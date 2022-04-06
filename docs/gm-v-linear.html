@@ -282,53 +282,53 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 4</span> GM v Linear<a href="gm-v-linear.html#gm-v-linear" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="load-packages-data-2" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Load packages + data<a href="gm-v-linear.html#load-packages-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="gm-v-linear.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download most recent software version</span></span>
-<span id="cb180-2"><a href="gm-v-linear.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;geomorphR/geomorph&quot;, ref = &quot;Stable&quot;, build_vignettes = TRUE)</span></span>
-<span id="cb180-3"><a href="gm-v-linear.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;mlcollyer/RRPP&quot;)</span></span>
-<span id="cb180-4"><a href="gm-v-linear.html#cb180-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-5"><a href="gm-v-linear.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis packages</span></span>
-<span id="cb180-6"><a href="gm-v-linear.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb180-7"><a href="gm-v-linear.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(StereoMorph)</span>
-<span id="cb180-8"><a href="gm-v-linear.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geomorph)</span>
-<span id="cb180-9"><a href="gm-v-linear.html#cb180-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb180-10"><a href="gm-v-linear.html#cb180-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb180-11"><a href="gm-v-linear.html#cb180-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
-<span id="cb180-12"><a href="gm-v-linear.html#cb180-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-13"><a href="gm-v-linear.html#cb180-13" aria-hidden="true" tabindex="-1"></a><span class="co"># read shape data and define number of sLMs</span></span>
-<span id="cb180-14"><a href="gm-v-linear.html#cb180-14" aria-hidden="true" tabindex="-1"></a>shapes <span class="ot">&lt;-</span> <span class="fu">readShapes</span>(<span class="st">&quot;shapes&quot;</span>)</span>
-<span id="cb180-15"><a href="gm-v-linear.html#cb180-15" aria-hidden="true" tabindex="-1"></a>shapesGM <span class="ot">&lt;-</span> <span class="fu">readland.shapes</span>(shapes, </span>
-<span id="cb180-16"><a href="gm-v-linear.html#cb180-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nCurvePts =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">10</span>))</span>
-<span id="cb180-17"><a href="gm-v-linear.html#cb180-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-18"><a href="gm-v-linear.html#cb180-18" aria-hidden="true" tabindex="-1"></a><span class="co"># read qualitative data</span></span>
-<span id="cb180-19"><a href="gm-v-linear.html#cb180-19" aria-hidden="true" tabindex="-1"></a>qdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;qdata.morph.csv&quot;</span>,</span>
-<span id="cb180-20"><a href="gm-v-linear.html#cb180-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb180-21"><a href="gm-v-linear.html#cb180-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="gm-v-linear.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download most recent software version</span></span>
+<span id="cb161-2"><a href="gm-v-linear.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;geomorphR/geomorph&quot;, ref = &quot;Stable&quot;, build_vignettes = TRUE)</span></span>
+<span id="cb161-3"><a href="gm-v-linear.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;mlcollyer/RRPP&quot;)</span></span>
+<span id="cb161-4"><a href="gm-v-linear.html#cb161-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-5"><a href="gm-v-linear.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis packages</span></span>
+<span id="cb161-6"><a href="gm-v-linear.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb161-7"><a href="gm-v-linear.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(StereoMorph)</span>
+<span id="cb161-8"><a href="gm-v-linear.html#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geomorph)</span>
+<span id="cb161-9"><a href="gm-v-linear.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb161-10"><a href="gm-v-linear.html#cb161-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb161-11"><a href="gm-v-linear.html#cb161-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
+<span id="cb161-12"><a href="gm-v-linear.html#cb161-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-13"><a href="gm-v-linear.html#cb161-13" aria-hidden="true" tabindex="-1"></a><span class="co"># read shape data and define number of sLMs</span></span>
+<span id="cb161-14"><a href="gm-v-linear.html#cb161-14" aria-hidden="true" tabindex="-1"></a>shapes <span class="ot">&lt;-</span> <span class="fu">readShapes</span>(<span class="st">&quot;shapes&quot;</span>)</span>
+<span id="cb161-15"><a href="gm-v-linear.html#cb161-15" aria-hidden="true" tabindex="-1"></a>shapesGM <span class="ot">&lt;-</span> <span class="fu">readland.shapes</span>(shapes, </span>
+<span id="cb161-16"><a href="gm-v-linear.html#cb161-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nCurvePts =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">10</span>))</span>
+<span id="cb161-17"><a href="gm-v-linear.html#cb161-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-18"><a href="gm-v-linear.html#cb161-18" aria-hidden="true" tabindex="-1"></a><span class="co"># read qualitative data</span></span>
+<span id="cb161-19"><a href="gm-v-linear.html#cb161-19" aria-hidden="true" tabindex="-1"></a>qdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;qdata.morph.csv&quot;</span>,</span>
+<span id="cb161-20"><a href="gm-v-linear.html#cb161-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb161-21"><a href="gm-v-linear.html#cb161-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 <div id="generalised-procrustes-analysis-2" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Generalised Procrustes Analysis<a href="gm-v-linear.html#generalised-procrustes-analysis-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="gm-v-linear.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gpa</span></span>
-<span id="cb181-2"><a href="gm-v-linear.html#cb181-2" aria-hidden="true" tabindex="-1"></a>Y.gpa <span class="ot">&lt;-</span> <span class="fu">gpagen</span>(shapesGM, <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb181-3"><a href="gm-v-linear.html#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-4"><a href="gm-v-linear.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="do">## plot</span></span>
-<span id="cb181-5"><a href="gm-v-linear.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y.gpa)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="gm-v-linear.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gpa</span></span>
+<span id="cb162-2"><a href="gm-v-linear.html#cb162-2" aria-hidden="true" tabindex="-1"></a>Y.gpa <span class="ot">&lt;-</span> <span class="fu">gpagen</span>(shapesGM, <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb162-3"><a href="gm-v-linear.html#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="gm-v-linear.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="do">## plot</span></span>
+<span id="cb162-5"><a href="gm-v-linear.html#cb162-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y.gpa)</span></code></pre></div>
 <p><img src="_main_files/figure-html/gpagmlin-1.png" width="100%" /></p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="gm-v-linear.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataframe</span></span>
-<span id="cb182-2"><a href="gm-v-linear.html#cb182-2" aria-hidden="true" tabindex="-1"></a>gdf <span class="ot">&lt;-</span> <span class="fu">geomorph.data.frame</span>(<span class="at">shape =</span> Y.gpa<span class="sc">$</span>coords,</span>
-<span id="cb182-3"><a href="gm-v-linear.html#cb182-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> Y.gpa<span class="sc">$</span>Csize)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="gm-v-linear.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataframe</span></span>
+<span id="cb163-2"><a href="gm-v-linear.html#cb163-2" aria-hidden="true" tabindex="-1"></a>gdf <span class="ot">&lt;-</span> <span class="fu">geomorph.data.frame</span>(<span class="at">shape =</span> Y.gpa<span class="sc">$</span>coords,</span>
+<span id="cb163-3"><a href="gm-v-linear.html#cb163-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> Y.gpa<span class="sc">$</span>Csize)</span></code></pre></div>
 </div>
 <div id="shape-vs-linear-data-shape-vars" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Shape vs linear data (shape vars)<a href="gm-v-linear.html#shape-vs-linear-data-shape-vars" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="gm-v-linear.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are shape and linear data correlated?</span></span>
-<span id="cb183-2"><a href="gm-v-linear.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset linear data</span></span>
-<span id="cb183-3"><a href="gm-v-linear.html#cb183-3" aria-hidden="true" tabindex="-1"></a>linear <span class="ot">&lt;-</span> qdata <span class="sc">%&gt;%</span></span>
-<span id="cb183-4"><a href="gm-v-linear.html#cb183-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sh.maxbl, sh.maxw, sh.maxshw, sh.maxth, sh.maxstl, sh.maxstw)</span>
-<span id="cb183-5"><a href="gm-v-linear.html#cb183-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-6"><a href="gm-v-linear.html#cb183-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2B-PLS</span></span>
-<span id="cb183-7"><a href="gm-v-linear.html#cb183-7" aria-hidden="true" tabindex="-1"></a>shape.meas.cor <span class="ot">&lt;-</span> <span class="fu">two.b.pls</span>(<span class="at">A1 =</span> Y.gpa<span class="sc">$</span>coords, </span>
-<span id="cb183-8"><a href="gm-v-linear.html#cb183-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">A2 =</span> linear,</span>
-<span id="cb183-9"><a href="gm-v-linear.html#cb183-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb183-10"><a href="gm-v-linear.html#cb183-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>)</span>
-<span id="cb183-11"><a href="gm-v-linear.html#cb183-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shape.meas.cor)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="gm-v-linear.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are shape and linear data correlated?</span></span>
+<span id="cb164-2"><a href="gm-v-linear.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset linear data</span></span>
+<span id="cb164-3"><a href="gm-v-linear.html#cb164-3" aria-hidden="true" tabindex="-1"></a>linear <span class="ot">&lt;-</span> qdata <span class="sc">%&gt;%</span></span>
+<span id="cb164-4"><a href="gm-v-linear.html#cb164-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sh.maxbl, sh.maxw, sh.maxshw, sh.maxth, sh.maxstl, sh.maxstw)</span>
+<span id="cb164-5"><a href="gm-v-linear.html#cb164-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-6"><a href="gm-v-linear.html#cb164-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2B-PLS</span></span>
+<span id="cb164-7"><a href="gm-v-linear.html#cb164-7" aria-hidden="true" tabindex="-1"></a>shape.meas.cor <span class="ot">&lt;-</span> <span class="fu">two.b.pls</span>(<span class="at">A1 =</span> Y.gpa<span class="sc">$</span>coords, </span>
+<span id="cb164-8"><a href="gm-v-linear.html#cb164-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">A2 =</span> linear,</span>
+<span id="cb164-9"><a href="gm-v-linear.html#cb164-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb164-10"><a href="gm-v-linear.html#cb164-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb164-11"><a href="gm-v-linear.html#cb164-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shape.meas.cor)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## two.b.pls(A1 = Y.gpa$coords, A2 = linear, iter = 9999, print.progress = FALSE) 
@@ -342,23 +342,23 @@ div.csl-indent {
 ## P-value: 1e-04
 ## 
 ## Based on 10000 random permutations</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="gm-v-linear.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot PLS</span></span>
-<span id="cb185-2"><a href="gm-v-linear.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shape.meas.cor)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="gm-v-linear.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot PLS</span></span>
+<span id="cb166-2"><a href="gm-v-linear.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shape.meas.cor)</span></code></pre></div>
 <p><img src="_main_files/figure-html/linear.shape-1.png" width="100%" /></p>
 </div>
 <div id="shape-vs-linear-data-linear-vars" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Shape vs linear data (linear vars)<a href="gm-v-linear.html#shape-vs-linear-data-linear-vars" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="gm-v-linear.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are shape and linear data correlated?</span></span>
-<span id="cb186-2"><a href="gm-v-linear.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset linear data</span></span>
-<span id="cb186-3"><a href="gm-v-linear.html#cb186-3" aria-hidden="true" tabindex="-1"></a>linear2 <span class="ot">&lt;-</span> qdata <span class="sc">%&gt;%</span></span>
-<span id="cb186-4"><a href="gm-v-linear.html#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(maxl, maxw, maxth, maxstl, maxstw)</span>
-<span id="cb186-5"><a href="gm-v-linear.html#cb186-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb186-6"><a href="gm-v-linear.html#cb186-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2B-PLS</span></span>
-<span id="cb186-7"><a href="gm-v-linear.html#cb186-7" aria-hidden="true" tabindex="-1"></a>shape.meas.cor <span class="ot">&lt;-</span> <span class="fu">two.b.pls</span>(<span class="at">A1 =</span> Y.gpa<span class="sc">$</span>coords, </span>
-<span id="cb186-8"><a href="gm-v-linear.html#cb186-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">A2 =</span> linear2,</span>
-<span id="cb186-9"><a href="gm-v-linear.html#cb186-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb186-10"><a href="gm-v-linear.html#cb186-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>)</span>
-<span id="cb186-11"><a href="gm-v-linear.html#cb186-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shape.meas.cor)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="gm-v-linear.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are shape and linear data correlated?</span></span>
+<span id="cb167-2"><a href="gm-v-linear.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset linear data</span></span>
+<span id="cb167-3"><a href="gm-v-linear.html#cb167-3" aria-hidden="true" tabindex="-1"></a>linear2 <span class="ot">&lt;-</span> qdata <span class="sc">%&gt;%</span></span>
+<span id="cb167-4"><a href="gm-v-linear.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(maxl, maxw, maxth, maxstl, maxstw)</span>
+<span id="cb167-5"><a href="gm-v-linear.html#cb167-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-6"><a href="gm-v-linear.html#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2B-PLS</span></span>
+<span id="cb167-7"><a href="gm-v-linear.html#cb167-7" aria-hidden="true" tabindex="-1"></a>shape.meas.cor <span class="ot">&lt;-</span> <span class="fu">two.b.pls</span>(<span class="at">A1 =</span> Y.gpa<span class="sc">$</span>coords, </span>
+<span id="cb167-8"><a href="gm-v-linear.html#cb167-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">A2 =</span> linear2,</span>
+<span id="cb167-9"><a href="gm-v-linear.html#cb167-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb167-10"><a href="gm-v-linear.html#cb167-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb167-11"><a href="gm-v-linear.html#cb167-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shape.meas.cor)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## two.b.pls(A1 = Y.gpa$coords, A2 = linear2, iter = 9999, print.progress = FALSE) 
@@ -372,8 +372,8 @@ div.csl-indent {
 ## P-value: 1e-04
 ## 
 ## Based on 10000 random permutations</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="gm-v-linear.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot PLS</span></span>
-<span id="cb188-2"><a href="gm-v-linear.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shape.meas.cor)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="gm-v-linear.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot PLS</span></span>
+<span id="cb169-2"><a href="gm-v-linear.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shape.meas.cor)</span></code></pre></div>
 <p><img src="_main_files/figure-html/linear.shape.2-1.png" width="100%" /></p>
 
 </div>
