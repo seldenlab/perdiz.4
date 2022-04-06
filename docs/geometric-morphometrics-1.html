@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Geometric morphometrics | Morphologically similar, but regionally distinct: Perdiz arrow points from Caddo burial contexts in the American Southeast</title>
+  <meta name="description" content="Morphological trajectories and disparity associated with resharpening." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Geometric morphometrics | Morphologically similar, but regionally distinct: Perdiz arrow points from Caddo burial contexts in the American Southeast" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="http://seldenlab.github.io/perdiz.4/img/img2/trajectory.png" />
+  <meta property="og:description" content="Morphological trajectories and disparity associated with resharpening." />
+  <meta name="github-repo" content="seldenlab/perdiz.4" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Geometric morphometrics | Morphologically similar, but regionally distinct: Perdiz arrow points from Caddo burial contexts in the American Southeast" />
+  
+  <meta name="twitter:description" content="Morphological trajectories and disparity associated with resharpening." />
+  <meta name="twitter:image" content="http://seldenlab.github.io/perdiz.4/img/img2/trajectory.png" />
+
+<meta name="author" content="Robert Z. Selden, Jr." />
+
+
+<meta name="date" content="2022-04-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-metrics-1.html"/>
+<link rel="next" href="gm-v-linear.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">perdiz.4</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#preface">Preface<span></span></a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Primary findings<span></span></a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#linear-metrics"><i class="fa fa-check"></i><b>0.1.1</b> Linear metrics<span></span></a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#geometric-morphometrics"><i class="fa fa-check"></i><b>0.1.2</b> Geometric morphometrics<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments<span></span></a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#funding"><i class="fa fa-check"></i><b>0.3</b> Funding<span></span></a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#data-management"><i class="fa fa-check"></i><b>0.4</b> Data management<span></span></a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.5</b> Colophon<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="linear-shapesize.html"><a href="linear-shapesize.html"><i class="fa fa-check"></i><b>1</b> Linear ~ shape/size<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#load-packages-data"><i class="fa fa-check"></i><b>1.1</b> Load packages + data<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#generalised-procrustes-analysis"><i class="fa fa-check"></i><b>1.2</b> Generalised Procrustes Analysis<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-length"><i class="fa fa-check"></i><b>1.3</b> 2BPLS Maximum length<span></span></a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape"><i class="fa fa-check"></i><b>1.3.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size"><i class="fa fa-check"></i><b>1.3.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-blade-length"><i class="fa fa-check"></i><b>1.4</b> 2BPLS Maximum blade length<span></span></a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-1"><i class="fa fa-check"></i><b>1.4.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.4.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-1"><i class="fa fa-check"></i><b>1.4.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-shoulder-width"><i class="fa fa-check"></i><b>1.5</b> 2BPLS Maximum shoulder width<span></span></a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-2"><i class="fa fa-check"></i><b>1.5.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.5.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-2"><i class="fa fa-check"></i><b>1.5.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-width"><i class="fa fa-check"></i><b>1.6</b> 2BPLS Maximum width<span></span></a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-3"><i class="fa fa-check"></i><b>1.6.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.6.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-3"><i class="fa fa-check"></i><b>1.6.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-thickness"><i class="fa fa-check"></i><b>1.7</b> 2BPLS Maximum thickness<span></span></a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-4"><i class="fa fa-check"></i><b>1.7.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-4"><i class="fa fa-check"></i><b>1.7.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-stem-length"><i class="fa fa-check"></i><b>1.8</b> 2BPLS Maximum stem length<span></span></a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-5"><i class="fa fa-check"></i><b>1.8.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.8.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-5"><i class="fa fa-check"></i><b>1.8.2</b> Size<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="linear-shapesize.html"><a href="linear-shapesize.html#bpls-maximum-stem-width"><i class="fa fa-check"></i><b>1.9</b> 2BPLS Maximum stem width<span></span></a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="linear-shapesize.html"><a href="linear-shapesize.html#shape-6"><i class="fa fa-check"></i><b>1.9.1</b> Shape<span></span></a></li>
+<li class="chapter" data-level="1.9.2" data-path="linear-shapesize.html"><a href="linear-shapesize.html#size-6"><i class="fa fa-check"></i><b>1.9.2</b> Size<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html"><i class="fa fa-check"></i><b>2</b> Linear metrics<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#derived-variables"><i class="fa fa-check"></i><b>2.1</b> Derived variables<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#assign-size-classes"><i class="fa fa-check"></i><b>2.2</b> Assign <code>size classes</code><span></span></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#northern-behavioural-region"><i class="fa fa-check"></i><b>2.2.1</b> Northern behavioural region<span></span></a></li>
+<li class="chapter" data-level="2.2.2" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#southern-behavioural-region"><i class="fa fa-check"></i><b>2.2.2</b> Southern behavioural region<span></span></a></li>
+<li class="chapter" data-level="2.2.3" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#aggregate"><i class="fa fa-check"></i><b>2.2.3</b> Aggregate<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#shape-variables"><i class="fa fa-check"></i><b>2.3</b> Shape variables<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#ratios"><i class="fa fa-check"></i><b>2.4</b> Ratios<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#boxplots-for-size-class"><i class="fa fa-check"></i><b>2.5</b> Boxplots for <code>Size Class</code><span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#principal-components-analysis"><i class="fa fa-check"></i><b>2.6</b> Principal Components Analysis<span></span></a></li>
+<li class="chapter" data-level="2.7" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#analyses-of-variance-anova"><i class="fa fa-check"></i><b>2.7</b> Analyses of Variance (ANOVA)<span></span></a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-blade-length-size-class"><i class="fa fa-check"></i><b>2.7.1</b> <em>Maximum blade length</em> ~ <em><code>size class</code></em><span></span></a></li>
+<li class="chapter" data-level="2.7.2" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-shoulder-width-size-class"><i class="fa fa-check"></i><b>2.7.2</b> <em>Maximum shoulder width</em> ~ <em><code>size class</code></em><span></span></a></li>
+<li class="chapter" data-level="2.7.3" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-width-size-class"><i class="fa fa-check"></i><b>2.7.3</b> <em>Maximum width</em> ~ <em><code>size class</code></em><span></span></a></li>
+<li class="chapter" data-level="2.7.4" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-thickness-size-class"><i class="fa fa-check"></i><b>2.7.4</b> <em>Maximum thickness</em> ~ <em><code>size class</code></em><span></span></a></li>
+<li class="chapter" data-level="2.7.5" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-stem-length-size-class"><i class="fa fa-check"></i><b>2.7.5</b> <em>Maximum stem length</em> ~ <em><code>size class</code></em><span></span></a></li>
+<li class="chapter" data-level="2.7.6" data-path="linear-metrics-1.html"><a href="linear-metrics-1.html#maximum-stem-width-size-class"><i class="fa fa-check"></i><b>2.7.6</b> <em>Maximum stem width</em> ~ <em><code>size class</code></em><span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html"><i class="fa fa-check"></i><b>3</b> Geometric morphometrics<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#load-packages-data-1"><i class="fa fa-check"></i><b>3.1</b> Load packages + data<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#generalised-procrustes-analysis-1"><i class="fa fa-check"></i><b>3.2</b> Generalised Procrustes Analysis<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#boxplot-centroid-size"><i class="fa fa-check"></i><b>3.3</b> Boxplot (centroid size)<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#principal-components-analysis-1"><i class="fa fa-check"></i><b>3.4</b> Principal Components Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#minimamaxima-of-pc12-with-warp-grids"><i class="fa fa-check"></i><b>3.4.1</b> Minima/maxima of PC1/2 with warp grids<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#composite-pca-with-warp-grids"><i class="fa fa-check"></i><b>3.4.2</b> Composite PCA with warp grids<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#procrustes-anova-allometry"><i class="fa fa-check"></i><b>3.5</b> Procrustes ANOVA: Allometry<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#procrustes-anova-shape-and-size"><i class="fa fa-check"></i><b>3.6</b> Procrustes ANOVA: Shape and size<span></span></a></li>
+<li class="chapter" data-level="3.7" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#modularity"><i class="fa fa-check"></i><b>3.7</b> Modularity<span></span></a></li>
+<li class="chapter" data-level="3.8" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#morphological-integration"><i class="fa fa-check"></i><b>3.8</b> Morphological integration<span></span></a></li>
+<li class="chapter" data-level="3.9" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#trajectory-analysis"><i class="fa fa-check"></i><b>3.9</b> Trajectory analysis<span></span></a></li>
+<li class="chapter" data-level="3.10" data-path="geometric-morphometrics-1.html"><a href="geometric-morphometrics-1.html#morphological-disparity"><i class="fa fa-check"></i><b>3.10</b> Morphological disparity<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gm-v-linear.html"><a href="gm-v-linear.html"><i class="fa fa-check"></i><b>4</b> GM v Linear<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="gm-v-linear.html"><a href="gm-v-linear.html#load-packages-data-2"><i class="fa fa-check"></i><b>4.1</b> Load packages + data<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="gm-v-linear.html"><a href="gm-v-linear.html#generalised-procrustes-analysis-2"><i class="fa fa-check"></i><b>4.2</b> Generalised Procrustes Analysis<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="gm-v-linear.html"><a href="gm-v-linear.html#shape-vs-linear-data-shape-vars"><i class="fa fa-check"></i><b>4.3</b> Shape vs linear data (shape vars)<span></span></a></li>
+<li class="chapter" data-level="4.4" data-path="gm-v-linear.html"><a href="gm-v-linear.html#shape-vs-linear-data-linear-vars"><i class="fa fa-check"></i><b>4.4</b> Shape vs linear data (linear vars)<span></span></a></li>
+</ul></li>
+<li><a href="references.html#references">References<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Morphologically similar, but regionally distinct: Perdiz arrow points from Caddo burial contexts in the American Southeast</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geometric-morphometrics-1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Geometric morphometrics<a href="geometric-morphometrics-1.html#geometric-morphometrics-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Two <code>size classes</code> (large/small) were used to examine whether the morphology of Perdiz arrow points from the northern and southern behavioural regions in the ancestral Caddo region remain morphologically stable, or express morphological variation. Variability in Perdiz arrow point shape potentially provides evidence associated with differential resharpening trajectories.</p>
+<p>This analysis follows recent analyses of Perdiz arrow points (<a href="https://github.com/seldenlab/perdiz3/blob/main/ms/perdiz3/perdiz3.pdf">Selden and Dockall, in review</a>) and Gahagan biface morphology across the southern Caddo area and central Texas <span class="citation">(<a href="#ref-RN11783" role="doc-biblioref">Selden Jr., Dockall, and Shafer 2018</a>; <a href="#ref-RN21001" role="doc-biblioref">Selden Jr., Dockall, and Dubied 2020</a>)</span>, where Perdiz arrow points and Gahagan bifaces have been found to differ in shape across the same geography as Caddo bottles <span class="citation">(<a href="#ref-RN11801" role="doc-biblioref">Selden Jr. 2018a</a>, <a href="#ref-RN11782" role="doc-biblioref">2018b</a>, <a href="#ref-RN11716" role="doc-biblioref">2019</a>, <a href="#ref-RN8312" role="doc-biblioref">2021</a>)</span>.</p>
+<p>It also follows another geometric morphometric analysis in which Perdiz arrow points from the ancestral Caddo area were found to differ as a function of <em>time</em>, <em>raw material</em>, and <em>burial context</em> <span class="citation">(<a href="#ref-RN9551" role="doc-biblioref">Selden Jr et al. 2021</a>)</span>.</p>
+<div id="load-packages-data-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Load packages + data<a href="geometric-morphometrics-1.html#load-packages-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="geometric-morphometrics-1.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis packages</span></span>
+<span id="cb140-2"><a href="geometric-morphometrics-1.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb140-3"><a href="geometric-morphometrics-1.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(StereoMorph)</span>
+<span id="cb140-4"><a href="geometric-morphometrics-1.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geomorph)</span>
+<span id="cb140-5"><a href="geometric-morphometrics-1.html#cb140-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb140-6"><a href="geometric-morphometrics-1.html#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb140-7"><a href="geometric-morphometrics-1.html#cb140-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb140-8"><a href="geometric-morphometrics-1.html#cb140-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
+<span id="cb140-9"><a href="geometric-morphometrics-1.html#cb140-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-10"><a href="geometric-morphometrics-1.html#cb140-10" aria-hidden="true" tabindex="-1"></a><span class="co"># read shape data and define number of sLMs</span></span>
+<span id="cb140-11"><a href="geometric-morphometrics-1.html#cb140-11" aria-hidden="true" tabindex="-1"></a>shapes <span class="ot">&lt;-</span> <span class="fu">readShapes</span>(<span class="st">&quot;shapes&quot;</span>)</span>
+<span id="cb140-12"><a href="geometric-morphometrics-1.html#cb140-12" aria-hidden="true" tabindex="-1"></a>shapesGM <span class="ot">&lt;-</span> <span class="fu">readland.shapes</span>(shapes, </span>
+<span id="cb140-13"><a href="geometric-morphometrics-1.html#cb140-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nCurvePts =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">10</span>))</span>
+<span id="cb140-14"><a href="geometric-morphometrics-1.html#cb140-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-15"><a href="geometric-morphometrics-1.html#cb140-15" aria-hidden="true" tabindex="-1"></a><span class="co"># read qualitative data</span></span>
+<span id="cb140-16"><a href="geometric-morphometrics-1.html#cb140-16" aria-hidden="true" tabindex="-1"></a>qdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;qdata.morph.csv&quot;</span>,</span>
+<span id="cb140-17"><a href="geometric-morphometrics-1.html#cb140-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb140-18"><a href="geometric-morphometrics-1.html#cb140-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+</div>
+<div id="generalised-procrustes-analysis-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Generalised Procrustes Analysis<a href="geometric-morphometrics-1.html#generalised-procrustes-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Landmark data were aligned to a global coordinate system <span class="citation">(<a href="#ref-RN11622" role="doc-biblioref">Kendall 1981</a>, <a href="#ref-RN11623" role="doc-biblioref">1984</a>; <a href="#ref-RN11563" role="doc-biblioref">Slice 2001</a>)</span>, achieved through generalized Procrustes superimposition <span class="citation">(<a href="#ref-RN478" role="doc-biblioref">Rohlf and Slice 1990</a>)</span> performed in R 4.1.3 <span class="citation">(<a href="#ref-R" role="doc-biblioref">R Core Development Team, 2022</a>)</span> using the <code>geomorph</code> library v. 4.0.3 <span class="citation">(<a href="#ref-RN11530" role="doc-biblioref">Adams et al. 2017</a>; <a href="#ref-RN1774" role="doc-biblioref">Adams and Otarola-Castillo 2013</a>; <a href="#ref-RN9565" role="doc-biblioref">Baken et al. 2021</a>)</span>. Procrustes superimposition translates, scales, and rotates the coordinate data to allow for comparisons among objects <span class="citation">(<a href="#ref-RN11564" role="doc-biblioref">Gower 1975</a>; <a href="#ref-RN478" role="doc-biblioref">Rohlf and Slice 1990</a>)</span>. The <code>geomorph</code> package uses a partial Procrustes superimposition that projects the aligned specimens into tangent space subsequent to alignment in preparation for the use of multivariate methods that assume linear space <span class="citation">(<a href="#ref-RN1646" role="doc-biblioref">Rohlf 1999</a>; <a href="#ref-RN11563" role="doc-biblioref">Slice 2001</a>)</span>.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="geometric-morphometrics-1.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gpa</span></span>
+<span id="cb141-2"><a href="geometric-morphometrics-1.html#cb141-2" aria-hidden="true" tabindex="-1"></a>Y.gpa <span class="ot">&lt;-</span> <span class="fu">gpagen</span>(shapesGM, <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb141-3"><a href="geometric-morphometrics-1.html#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="geometric-morphometrics-1.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="do">## plot</span></span>
+<span id="cb141-5"><a href="geometric-morphometrics-1.html#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y.gpa)</span></code></pre></div>
+<p><img src="_main_files/figure-html/gpa-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="geometric-morphometrics-1.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataframe</span></span>
+<span id="cb142-2"><a href="geometric-morphometrics-1.html#cb142-2" aria-hidden="true" tabindex="-1"></a>gdf <span class="ot">&lt;-</span> <span class="fu">geomorph.data.frame</span>(<span class="at">shape =</span> Y.gpa<span class="sc">$</span>coords,</span>
+<span id="cb142-3"><a href="geometric-morphometrics-1.html#cb142-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> Y.gpa<span class="sc">$</span>Csize,</span>
+<span id="cb142-4"><a href="geometric-morphometrics-1.html#cb142-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">merged =</span> qdata<span class="sc">$</span>merged)</span>
+<span id="cb142-5"><a href="geometric-morphometrics-1.html#cb142-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="geometric-morphometrics-1.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add centroid size to qdata</span></span>
+<span id="cb142-7"><a href="geometric-morphometrics-1.html#cb142-7" aria-hidden="true" tabindex="-1"></a>qdata<span class="sc">$</span>csz <span class="ot">&lt;-</span> Y.gpa<span class="sc">$</span>Csize</span></code></pre></div>
+</div>
+<div id="boxplot-centroid-size" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Boxplot (centroid size)<a href="geometric-morphometrics-1.html#boxplot-centroid-size" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="geometric-morphometrics-1.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># attributes</span></span>
+<span id="cb143-2"><a href="geometric-morphometrics-1.html#cb143-2" aria-hidden="true" tabindex="-1"></a>csz <span class="ot">&lt;-</span> qdata<span class="sc">$</span>csz</span>
+<span id="cb143-3"><a href="geometric-morphometrics-1.html#cb143-3" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> qdata<span class="sc">$</span>merged</span>
+<span id="cb143-4"><a href="geometric-morphometrics-1.html#cb143-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-5"><a href="geometric-morphometrics-1.html#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="co"># palette</span></span>
+<span id="cb143-6"><a href="geometric-morphometrics-1.html#cb143-6" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">wes_palette</span>(<span class="st">&quot;Moonrise2&quot;</span>, <span class="dv">4</span>, <span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
+<span id="cb143-7"><a href="geometric-morphometrics-1.html#cb143-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-8"><a href="geometric-morphometrics-1.html#cb143-8" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of Perdiz arrow points by merged</span></span>
+<span id="cb143-9"><a href="geometric-morphometrics-1.html#cb143-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(qdata, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> csz, <span class="at">color =</span> merged)) <span class="sc">+</span></span>
+<span id="cb143-10"><a href="geometric-morphometrics-1.html#cb143-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb143-11"><a href="geometric-morphometrics-1.html#cb143-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>, <span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb143-12"><a href="geometric-morphometrics-1.html#cb143-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb143-13"><a href="geometric-morphometrics-1.html#cb143-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb143-14"><a href="geometric-morphometrics-1.html#cb143-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Centroid Size&#39;</span>)</span></code></pre></div>
+<pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/box-1.png" width="100%" /></p>
+</div>
+<div id="principal-components-analysis-1" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Principal Components Analysis<a href="geometric-morphometrics-1.html#principal-components-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Principal components analysis <span class="citation">(<a href="#ref-RN1746" role="doc-biblioref">Jolliffe 2002</a>)</span> was used to visualise shape variation among the Perdiz arrow points. The shape changes described by each principal axis are commonly visualized using thin-plate spline warping of a reference 3D mesh <span class="citation">(<a href="#ref-RN1731" role="doc-biblioref">Klingenberg 2013</a>; <a href="#ref-RN479" role="doc-biblioref">Sherratt et al. 2014</a>)</span>.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="geometric-morphometrics-1.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pca</span></span>
+<span id="cb145-2"><a href="geometric-morphometrics-1.html#cb145-2" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">gm.prcomp</span>(Y.gpa<span class="sc">$</span>coords)</span>
+<span id="cb145-3"><a href="geometric-morphometrics-1.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code></pre></div>
+<pre><code>## 
+## Ordination type: Principal Component Analysis 
+## Centering by OLS mean
+## Orthogonal projection of OLS residuals
+## Number of observations: 67 
+## Number of vectors 58 
+## 
+## Importance of Components:
+##                              Comp1       Comp2      Comp3        Comp4        Comp5        Comp6
+## Eigenvalues            0.005773408 0.004263677 0.00110953 0.0002718422 0.0002235284 0.0001238687
+## Proportion of Variance 0.475367265 0.351059970 0.09135581 0.0223827748 0.0184047395 0.0101990267
+## Cumulative Proportion  0.475367265 0.826427234 0.91778304 0.9401658161 0.9585705557 0.9687695824
+##                               Comp7        Comp8        Comp9       Comp10       Comp11       Comp12
+## Eigenvalues            9.341316e-05 5.630102e-05 3.794795e-05 3.555976e-05 3.274869e-05 2.100995e-05
+## Proportion of Variance 7.691394e-03 4.635678e-03 3.124534e-03 2.927897e-03 2.696441e-03 1.729904e-03
+## Cumulative Proportion  9.764610e-01 9.810967e-01 9.842212e-01 9.871491e-01 9.898455e-01 9.915754e-01
+##                              Comp13       Comp14       Comp15       Comp16       Comp17       Comp18
+## Eigenvalues            1.673629e-05 1.558522e-05 0.0000146522 9.479467e-06 8.202708e-06 6.581542e-06
+## Proportion of Variance 1.378022e-03 1.283246e-03 0.0012064237 7.805144e-04 6.753894e-04 5.419068e-04
+## Cumulative Proportion  9.929535e-01 9.942367e-01 0.9954431225 9.962236e-01 9.968990e-01 9.974409e-01
+##                              Comp19       Comp20       Comp21       Comp22       Comp23       Comp24
+## Eigenvalues            5.623302e-06 4.551824e-06 4.004696e-06 2.780295e-06 2.539899e-06 2.053898e-06
+## Proportion of Variance 4.630079e-04 3.747852e-04 3.297361e-04 2.289221e-04 2.091286e-04 1.691126e-04
+## Cumulative Proportion  9.979039e-01 9.982787e-01 9.986085e-01 9.988374e-01 9.990465e-01 9.992156e-01
+##                              Comp25       Comp26       Comp27       Comp28       Comp29       Comp30
+## Eigenvalues            1.684806e-06 1.383734e-06 1.008708e-06 9.296041e-07 7.104462e-07 6.995574e-07
+## Proportion of Variance 1.387225e-04 1.139330e-04 8.305433e-05 7.654116e-05 5.849627e-05 5.759972e-05
+## Cumulative Proportion  9.993543e-01 9.994683e-01 9.995513e-01 9.996279e-01 9.996864e-01 9.997440e-01
+##                              Comp31       Comp32       Comp33       Comp34       Comp35       Comp36
+## Eigenvalues            5.611282e-07 4.574896e-07 3.740460e-07 3.295267e-07 3.023244e-07 2.819142e-07
+## Proportion of Variance 4.620182e-05 3.766849e-05 3.079797e-05 2.713236e-05 2.489260e-05 2.321208e-05
+## Cumulative Proportion  9.997902e-01 9.998278e-01 9.998586e-01 9.998858e-01 9.999107e-01 9.999339e-01
+##                              Comp37       Comp38       Comp39       Comp40       Comp41       Comp42
+## Eigenvalues            1.822967e-07 1.544787e-07 1.175824e-07 1.003652e-07 8.345271e-08 3.996616e-08
+## Proportion of Variance 1.500983e-05 1.271937e-05 9.681424e-06 8.263810e-06 6.871277e-06 3.290708e-06
+## Cumulative Proportion  9.999489e-01 9.999616e-01 9.999713e-01 9.999796e-01 9.999864e-01 9.999897e-01
+##                              Comp43       Comp44       Comp45       Comp46       Comp47       Comp48
+## Eigenvalues            3.159475e-08 2.666575e-08 2.255638e-08 1.462538e-08 8.448002e-09 6.927099e-09
+## Proportion of Variance 2.601429e-06 2.195587e-06 1.857233e-06 1.204216e-06 6.955863e-07 5.703591e-07
+## Cumulative Proportion  9.999923e-01 9.999945e-01 9.999964e-01 9.999976e-01 9.999983e-01 9.999988e-01
+##                              Comp49       Comp50       Comp51       Comp52       Comp53       Comp54
+## Eigenvalues            3.723904e-09 3.152719e-09 2.374219e-09 1.963601e-09 1.208301e-09 6.656422e-10
+## Proportion of Variance 3.066164e-07 2.595866e-07 1.954869e-07 1.616777e-07 9.948832e-08 5.480723e-08
+## Cumulative Proportion  9.999991e-01 9.999994e-01 9.999996e-01 9.999998e-01 9.999999e-01 9.999999e-01
+##                              Comp55       Comp56       Comp57       Comp58
+## Eigenvalues            4.846033e-10 2.571792e-10 1.910708e-10 8.289472e-11
+## Proportion of Variance 3.990096e-08 2.117546e-08 1.573227e-08 6.825333e-09
+## Cumulative Proportion  1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="geometric-morphometrics-1.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set plot parameters</span></span>
+<span id="cb147-2"><a href="geometric-morphometrics-1.html#cb147-2" aria-hidden="true" tabindex="-1"></a>pch.gps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)[<span class="fu">as.factor</span>(merged)]</span>
+<span id="cb147-3"><a href="geometric-morphometrics-1.html#cb147-3" aria-hidden="true" tabindex="-1"></a>col.gps <span class="ot">&lt;-</span> pal[<span class="fu">as.factor</span>(merged)]</span>
+<span id="cb147-4"><a href="geometric-morphometrics-1.html#cb147-4" aria-hidden="true" tabindex="-1"></a>col.hull <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#798E87&quot;</span>, <span class="st">&quot;#C27D38&quot;</span>, <span class="st">&quot;#CCC591&quot;</span>, <span class="st">&quot;#29211F&quot;</span>)</span>
+<span id="cb147-5"><a href="geometric-morphometrics-1.html#cb147-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-6"><a href="geometric-morphometrics-1.html#cb147-6" aria-hidden="true" tabindex="-1"></a><span class="do">## pca plot</span></span>
+<span id="cb147-7"><a href="geometric-morphometrics-1.html#cb147-7" aria-hidden="true" tabindex="-1"></a>pc.plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(pca,</span>
+<span id="cb147-8"><a href="geometric-morphometrics-1.html#cb147-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">asp =</span> <span class="dv">1</span>,</span>
+<span id="cb147-9"><a href="geometric-morphometrics-1.html#cb147-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">pch =</span> pch.gps,</span>
+<span id="cb147-10"><a href="geometric-morphometrics-1.html#cb147-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> col.gps)</span>
+<span id="cb147-11"><a href="geometric-morphometrics-1.html#cb147-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shapeHulls</span>(pc.plot,</span>
+<span id="cb147-12"><a href="geometric-morphometrics-1.html#cb147-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">groups =</span> merged,</span>
+<span id="cb147-13"><a href="geometric-morphometrics-1.html#cb147-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">group.cols =</span> col.hull)</span></code></pre></div>
+<p><img src="_main_files/figure-html/pcagm-1.png" width="100%" /></p>
+<div id="minimamaxima-of-pc12-with-warp-grids" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Minima/maxima of PC1/2 with warp grids<a href="geometric-morphometrics-1.html#minimamaxima-of-pc12-with-warp-grids" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="geometric-morphometrics-1.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot x/y maxima/minima</span></span>
+<span id="cb148-2"><a href="geometric-morphometrics-1.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="do">## x - minima</span></span>
+<span id="cb148-3"><a href="geometric-morphometrics-1.html#cb148-3" aria-hidden="true" tabindex="-1"></a>mean.shape <span class="ot">&lt;-</span> <span class="fu">mshape</span>(Y.gpa<span class="sc">$</span>coords)</span>
+<span id="cb148-4"><a href="geometric-morphometrics-1.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRefToTarget</span>(pca<span class="sc">$</span>shapes<span class="sc">$</span>shapes.comp1<span class="sc">$</span>min, </span>
+<span id="cb148-5"><a href="geometric-morphometrics-1.html#cb148-5" aria-hidden="true" tabindex="-1"></a>                mean.shape)</span></code></pre></div>
+<p><img src="_main_files/figure-html/min.max-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="geometric-morphometrics-1.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="do">## x - maxima</span></span>
+<span id="cb149-2"><a href="geometric-morphometrics-1.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRefToTarget</span>(pca<span class="sc">$</span>shapes<span class="sc">$</span>shapes.comp1<span class="sc">$</span>max, </span>
+<span id="cb149-3"><a href="geometric-morphometrics-1.html#cb149-3" aria-hidden="true" tabindex="-1"></a>                mean.shape)</span></code></pre></div>
+<p><img src="_main_files/figure-html/min.max-2.png" width="100%" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="geometric-morphometrics-1.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="do">## y - minima</span></span>
+<span id="cb150-2"><a href="geometric-morphometrics-1.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRefToTarget</span>(pca<span class="sc">$</span>shapes<span class="sc">$</span>shapes.comp2<span class="sc">$</span>min, </span>
+<span id="cb150-3"><a href="geometric-morphometrics-1.html#cb150-3" aria-hidden="true" tabindex="-1"></a>                mean.shape)</span></code></pre></div>
+<p><img src="_main_files/figure-html/min.max-3.png" width="100%" /></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="geometric-morphometrics-1.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="do">## y - maxima</span></span>
+<span id="cb151-2"><a href="geometric-morphometrics-1.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRefToTarget</span>(pca<span class="sc">$</span>shapes<span class="sc">$</span>shapes.comp2<span class="sc">$</span>max, </span>
+<span id="cb151-3"><a href="geometric-morphometrics-1.html#cb151-3" aria-hidden="true" tabindex="-1"></a>                mean.shape)</span></code></pre></div>
+<p><img src="_main_files/figure-html/min.max-4.png" width="100%" /></p>
+</div>
+<div id="composite-pca-with-warp-grids" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Composite PCA with warp grids<a href="geometric-morphometrics-1.html#composite-pca-with-warp-grids" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="geometric-morphometrics-1.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot composite pca with PC1/2 max/min</span></span>
+<span id="cb152-2"><a href="geometric-morphometrics-1.html#cb152-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&#39;img/img2/gm-pca.png&#39;</span>)</span></code></pre></div>
+<p><img src="img/img2/gm-pca.png" width="100%" /></p>
+</div>
+</div>
+<div id="procrustes-anova-allometry" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Procrustes ANOVA: Allometry<a href="geometric-morphometrics-1.html#procrustes-anova-allometry" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To assess whether shape changes with size (allometry), Procrustes ANOVAs <span class="citation">(<a href="#ref-RN1749" role="doc-biblioref">Goodall 1991</a>)</span> were run that enlist effect-sizes (zscores) computed as standard deviates of the generated sampling distributions <span class="citation">(<a href="#ref-RN1756" role="doc-biblioref">M. L. Collyer, Sekora, and Adams 2015</a>)</span>. A residual randomization permutation procedure (RRPP; n = 10,000 permutations) was used for all Procrustes ANOVAs <span class="citation">(<a href="#ref-RN1655" role="doc-biblioref">Adams and Collyer 2015</a>; <a href="#ref-RN11775" role="doc-biblioref">M. L. Collyer and Adams 2018</a>)</span>, which has higher statistical power and a greater ability to identify patterns in the data should they be present <span class="citation">(<a href="#ref-RN1719" role="doc-biblioref">Anderson and Ter Braak 2003</a>)</span>.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="geometric-morphometrics-1.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># allometry</span></span>
+<span id="cb153-2"><a href="geometric-morphometrics-1.html#cb153-2" aria-hidden="true" tabindex="-1"></a>fit.size <span class="ot">&lt;-</span> <span class="fu">procD.lm</span>(shape <span class="sc">~</span> size, </span>
+<span id="cb153-3"><a href="geometric-morphometrics-1.html#cb153-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> gdf, </span>
+<span id="cb153-4"><a href="geometric-morphometrics-1.html#cb153-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">print.progress =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb153-5"><a href="geometric-morphometrics-1.html#cb153-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb153-6"><a href="geometric-morphometrics-1.html#cb153-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-7"><a href="geometric-morphometrics-1.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="co"># allometry</span></span>
+<span id="cb153-8"><a href="geometric-morphometrics-1.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit.size)</span></code></pre></div>
+<pre><code>## 
+## Analysis of Variance, using Residual Randomization
+## Permutation procedure: Randomization of null model residuals 
+## Number of permutations: 10000 
+## Estimation method: Ordinary Least Squares 
+## Sums of Squares and Cross-products: Type I 
+## Effect sizes (Z) based on F distributions
+## 
+##           Df      SS       MS     Rsq      F      Z Pr(&gt;F)    
+## size       1 0.11834 0.118340 0.14763 11.258 3.7912  1e-04 ***
+## Residuals 65 0.68324 0.010511 0.85237                         
+## Total     66 0.80158                                          
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Call: procD.lm(f1 = shape ~ size, iter = 9999, data = gdf, print.progress = FALSE)</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="geometric-morphometrics-1.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unique allometries?</span></span>
+<span id="cb155-2"><a href="geometric-morphometrics-1.html#cb155-2" aria-hidden="true" tabindex="-1"></a>fit.unique <span class="ot">&lt;-</span> <span class="fu">procD.lm</span>(shape <span class="sc">~</span> size <span class="sc">*</span> merged,</span>
+<span id="cb155-3"><a href="geometric-morphometrics-1.html#cb155-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> gdf,</span>
+<span id="cb155-4"><a href="geometric-morphometrics-1.html#cb155-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb155-5"><a href="geometric-morphometrics-1.html#cb155-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb155-6"><a href="geometric-morphometrics-1.html#cb155-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-7"><a href="geometric-morphometrics-1.html#cb155-7" aria-hidden="true" tabindex="-1"></a><span class="co"># unique allometries</span></span>
+<span id="cb155-8"><a href="geometric-morphometrics-1.html#cb155-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit.unique)</span></code></pre></div>
+<pre><code>## 
+## Analysis of Variance, using Residual Randomization
+## Permutation procedure: Randomization of null model residuals 
+## Number of permutations: 10000 
+## Estimation method: Ordinary Least Squares 
+## Sums of Squares and Cross-products: Type I 
+## Effect sizes (Z) based on F distributions
+## 
+##             Df      SS       MS     Rsq       F      Z Pr(&gt;F)    
+## size         1 0.11834 0.118340 0.14763 12.7163 3.9820  1e-04 ***
+## merged       3 0.05847 0.019488 0.07294  2.0941 1.8027 0.0357 *  
+## size:merged  3 0.07571 0.025238 0.09446  2.7120 2.3035 0.0105 *  
+## Residuals   59 0.54906 0.009306 0.68497                          
+## Total       66 0.80158                                           
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Call: procD.lm(f1 = shape ~ size * merged, iter = 9999, data = gdf,      print.progress = FALSE)</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="geometric-morphometrics-1.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb157-2"><a href="geometric-morphometrics-1.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="do">## PredLine (Adams and Nistri 2010)</span></span>
+<span id="cb157-3"><a href="geometric-morphometrics-1.html#cb157-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotAllometry</span>(fit.unique, </span>
+<span id="cb157-4"><a href="geometric-morphometrics-1.html#cb157-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> gdf<span class="sc">$</span>size, </span>
+<span id="cb157-5"><a href="geometric-morphometrics-1.html#cb157-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">logsz =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb157-6"><a href="geometric-morphometrics-1.html#cb157-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;PredLine&quot;</span>, </span>
+<span id="cb157-7"><a href="geometric-morphometrics-1.html#cb157-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">pch =</span> pch.gps, </span>
+<span id="cb157-8"><a href="geometric-morphometrics-1.html#cb157-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> col.gps)</span></code></pre></div>
+<p><img src="_main_files/figure-html/allom-1.png" width="100%" /></p>
+</div>
+<div id="procrustes-anova-shape-and-size" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Procrustes ANOVA: Shape and size<a href="geometric-morphometrics-1.html#procrustes-anova-shape-and-size" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To assess whether shape and size differ by <code>size class</code>, Procrustes ANOVAs <span class="citation">(<a href="#ref-RN1749" role="doc-biblioref">Goodall 1991</a>)</span> were run that enlist effect-sizes (zscores) computed as standard deviates of the generated sampling distributions <span class="citation">(<a href="#ref-RN1756" role="doc-biblioref">M. L. Collyer, Sekora, and Adams 2015</a>)</span>. A residual randomization permutation procedure (RRPP; n = 10,000 permutations) was used for all Procrustes ANOVAs <span class="citation">(<a href="#ref-RN1655" role="doc-biblioref">Adams and Collyer 2015</a>; <a href="#ref-RN11775" role="doc-biblioref">M. L. Collyer and Adams 2018</a>)</span>, which has higher statistical power and a greater ability to identify patterns in the data should they be present <span class="citation">(<a href="#ref-RN1719" role="doc-biblioref">Anderson and Ter Braak 2003</a>)</span>.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="geometric-morphometrics-1.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shape</span></span>
+<span id="cb158-2"><a href="geometric-morphometrics-1.html#cb158-2" aria-hidden="true" tabindex="-1"></a>fit.sh.reg <span class="ot">&lt;-</span> <span class="fu">procD.lm</span>(shape <span class="sc">~</span> merged,</span>
+<span id="cb158-3"><a href="geometric-morphometrics-1.html#cb158-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> gdf,</span>
+<span id="cb158-4"><a href="geometric-morphometrics-1.html#cb158-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb158-5"><a href="geometric-morphometrics-1.html#cb158-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb158-6"><a href="geometric-morphometrics-1.html#cb158-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-7"><a href="geometric-morphometrics-1.html#cb158-7" aria-hidden="true" tabindex="-1"></a><span class="co"># difference in shape by size class?</span></span>
+<span id="cb158-8"><a href="geometric-morphometrics-1.html#cb158-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit.sh.reg)</span></code></pre></div>
+<pre><code>## 
+## Analysis of Variance, using Residual Randomization
+## Permutation procedure: Randomization of null model residuals 
+## Number of permutations: 10000 
+## Estimation method: Ordinary Least Squares 
+## Sums of Squares and Cross-products: Type I 
+## Effect sizes (Z) based on F distributions
+## 
+##           Df      SS       MS     Rsq      F      Z Pr(&gt;F)   
+## merged     3 0.10010 0.033367 0.12488 2.9966 2.6487 0.0038 **
+## Residuals 63 0.70148 0.011135 0.87512                        
+## Total     66 0.80158                                         
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Call: procD.lm(f1 = shape ~ merged, iter = 9999, data = gdf, print.progress = FALSE)</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="geometric-morphometrics-1.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb160-2"><a href="geometric-morphometrics-1.html#cb160-2" aria-hidden="true" tabindex="-1"></a>pw.sh.reg <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(fit.sh.reg,</span>
+<span id="cb160-3"><a href="geometric-morphometrics-1.html#cb160-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> qdata<span class="sc">$</span>merged)</span>
+<span id="cb160-4"><a href="geometric-morphometrics-1.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pw.sh.reg, </span>
+<span id="cb160-5"><a href="geometric-morphometrics-1.html#cb160-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb160-6"><a href="geometric-morphometrics-1.html#cb160-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Pairwise comparisons
+## 
+## Groups: north_L north_S south_L south_S 
+## 
+## RRPP: 10000 permutations
+## 
+## LS means:
+## Vectors hidden (use show.vectors = TRUE to view)
+## 
+## Pairwise distances between means, plus statistics
+##                          d  UCL (95%)          Z Pr &gt; d
+## north_L:north_S 0.10303874 0.07924105  2.4114393 0.0046
+## north_L:south_L 0.05011667 0.06117665  1.0941187 0.1436
+## north_L:south_S 0.03985408 0.06060269  0.4950596 0.3217
+## north_S:south_L 0.11012158 0.07324844  2.8681547 0.0009
+## north_S:south_S 0.10319047 0.07251068  2.7027293 0.0017
+## south_L:south_S 0.01657002 0.05318001 -1.2603364 0.8892</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="geometric-morphometrics-1.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># size</span></span>
+<span id="cb162-2"><a href="geometric-morphometrics-1.html#cb162-2" aria-hidden="true" tabindex="-1"></a>fit.sz.reg <span class="ot">&lt;-</span> <span class="fu">procD.lm</span>(size <span class="sc">~</span> merged,</span>
+<span id="cb162-3"><a href="geometric-morphometrics-1.html#cb162-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> gdf,</span>
+<span id="cb162-4"><a href="geometric-morphometrics-1.html#cb162-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb162-5"><a href="geometric-morphometrics-1.html#cb162-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb162-6"><a href="geometric-morphometrics-1.html#cb162-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-7"><a href="geometric-morphometrics-1.html#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="co"># size</span></span>
+<span id="cb162-8"><a href="geometric-morphometrics-1.html#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit.sz.reg)</span></code></pre></div>
+<pre><code>## 
+## Analysis of Variance, using Residual Randomization
+## Permutation procedure: Randomization of null model residuals 
+## Number of permutations: 10000 
+## Estimation method: Ordinary Least Squares 
+## Sums of Squares and Cross-products: Type I 
+## Effect sizes (Z) based on F distributions
+## 
+##           Df     SS     MS     Rsq     F      Z Pr(&gt;F)    
+## merged     3 22.934 7.6446 0.34701 11.16 4.1706  1e-04 ***
+## Residuals 63 43.155 0.6850 0.65299                        
+## Total     66 66.089                                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Call: procD.lm(f1 = size ~ merged, iter = 9999, data = gdf, print.progress = FALSE)</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="geometric-morphometrics-1.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb164-2"><a href="geometric-morphometrics-1.html#cb164-2" aria-hidden="true" tabindex="-1"></a>pw.sz.reg <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(fit.sz.reg,</span>
+<span id="cb164-3"><a href="geometric-morphometrics-1.html#cb164-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> qdata<span class="sc">$</span>merged)</span>
+<span id="cb164-4"><a href="geometric-morphometrics-1.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pw.sz.reg, </span>
+<span id="cb164-5"><a href="geometric-morphometrics-1.html#cb164-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb164-6"><a href="geometric-morphometrics-1.html#cb164-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Pairwise comparisons
+## 
+## Groups: north_L north_S south_L south_S 
+## 
+## RRPP: 10000 permutations
+## 
+## LS means:
+## Vectors hidden (use show.vectors = TRUE to view)
+## 
+## Pairwise distances between means, plus statistics
+##                          d UCL (95%)         Z Pr &gt; d
+## north_L:north_S 0.70995445 0.8650155  1.239690 0.1086
+## north_L:south_L 0.95927394 0.6787305  2.290754 0.0048
+## north_L:south_S 0.86926347 0.6665158  2.085959 0.0100
+## north_S:south_L 1.66922839 0.7998731  3.165704 0.0003
+## north_S:south_S 1.57921791 0.7949796  3.023732 0.0003
+## south_L:south_S 0.09001048 0.5770700 -0.757120 0.7638</code></pre>
+</div>
+<div id="modularity" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Modularity<a href="geometric-morphometrics-1.html#modularity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="geometric-morphometrics-1.html#cb166-1" aria-hidden="true" tabindex="-1"></a>land.gps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,</span>
+<span id="cb166-2"><a href="geometric-morphometrics-1.html#cb166-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,</span>
+<span id="cb166-3"><a href="geometric-morphometrics-1.html#cb166-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>)</span>
+<span id="cb166-4"><a href="geometric-morphometrics-1.html#cb166-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-5"><a href="geometric-morphometrics-1.html#cb166-5" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">modularity.test</span>(Y.gpa<span class="sc">$</span>coords,</span>
+<span id="cb166-6"><a href="geometric-morphometrics-1.html#cb166-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">partition.gp =</span> land.gps,</span>
+<span id="cb166-7"><a href="geometric-morphometrics-1.html#cb166-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb166-8"><a href="geometric-morphometrics-1.html#cb166-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">seed =</span> <span class="cn">NULL</span>,</span>
+<span id="cb166-9"><a href="geometric-morphometrics-1.html#cb166-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">opt.rot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb166-10"><a href="geometric-morphometrics-1.html#cb166-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb166-11"><a href="geometric-morphometrics-1.html#cb166-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-12"><a href="geometric-morphometrics-1.html#cb166-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## modularity.test(A = Y.gpa$coords, partition.gp = land.gps, iter = 9999,  
+##     seed = NULL, opt.rot = TRUE, print.progress = FALSE) 
+## 
+## 
+## 
+## CR: 0.94387
+## 
+## P-value: 6e-04
+## 
+## Effect Size: -4.7686
+## 
+## Based on 10000 random permutations</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="geometric-morphometrics-1.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="do">## modularity plot</span></span>
+<span id="cb168-2"><a href="geometric-morphometrics-1.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<p><img src="_main_files/figure-html/mod-1.png" width="100%" /></p>
+</div>
+<div id="morphological-integration" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Morphological integration<a href="geometric-morphometrics-1.html#morphological-integration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="geometric-morphometrics-1.html#cb169-1" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">integration.test</span>(Y.gpa<span class="sc">$</span>coords,</span>
+<span id="cb169-2"><a href="geometric-morphometrics-1.html#cb169-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">partition.gp =</span> land.gps,</span>
+<span id="cb169-3"><a href="geometric-morphometrics-1.html#cb169-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">print.progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb169-4"><a href="geometric-morphometrics-1.html#cb169-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iter =</span> <span class="dv">9999</span>)</span>
+<span id="cb169-5"><a href="geometric-morphometrics-1.html#cb169-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-6"><a href="geometric-morphometrics-1.html#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(it)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## integration.test(A = Y.gpa$coords, partition.gp = land.gps, iter = 9999,  
+##     print.progress = FALSE) 
+## 
+## 
+## 
+## r-PLS: 0.9676
+## 
+## Effect Size (Z): 6.23893
+## 
+## P-value: 1e-04
+## 
+## Based on 10000 random permutations</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="geometric-morphometrics-1.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="do">## integration plot</span></span>
+<span id="cb171-2"><a href="geometric-morphometrics-1.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(it)</span></code></pre></div>
+<p><img src="_main_files/figure-html/integ-1.png" width="100%" /></p>
+</div>
+<div id="trajectory-analysis" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Trajectory analysis<a href="geometric-morphometrics-1.html#trajectory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="geometric-morphometrics-1.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># trajectory analysis::shape</span></span>
+<span id="cb172-2"><a href="geometric-morphometrics-1.html#cb172-2" aria-hidden="true" tabindex="-1"></a>TA <span class="ot">&lt;-</span> <span class="fu">trajectory.analysis</span>(fit.sh.reg, </span>
+<span id="cb172-3"><a href="geometric-morphometrics-1.html#cb172-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">groups =</span> qdata<span class="sc">$</span>region, </span>
+<span id="cb172-4"><a href="geometric-morphometrics-1.html#cb172-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">traj.pts =</span> qdata<span class="sc">$</span>size,</span>
+<span id="cb172-5"><a href="geometric-morphometrics-1.html#cb172-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb172-6"><a href="geometric-morphometrics-1.html#cb172-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-7"><a href="geometric-morphometrics-1.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="co"># magnitude difference</span></span>
+<span id="cb172-8"><a href="geometric-morphometrics-1.html#cb172-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(TA, </span>
+<span id="cb172-9"><a href="geometric-morphometrics-1.html#cb172-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">attribute =</span> <span class="st">&quot;MD&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Trajectory analysis
+## 
+## 10000 permutations.
+## 
+## Points projected onto trajectory PCs
+## 
+## Trajectories:
+## Trajectories hidden (use show.trajectories = TRUE to view)
+## 
+## Observed path distances by group
+## 
+##      north      south 
+## 0.10303874 0.01657002 
+## 
+## Pairwise absolute differences in path distances, plus statistics
+##                      d  UCL (95%)        Z Pr &gt; d
+## north:south 0.08646872 0.05328336 2.511681 0.0017</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="geometric-morphometrics-1.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb174-2"><a href="geometric-morphometrics-1.html#cb174-2" aria-hidden="true" tabindex="-1"></a>TP <span class="ot">&lt;-</span> <span class="fu">plot</span>(TA, </span>
+<span id="cb174-3"><a href="geometric-morphometrics-1.html#cb174-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">pch =</span> <span class="fu">as.numeric</span>(qdata<span class="sc">$</span>region), </span>
+<span id="cb174-4"><a href="geometric-morphometrics-1.html#cb174-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">bg =</span> <span class="fu">as.numeric</span>(qdata<span class="sc">$</span>size),</span>
+<span id="cb174-5"><a href="geometric-morphometrics-1.html#cb174-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">cex =</span> <span class="fl">0.9</span>,</span>
+<span id="cb174-6"><a href="geometric-morphometrics-1.html#cb174-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb174-7"><a href="geometric-morphometrics-1.html#cb174-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add.trajectories</span>(TP, </span>
+<span id="cb174-8"><a href="geometric-morphometrics-1.html#cb174-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">traj.pch =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>),</span>
+<span id="cb174-9"><a href="geometric-morphometrics-1.html#cb174-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">traj.cex =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/shapetrajectory-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="geometric-morphometrics-1.html#cb175-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&#39;img/img2/trajectory.png&#39;</span>)</span></code></pre></div>
+<p><img src="img/img2/trajectory.png" width="100%" /></p>
+</div>
+<div id="morphological-disparity" class="section level2 hasAnchor" number="3.10">
+<h2><span class="header-section-number">3.10</span> Morphological disparity<a href="geometric-morphometrics-1.html#morphological-disparity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="geometric-morphometrics-1.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># morphological disparity in shape</span></span>
+<span id="cb176-2"><a href="geometric-morphometrics-1.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">morphol.disparity</span>(fit.sh.reg, </span>
+<span id="cb176-3"><a href="geometric-morphometrics-1.html#cb176-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">groups =</span> qdata<span class="sc">$</span>merged, </span>
+<span id="cb176-4"><a href="geometric-morphometrics-1.html#cb176-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> gdf, </span>
+<span id="cb176-5"><a href="geometric-morphometrics-1.html#cb176-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">print.progress =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb176-6"><a href="geometric-morphometrics-1.html#cb176-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">iter =</span> <span class="dv">9999</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## morphol.disparity(f1 = fit.sh.reg, groups = qdata$merged, iter = 9999,  
+##     data = gdf, print.progress = FALSE) 
+## 
+## 
+## 
+## Randomized Residual Permutation Procedure Used
+## 10000 Permutations
+## 
+## Procrustes variances for defined groups
+##     north_L     north_S     south_L     south_S 
+## 0.006787206 0.005489185 0.014294381 0.010785645 
+## 
+## 
+## Pairwise absolute differences between variances
+##             north_L     north_S     south_L     south_S
+## north_L 0.000000000 0.001298021 0.007507174 0.003998439
+## north_S 0.001298021 0.000000000 0.008805195 0.005296460
+## south_L 0.007507174 0.008805195 0.000000000 0.003508735
+## south_S 0.003998439 0.005296460 0.003508735 0.000000000
+## 
+## 
+## P-Values
+##         north_L north_S south_L south_S
+## north_L  1.0000  0.7705  0.0179  0.2223
+## north_S  0.7705  1.0000  0.0229  0.1756
+## south_L  0.0179  0.0229  1.0000  0.2263
+## south_S  0.2223  0.1756  0.2263  1.0000</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="geometric-morphometrics-1.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># morphological disparity in size</span></span>
+<span id="cb178-2"><a href="geometric-morphometrics-1.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">morphol.disparity</span>(fit.sz.reg, </span>
+<span id="cb178-3"><a href="geometric-morphometrics-1.html#cb178-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">groups =</span> qdata<span class="sc">$</span>merged, </span>
+<span id="cb178-4"><a href="geometric-morphometrics-1.html#cb178-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> gdf, </span>
+<span id="cb178-5"><a href="geometric-morphometrics-1.html#cb178-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">print.progress =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb178-6"><a href="geometric-morphometrics-1.html#cb178-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">iter =</span> <span class="dv">9999</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## morphol.disparity(f1 = fit.sz.reg, groups = qdata$merged, iter = 9999,  
+##     data = gdf, print.progress = FALSE) 
+## 
+## 
+## 
+## Randomized Residual Permutation Procedure Used
+## 10000 Permutations
+## 
+## Procrustes variances for defined groups
+##   north_L   north_S   south_L   south_S 
+## 0.1558141 0.2508603 1.0774395 0.6636123 
+## 
+## 
+## Pairwise absolute differences between variances
+##            north_L    north_S   south_L   south_S
+## north_L 0.00000000 0.09504627 0.9216254 0.5077983
+## north_S 0.09504627 0.00000000 0.8265792 0.4127520
+## south_L 0.92162545 0.82657918 0.0000000 0.4138272
+## south_S 0.50779827 0.41275200 0.4138272 0.0000000
+## 
+## 
+## P-Values
+##         north_L north_S south_L south_S
+## north_L  1.0000  0.8200  0.0160  0.2357
+## north_S  0.8200  1.0000  0.0999  0.3255
+## south_L  0.0160  0.0999  1.0000  0.2836
+## south_S  0.2357  0.3255  0.2836  1.0000</code></pre>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-RN1655" class="csl-entry">
+———. 2015. <span>“<span class="nocase">Permutation Tests for Phylogenetic Comparative Analyses of High-Dimensional Shape Data: What you Shuffle Matters</span>.”</span> <em>Evolution</em> 69 (3): 823–29. <a href="https://doi.org/10.1111/evo.12596">https://doi.org/10.1111/evo.12596</a>.
+</div>
+<div id="ref-RN11530" class="csl-entry">
+Adams, Dean C., Michael L. Collyer, Antigoni Kaliontzopoulou, and Emma Sherratt. 2017. <span>“<span class="nocase">Package geomorph: Geometric Morphometric Analyses of Landmark Data. R package version 3.0.5</span>.”</span> <a href="http://geomorphr.github.io/geomorph/">http://geomorphr.github.io/geomorph/</a>.
+</div>
+<div id="ref-RN1774" class="csl-entry">
+Adams, Dean C., and Erik Otarola-Castillo. 2013. <span>“<span class="nocase">geomorph: An R Package for the Collection and Analysis of Geometric Morphometric Shape Data</span>.”</span> <em>Methods in Ecology and Evolution</em> 4 (4): 393–99. <a href="https://doi.org/10.1111/2041-210x.12035">https://doi.org/10.1111/2041-210x.12035</a>.
+</div>
+<div id="ref-RN1719" class="csl-entry">
+Anderson, M. J., and C. J. F. Ter Braak. 2003. <span>“<span class="nocase">Permutation Tests for Multi-Factoral Analysis of Variance</span>.”</span> <em>Journal of Statistical Computation and Simulation</em> 73 (2): 85–113. <a href="https://doi.org/10.1080=0094965021000015558">https://doi.org/10.1080=0094965021000015558</a>.
+</div>
+<div id="ref-RN9565" class="csl-entry">
+Baken, Erica K., Michael L. Collyer, Antigoni Kaliontzopoulou, and Dean C. Adams. 2021. <span>“<span class="nocase">geomorph v4.0 and gmShiny: Enhanced analytics and a new graphical interface for a comprehensive morphometric experience</span>.”</span> Journal Article. <em>Methods in Ecology and Evolution</em>. <a href="https://doi.org/10.1111/2041-210x.13723">https://doi.org/10.1111/2041-210x.13723</a>.
+</div>
+<div id="ref-RN11775" class="csl-entry">
+———. 2018. <span>“<span class="nocase">RRPP: An R Package for Fitting Linear Models to High-Dimensional Data using Residual Randomization</span>.”</span> <em>Methods in Ecology and Evolution</em> 9 (7): 1772–79. https://doi.org/<a href="https://doi.org/10.1111/2041-210X.13029">https://doi.org/10.1111/2041-210X.13029</a>.
+</div>
+<div id="ref-RN1756" class="csl-entry">
+Collyer, Michael L., D. J. Sekora, and Dean C. Adams. 2015. <span>“<span class="nocase">A Method for Analysis of Phenotypic Change for Phenotypes Described by High-Dimensional Data</span>.”</span> <em>Heredity</em> 115 (4): 357–65. <a href="https://doi.org/10.1038/hdy.2014.75">https://doi.org/10.1038/hdy.2014.75</a>.
+</div>
+<div id="ref-RN1749" class="csl-entry">
+Goodall, Colin. 1991. <span>“<span class="nocase">Procrustes Methods in the Statistical Analysis of Shape</span>.”</span> <em>Journal of the Royal Statistical Society. Series B (Methodological)</em> 53 (2): 285–339.
+</div>
+<div id="ref-RN11564" class="csl-entry">
+Gower, J. C. 1975. <span>“<span>Generalized Procrustes Analysis</span>.”</span> <em>Psychometrika</em> 40 (1): 33–51. https://doi.org/<a href="https://doi.org/10.1007/BF02291478">https://doi.org/10.1007/BF02291478</a>.
+</div>
+<div id="ref-RN1746" class="csl-entry">
+Jolliffe, Ian T. 2002. <em>Principal Component Analysis</em>. New York: Springer.
+</div>
+<div id="ref-RN11622" class="csl-entry">
+Kendall, David G. 1981. <span>“<span class="nocase">The Statistics of Shape</span>.”</span> In <em>Interpreting Multivariate Data</em>, edited by V. Barnett, 75–80. New York: Wiley.
+</div>
+<div id="ref-RN11623" class="csl-entry">
+———. 1984. <span>“<span class="nocase">Shape Manifolds, Procrustean Metrics, and Complex Projective Spaces</span>.”</span> <em>Bulletin of the London Mathematical Society</em> 16 (2): 81–121. <a href="https://doi.org/10.1112/blms/16.2.81">https://doi.org/10.1112/blms/16.2.81</a>.
+</div>
+<div id="ref-RN1731" class="csl-entry">
+Klingenberg, Christian Peter. 2013. <span>“<span class="nocase">Visualizations in Geometric Morphometrics: How to Read and How to Make Graphs Showing Shape Changes</span>.”</span> <em>Hystrix</em> 24 (1): 15–24. https://doi.org/<a href="http://dx.doi.org/10.4404/hystrix-24.1-7691">http://dx.doi.org/10.4404/hystrix-24.1-7691</a>.
+</div>
+<div id="ref-R" class="csl-entry">
+R Core Development Team,. 2022. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="http://www.R-project.org/">http://www.R-project.org/</a>.
+</div>
+<div id="ref-RN1646" class="csl-entry">
+Rohlf, F. James. 1999. <span>“<span class="nocase">Shape Statistics: Procrustes Superimpositions and Tangent Spaces</span>.”</span> <em>Journal of Classification</em> 16 (2): 197–223. <a href="https://doi.org/10.1007/s003579900054">https://doi.org/10.1007/s003579900054</a>.
+</div>
+<div id="ref-RN478" class="csl-entry">
+Rohlf, F. James, and Dennis Slice. 1990. <span>“<span class="nocase">Extensions of the Procrustes Method for the Optimal Superimposition of Landmarks</span>.”</span> <em>Systematic Zoology</em> 39 (1): 40–59. <a href="https://doi.org/10.2307/2992207">https://doi.org/10.2307/2992207</a>.
+</div>
+<div id="ref-RN9551" class="csl-entry">
+Selden Jr, Robert Z., John E. Dockall, C. Britt Bousman, and Timothy K. Perttula. 2021. <span>“<span class="nocase">Shape as a function of time + raw material + burial context? An exploratory analysis of Perdiz arrow points from the ancestral Caddo area of the American Southeast</span>.”</span> Journal Article. <em>Journal of Archaeological Science: Reports</em> 37: 102916. <a href="https://doi.org/10.1016/j.jasrep.2021.102916">https://doi.org/10.1016/j.jasrep.2021.102916</a>.
+</div>
+<div id="ref-RN11801" class="csl-entry">
+Selden Jr., Robert Z. 2018a. <span>“A Preliminary Study of Smithport Plain Bottle Morphology in the Southern Caddo Area.”</span> <em>Bulletin of the Texas Archeological Society</em> 89: 63–89.
+</div>
+<div id="ref-RN11782" class="csl-entry">
+———. 2018b. <span>“<span class="nocase">Ceramic Morphological Organisation in the Southern Caddo Area: Quiddity of Shape for Hickory Engraved Bottles</span>.”</span> <em>Journal of Archaeological Science: Reports</em> 21: 884–96. <a href="https://doi.org/10.1016/j.jasrep.2018.08.045">https://doi.org/10.1016/j.jasrep.2018.08.045</a>.
+</div>
+<div id="ref-RN11716" class="csl-entry">
+———. 2019. <span>“<span class="nocase">Ceramic Morphological Organisation in the Southern Caddo Area: The Clarence H. Webb Collections</span>.”</span> <em>Journal of Cultural Heritage</em> 35: 41–55. https://doi.org/<a href="https://doi.org/10.1016/j.culher.2018.07.002">https://doi.org/10.1016/j.culher.2018.07.002</a>.
+</div>
+<div id="ref-RN8312" class="csl-entry">
+———. 2021. <span>“Louisiana Limitrophe: An Iterative Morphological Exegesis of Caddo Bottle and Biface Production.”</span> Book Section. In <em>Ancestral Caddo Ceramic Traditions</em>, edited by Duncan P. McKinnon, Jeffrey S. Girard, and Timothy K. Perttula, 258–76. Baton Rouge: LSU Press.
+</div>
+<div id="ref-RN21001" class="csl-entry">
+Selden Jr., Robert Z., John E. Dockall, and Morgane Dubied. 2020. <span>“A Quantitative Assessment of Intraspecific Morphological Variation in Gahagan Bifaces from the Southern Caddo Area and Central Texas.”</span> <em>Southeastern Archaeology</em> 39 (2): 125–45. <a href="https://doi.org/10.1080/0734578x.2020.1744416">https://doi.org/10.1080/0734578x.2020.1744416</a>.
+</div>
+<div id="ref-RN11783" class="csl-entry">
+Selden Jr., Robert Z., John E. Dockall, and Harry J. Shafer. 2018. <span>“<span class="nocase">Lithic Morphological Organisation: Gahagan Bifaces from the Southern Caddo Area</span>.”</span> <em>Digital Applications in Archaeology and Cultural Heritage</em> 10: e00080. <a href="https://doi.org/10.1016/j.daach.2018.e00080">https://doi.org/10.1016/j.daach.2018.e00080</a>.
+</div>
+<div id="ref-RN479" class="csl-entry">
+Sherratt, Emma, David J. Gower, Christian Peter Klingenberg, and Mark Wilkinson. 2014. <span>“<span class="nocase">Evolution of Cranial Shape in Caecilians (Amphibia: Gymnophiona)</span>.”</span> <em>Evolutionary Biology</em> 41 (4): 528–45. https://doi.org/<a href="https://doi.org/10.1007/s11692-014-9287-2">https://doi.org/10.1007/s11692-014-9287-2</a>.
+</div>
+<div id="ref-RN11563" class="csl-entry">
+Slice, Dennis E. 2001. <span>“<span class="nocase">Landmark Coordinates Aligned by Procrustes Analysis Do Not Lie in Kendall’s Shape Space</span>.”</span> <em>Systematic Biology</em> 50 (1): 141–49. <a href="https://doi.org/10.1080/10635150119110">https://doi.org/10.1080/10635150119110</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-metrics-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gm-v-linear.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-gm.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

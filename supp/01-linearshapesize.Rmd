@@ -1,0 +1,276 @@
+# Linear ~ shape/size
+
+This study begins by asking which linear measure/s---if any---can be said to covary with Perdiz arrow point shape and size? To assess covariance, Procrustes-aligned **shape** and centroid **size** are used in a pair of two-block partial least-squares analysis with each linear (caliper collected) metric. 
+
+## Load packages + data
+
+```{r loadlinearshapesize, echo=TRUE, warning=FALSE}
+# download most recent software version
+#devtools::install_github("geomorphR/geomorph", ref = "Stable", build_vignettes = TRUE)
+#devtools::install_github("mlcollyer/RRPP")
+
+# load analysis packages
+library(here)
+library(StereoMorph)
+library(geomorph)
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+library(wesanderson)
+
+# read shape data and define number of sLMs
+shapes <- readShapes("shapes")
+shapesGM <- readland.shapes(shapes, 
+                            nCurvePts = c(10,3,5,5,3,10))
+
+# read qualitative data
+qdata <- read.csv("qdata.perdiz.csv",
+                  header = TRUE,
+                  row.names = 1)
+
+# add derived vars to data
+# maximum blade length (derived)
+qdata$maxbl <- qdata$maxl - qdata$maxstl
+# maximum shoulder width (derived)
+qdata$maxshw <- qdata$maxw - qdata$maxstw
+```
+
+## Generalised Procrustes Analysis
+
+Landmark data were aligned to a global coordinate system [@RN11622;@RN11623;@RN11563], achieved through generalized Procrustes superimposition [@RN478] performed in R 4.1.3 [@R] using the `geomorph` library v. 4.0.3 [@RN11530;@RN1774;@RN9565]. Procrustes superimposition translates, scales, and rotates the coordinate data to allow for comparisons among objects [@RN11564;@RN478]. The `geomorph` package uses a partial Procrustes superimposition that projects the aligned specimens into tangent space subsequent to alignment in preparation for the use of multivariate methods that assume linear space [@RN1646;@RN11563]. 
+
+```{r gpashapesize, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# gpa
+Y.gpa <- gpagen(shapesGM, print.progress = FALSE)
+
+## plot
+plot(Y.gpa)
+
+# dataframe
+gdf <- geomorph.data.frame(shape = Y.gpa$coords,
+                           size = Y.gpa$Csize)
+```
+
+## 2BPLS Maximum length
+
+### Shape
+
+```{r 2bplsshl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapeml <- two.b.pls(Y.gpa$coords,
+                      qdata$maxl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapeml)
+
+## plot
+plot(shapeml)
+```
+
+### Size
+
+```{r 2bplsszl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizeml <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizeml)
+
+## plot
+plot(sizeml)
+```
+
+## 2BPLS Maximum blade length
+
+### Shape
+
+```{r 2bplsshbl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapembl <- two.b.pls(Y.gpa$coords,
+                      qdata$maxbl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapembl)
+
+## plot
+plot(shapembl)
+```
+
+### Size
+
+```{r 2bplsszbl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizembl <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxbl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizembl)
+
+## plot
+plot(sizembl)
+```
+
+## 2BPLS Maximum shoulder width
+
+### Shape
+
+```{r 2bplsshshw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapemshw <- two.b.pls(Y.gpa$coords,
+                      qdata$maxshw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapemshw)
+
+## plot
+plot(shapemshw)
+```
+
+### Size
+
+```{r 2bplsszshw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizemshw <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxshw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizemshw)
+
+## plot
+plot(sizemshw)
+```
+
+## 2BPLS Maximum width
+
+### Shape
+
+```{r 2bplsshw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapemw <- two.b.pls(Y.gpa$coords,
+                      qdata$maxw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapemw)
+
+## plot
+plot(shapemw)
+```
+
+### Size
+
+```{r 2bplsszw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizemw <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizemw)
+
+## plot
+plot(sizemw)
+```
+
+## 2BPLS Maximum thickness
+
+### Shape
+
+```{r 2bplsshth, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapemth <- two.b.pls(Y.gpa$coords,
+                      qdata$maxth,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapemth)
+
+## plot
+plot(shapemth)
+```
+
+### Size
+
+```{r 2bplsszth, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizemth <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxth,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizemth)
+
+## plot
+plot(sizemth)
+```
+
+## 2BPLS Maximum stem length
+
+### Shape
+
+```{r 2bplsshstl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapemstl <- two.b.pls(Y.gpa$coords,
+                      qdata$maxstl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapemstl)
+
+## plot
+plot(shapemstl)
+```
+
+### Size
+
+```{r 2bplsszstl, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizemstl <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxstl,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizemstl)
+
+## plot
+plot(sizemstl)
+```
+
+## 2BPLS Maximum stem width
+
+### Shape
+
+```{r 2bplsshstw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point shape correlated with linear var?
+shapemstw <- two.b.pls(Y.gpa$coords,
+                      qdata$maxstw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(shapemstw)
+
+## plot
+plot(shapemstw)
+```
+
+### Size
+
+```{r 2bplsszstw, echo=TRUE, out.width = "100%", dpi = 300, warning=FALSE}
+# is Perdiz arrow point size correlated with linear var?
+sizemstw <- two.b.pls(Y.gpa$Csize,
+                      qdata$maxstw,
+                      iter = 9999,
+                      seed = NULL,
+                      print.progress = FALSE)
+summary(sizemstw)
+
+## plot
+plot(sizemstw)
+```

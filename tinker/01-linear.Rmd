@@ -1,0 +1,457 @@
+# Linear metrics
+
+Two `size classes` (large/small) were used to examine whether the shape of Perdiz arrow points from the northern and southern behavioural regions of the ancestral Caddo region remain morphologically stable, or express morphological variation. Variability in Perdiz arrow point shape potentially provides evidence associated with differential resharpening trajectories.
+
+_The `maximum blade length` variable used in this study is calculated as the difference between `maximum length` and `maximum stem length`. For that reason, it differs from traditional measures of maximum blade length, which often overlaps with maximum stem length if measuring Perdiz arrow points with calipers._
+
+_Similarly, `maximum shoulder length` is calculated as the difference between `maximum width` and `maximum shoulder width`. Thus, while derivative of two linear measures, it does not account for the curvature that occurs in the range of that linear measurement. Similarly, it does not account for asymmetry on either side of the projectile._
+
+```{r load.linear, echo=TRUE}
+# load analysis libraries
+library(here)
+library(tidyverse)
+library(EnvStats)
+library(ggpubr)
+library(ggfortify)
+library(cluster)
+library(ggExtra)
+library(RRPP)
+library(wesanderson)
+
+# load data
+perdiz.linear <- read.csv("qdata.perdiz.csv",
+                          header = TRUE,
+                          as.is = TRUE)
+```
+
+## Variables + histograms
+
+```{r derived.variables, echo=TRUE, warning = FALSE}
+# add vars to data
+# maximum blade length (derived)
+perdiz.linear$maxbl <- perdiz.linear$maxl - perdiz.linear$maxstl
+# maximum shoulder width (derived)
+perdiz.linear$maxshw <- perdiz.linear$maxw - perdiz.linear$maxstw
+
+## histograms
+h.maxbl <- ggplot(perdiz.linear, aes(maxbl)) +
+  geom_histogram()
+h.maxshw <- ggplot(perdiz.linear, aes(maxshw)) +
+  geom_histogram()
+h.maxw <- ggplot(perdiz.linear, aes(maxw)) +
+  geom_histogram()
+h.maxth <- ggplot(perdiz.linear, aes(maxth)) +
+  geom_histogram()
+h.maxstw <- ggplot(perdiz.linear, aes(maxstw)) +
+  geom_histogram()
+h.maxstl <- ggplot(perdiz.linear, aes(maxstl)) +
+  geom_histogram()
+
+# render figure
+figure.histograms <- ggarrange(h.maxbl, h.maxshw, h.maxw, h.maxth, h.maxstw, h.maxstl,
+                  labels = c("a", "b", "c", "d", "e", "f"),
+                  ncol = 2, nrow = 3)
+
+## plot figure
+figure.histograms
+```
+
+## Assign `size classes`
+
+For this effort, the mean `maximum blade length` for Perdiz arrow points from each behavioural region was calculated and used to bin the sample into two groups (henceforth, `size classes`); one with a longer blade, and the other, shorter. Following the assignment of `size classes`, data were joined in advance of analysis. 
+
+### Red River Basin
+
+```{r sizenorth, echo=TRUE, warning=FALSE}
+# subset red river basin
+perdiz.red <- subset(perdiz.linear,
+                     basin == "Red",
+                     select = site:maxshw)
+
+# calculate mean blade length
+meanbl <- mean(perdiz.red$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- perdiz.red$maxbl >= meanbl
+lcheck3 <- perdiz.red$maxbl >= 0 & perdiz.red$maxbl < meanbl
+
+perdiz.red$size <- ""
+perdiz.red$size <- ifelse(lcheck2, "L", perdiz.red$size)
+perdiz.red$size <- ifelse(lcheck3, "S", perdiz.red$size)
+
+size.class <- perdiz.red$size.class
+```
+
+### Sabine River Basin
+
+```{r sizesabine, echo=TRUE, warning=FALSE}
+# subset sabine river basin
+perdiz.sabine <- subset(perdiz.linear,
+                        basin == "Sabine",
+                        select = site:maxshw)
+
+# calculate mean blade length
+meanbl <- mean(perdiz.sabine$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- perdiz.sabine$maxbl >= meanbl
+lcheck3 <- perdiz.sabine$maxbl >= 0 & perdiz.sabine$maxbl < meanbl
+
+perdiz.sabine$size <- ""
+perdiz.sabine$size <- ifelse(lcheck2, "L", perdiz.sabine$size)
+perdiz.sabine$size <- ifelse(lcheck3, "S", perdiz.sabine$size)
+
+size.class <- perdiz.sabine$size.class
+```
+
+### Neches River Basin
+
+```{r sizeneches, echo=TRUE, warning=FALSE}
+# subset neches river basin
+perdiz.neches <- subset(perdiz.linear,
+                        basin == "Neches",
+                        select = site:maxshw)
+
+# calculate mean blade length
+meanbl <- mean(perdiz.neches$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- perdiz.neches$maxbl >= meanbl
+lcheck3 <- perdiz.neches$maxbl >= 0 & perdiz.neches$maxbl < meanbl
+
+perdiz.neches$size <- ""
+perdiz.neches$size <- ifelse(lcheck2, "L", perdiz.neches$size)
+perdiz.neches$size <- ifelse(lcheck3, "S", perdiz.neches$size)
+
+size.class <- perdiz.neches$size.class
+```
+
+### Aggregate
+
+```{r join}
+# aggregate data
+mx <- bind_rows(perdiz.red, perdiz.sabine, perdiz.neches)
+```
+
+## Shape variables
+
+The morphological form (shape + size) of the Perdiz arrow points was split into shape (representing proportions between dimensions in an object) and size (sensu Klingenberg [-@RN11105]). `Size` and `shape` were calculated using the method of log-shape ratios proposed by Mosimann [-@RN11104], where the `geometric mean` is considered a proxy for size, and shape was calculated as the log of isometric size subtracted from the log of each linear/dimensional measure.
+
+```{r linearshape}
+# vars used to calculate geometric mean
+mx.maxbl <- mx$maxbl
+mx.maxw <- mx$maxw
+mx.maxshw <- mx$maxshw
+mx.maxth <- mx$maxth
+mx.maxstl <- mx$maxstl
+mx.maxstw <- mx$maxstw
+
+mean <- c(mx.maxbl, mx.maxw, mx.maxshw, mx.maxth, mx.maxstl, mx.maxstw)
+
+# calculate geometric mean
+mx$geo.mean <- geoMean(mean)
+geo.mean <- mx$geo.mean
+
+# log of linear vars subtracted from log of geometric mean to isolate shape
+mx$sh.maxbl <- log(mx.maxbl) - log(geo.mean)
+mx$sh.maxw <- log(mx.maxw) - log(geo.mean)
+mx$sh.maxshw <- log(mx.maxshw) - log(geo.mean)
+mx$sh.maxth <- log(mx.maxth) - log(geo.mean)
+mx$sh.maxstl <- log(mx.maxstl) - log(geo.mean)
+mx$sh.maxstw <- log(mx.maxstw) - log(geo.mean)
+
+# join river basin and size class
+mx <- mx %>% 
+  unite("merged", basin, size, remove = FALSE)
+
+# export table for use in gm analysis
+write.csv(mx, "qdata.morph.csv")
+```
+
+## Ratios
+
+```{r ratios, out.width = "100%", dpi = 300, echo=TRUE, warning=FALSE}
+# calculate ratios
+# blade:stem (shape vars)
+mx$perdiz.blade.stem <- mx$sh.maxbl / mx$sh.maxstl
+# blade:stem (linear vars)
+mx$perdiz.blade.stem2 <- mx$maxbl / mx$maxstl
+
+# length:thickness
+# calculate sh.maxl var
+mx.maxl <- mx$maxl
+mx$sh.maxl <- log(mx.maxl) - log(geo.mean)
+# length:thickness (shape vars)
+mx$perdiz.length.thickness <- mx$sh.maxl / mx$sh.maxth
+# length:thickness (linear vars)
+mx$perdiz.length.thickness2 <- mx$maxl / mx$maxth
+
+# colorblind-friendly palette with six levels
+pal <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00")
+
+# boxplot blade:stem + drainage basin
+# using shape vars
+bl.st1 <- ggplot(mx, aes(x = merged, y = perdiz.blade.stem, color = merged)) +
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Blade:Stem')
+
+# using linear vars
+bl.st2 <- ggplot(mx, aes(x = merged, y = perdiz.blade.stem2, color = merged)) +
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Blade:Stem')
+
+# boxplot length:thickness + drainage basin
+# using shape vars
+lth1 <- ggplot(mx, aes(x = merged, y = perdiz.length.thickness, color = merged)) +
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Length:Thickness')
+
+# using linear vars
+lth2 <- ggplot(mx, aes(x = merged, y = perdiz.length.thickness2, color = merged)) +
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Length:Thickness')
+
+# render figure
+figure.ratios <- ggarrange(bl.st1, bl.st2, lth1, lth2,
+                  labels = c("a", "b", "c", "d"),
+                  ncol = 2, nrow = 2)
+
+## plot figure
+figure.ratios
+```
+
+## Boxplots for `Size Class`
+
+Boxplots are used here to identify whether shape changes in similar ways between `size classes` and drainage basins.
+
+Three attributes (maximum blade length, shoulder width, and width) are associated with **blade shape**, two attributes (maximum stem length and stem width) articulate with **base shape**, and one attribute (maximum thickness) remains **neutral** as the thickest part of each projectile was inconsistent across blade and base designations.
+
+```{r boxplotppx, out.width = "100%", dpi = 300, echo=TRUE, warning=FALSE, fig.cap = "Boxplots for shape variables associated with a, maximum length; b, width; c, thickness; d, stem length; and e, stem width for Perdiz arrow points from the northern and southern behavioural regions."}
+# boxplot of maximum blade length
+maxbl <- ggplot(mx, aes(x = merged, y = sh.maxbl, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxBL')
+
+# boxplot of  maximum shoulder width
+maxshw <- ggplot(mx, aes(x = merged, y = sh.maxshw, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxShW')
+
+# boxplot of maximum width
+maxw <- ggplot(mx, aes(x = merged, y = sh.maxw, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxW')
+
+# boxplot of maximum thickness
+maxth <- ggplot(mx, aes(x = merged, y = sh.maxth, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxTh')
+
+# boxplot of maximum stem length
+maxstl <- ggplot(mx, aes(x = merged, y = sh.maxstl, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxStL')
+
+# boxplot of stem width
+maxstw <- ggplot(mx, aes(x = merged, y = sh.maxstw, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'MaxStW')
+
+# render figure
+figure <- ggarrange(maxbl, maxshw, maxw, maxth, maxstl, maxstw,
+                  labels = c("a", "b", "c", "d", "e", "f"),
+                  ncol = 3, nrow = 2)
+
+## plot figure
+figure
+```
+
+## Principal Components Analysis
+
+```{r pcalinearx, out.width = "100%", dpi = 300, echo=TRUE, fig.cap = "PCA of Perdiz arrow point shape variables by drainage basin and size class (L/S)."}
+#pca
+df <- mx[c(14:19)]
+pch.gps <- c(3, 6, 15:18)[as.factor(mx$merged)]
+col.gps <- pal[as.factor(mx$merged)]
+
+## pca plot
+pca <- autoplot(prcomp(df),
+                data = mx,
+                asp = 1,
+                shape = pch.gps,
+                colour = "merged",
+                variance_percentage = TRUE,
+                loadings = TRUE, 
+                loadings.colour = 'blue',
+                loadings.label = TRUE,
+                loadings.label.size = 3,
+                frame = TRUE,
+                frame.type = 't') +
+  scale_fill_manual(values = pal) +
+  scale_colour_manual(values = pal)
+
+ggMarginal(pca, groupColour = TRUE)
+```
+
+## Analyses of Variance (ANOVA)
+
+`Size classes` and `shape` were analysed using an ANOVA to assess `shape` as a function of `size class`, and results are used to determine differences in Perdiz arrow point shape _in_ and _between_ major drainage basins.
+
+### _Maximum blade length_ ~ _`size class`_
+
+```{r maxbl.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum blade length ~ `size class`
+maxbl.sizeclass <- lm.rrpp(mx.maxbl ~ merged,
+                           SS.type = "I",
+                           data = mx,
+                           iter = 9999,
+                           print.progress = FALSE)
+
+## difference in max blade length by size class?
+anova(maxbl.sizeclass)
+
+# pairwise comparison of LS means = which differ?
+sh.pwmbl <- pairwise(maxbl.sizeclass,
+                     groups = mx$merged)
+summary(sh.pwmbl, 
+        confidence = 0.95, 
+        test.type = "dist")
+```
+
+### _Maximum shoulder width_ ~ _`size class`_
+
+```{r maxshw.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum shoulder width ~ size class
+maxshw.sizeclass <- lm.rrpp(mx.maxshw ~ merged,
+                            SS.type = "I",
+                            data = mx,
+                            iter = 9999,
+                            print.progress = FALSE)
+
+## difference in max shoulder width by size class?
+anova(maxshw.sizeclass)
+
+# pairwise comparison of LS means = which differ?
+sh.pwmshw <- pairwise(maxshw.sizeclass,
+                      groups = mx$merged)
+summary(sh.pwmshw, 
+        confidence = 0.95, 
+        test.type = "dist")
+```
+
+### _Maximum width_ ~ _`size class`_
+
+```{r maxw.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum width ~ size class
+maxw.sizeclass <- lm.rrpp(mx.maxw ~ merged,
+                          SS.type = "I",
+                          data = mx,
+                          iter = 9999,
+                          print.progress = FALSE)
+
+## difference in max width by size class?
+anova(maxw.sizeclass)
+
+# pairwise comparison of LS means = which differ?
+sh.pwmw <- pairwise(maxw.sizeclass,
+                    groups = mx$merged)
+summary(sh.pwmw, 
+        confidence = 0.95, 
+        test.type = "dist")
+```
+
+### _Maximum thickness_ ~ _`size class`_
+
+```{r maxth.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum thickness ~ size class
+maxth.sizeclass <- lm.rrpp(mx.maxth ~ merged,
+                           SS.type = "I",
+                           data = mx,
+                           iter = 9999,
+                           print.progress = FALSE)
+
+## difference in max thickness by size class?
+anova(maxth.sizeclass)
+
+# pairwise comparison of LS means = which differ?
+sh.pwmth <- pairwise(maxth.sizeclass,
+                     groups = mx$merged)
+summary(sh.pwmth, 
+        confidence = 0.95, 
+        test.type = "dist")
+```
+
+### _Maximum stem length_ ~ _`size class`_
+
+```{r maxstl.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum stem length ~ size class
+maxstl.sizeclass <- lm.rrpp(mx.maxstl ~ merged,
+                            SS.type = "I",
+                            data = mx,
+                            iter = 9999,
+                            print.progress = FALSE)
+
+## difference in max stem length by size class?
+anova(maxstl.sizeclass)
+```
+
+### _Maximum stem width_ ~ _`size class`_
+
+```{r maxstw.sizeclass, out.width = "100%", dpi = 300, echo=TRUE}
+# anova = maximum stem width ~ size class
+maxstw.sizeclass <- lm.rrpp(mx.maxstw ~ merged,
+                            SS.type = "I",
+                            data = mx,
+                            iter = 9999,
+                            print.progress = FALSE)
+
+## difference in max stem width by size class?
+anova(maxstw.sizeclass)
+
+# pairwise comparison of LS means = which differ?
+sh.pwmstw <- pairwise(maxstw.sizeclass,
+                      groups = mx$merged)
+summary(sh.pwmstw, 
+        confidence = 0.95, 
+        test.type = "dist")
+```

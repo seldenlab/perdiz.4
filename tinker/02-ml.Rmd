@@ -1,0 +1,137 @@
+### Machine learning
+
+A _support vector machine_ is a supervised machine learning model regularly used in classifying archaeological materials [@RN9515;@RN9516;@RN9514;@RN9513;@RN10755;@RN10754], and has utility in comparing and classifying a broad range of aggregated archaeological datasets. For this effort, linear shape variables were imported and modeled using the `scikit-learn` package in Python [@scikit-learn;@sklearn_api], and were then split into training (75 percent) and testing (25 percent) subsets. A _standard scaler_ was used to decrease the sensitivity of the algorithm to outliers by standardizing features, and a _nested cross validation_ of the training set was used to achieve unbiased estimates of model performance. The model was subsequently fit on the training set to assess accuracy.
+
+#### Results
+
+  -   The support vector machine assigned Perdiz arrow points from Caddo mortuary contexts to the correct `size class` with an accuracy score of 88%.
+
+
+
+# Machine learning
+
+A _support vector machine_ is a supervised machine learning model regularly used in classifying archaeological materials [@RN9515;@RN9516;@RN9514;@RN9513;@RN10755;@RN10754], and has utility in comparing and classifying a broad range of aggregated archaeological datasets. For this effort, linear shape variables were imported and modeled using the `scikit-learn` package in Python [@scikit-learn;@sklearn_api], and were then split into training (75 percent) and testing (25 percent) subsets. A _standard scaler_ was used to decrease the sensitivity of the algorithm to outliers by standardizing features, and a _nested cross validation_ of the training set was used to achieve unbiased estimates of model performance. The model was subsequently fit on the training set to assess accuracy.
+
+```{r}
+library(tidyverse)
+library(reticulate)
+# run the following in terminal
+#conda create -n py3.8 python=3.9 scikit-learn-intelex pandas numpy matplotlib
+use_condaenv("py3.9", required = TRUE)
+```
+
+```{python}
+# load analysis packages
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
+from sklearn import svm
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import roc_auc_score, accuracy_score
+from sklearn import metrics
+
+# read data
+data = pd.read_csv('qdata.morph.csv')
+data.head()
+```
+
+## Select features and responses
+
+```{python}
+# attributes for analysis
+feature_cols = ['sh.maxbl','sh.maxw','sh.maxshw','sh.maxth','sh.maxstl','sh.maxstw']
+X = data[feature_cols]
+
+#cast from string to int
+reg_num = {'north_L':0, 'north_S':1, 'south_L':2, 'south_S':3}
+data['reg_num'] = data.merged.map(reg_num)
+data.head()
+y = data.reg_num
+```
+
+## Ensure features and responses are numeric
+
+```{python}
+# X vals
+X.dtypes
+# y vals
+y.dtypes
+```
+
+## Split data for train/test
+
+```{python}
+# split data into train/test sets (75/25 split)
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                    test_size = 0.25,
+                                                    random_state = 0)
+
+print('X_train: ', X_train.shape)
+print('X_test: ', X_test.shape)
+print('y_train:', y_train.shape)
+print('y_test: ', y_test.shape)
+```
+
+## Decrease sensitivity of algorithm to outliers through standardising features
+
+```{python}
+stdsc = StandardScaler()
+X_train_std = stdsc.fit_transform(X_train)
+X_test_std = stdsc.transform(X_test)
+```
+
+## Create SVM classifier with linear kernel
+
+```{python}
+clf = svm.SVC(kernel = 'linear')
+clf.fit(X_train_std, y_train)
+```
+
+#Grid search and nested cross validation of training dataset
+
+```{python}
+# grid search
+pipe_svc = Pipeline([('scl', StandardScaler()), ('clf', SVC(random_state = 0))])
+param_range = [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]
+param_grid = [{'clf__C': param_range,
+              'clf__kernel': ['linear']},
+             {'clf__C': param_range,
+             'clf__gamma': param_range,
+             'clf__kernel': ['rbf']}]
+gs = GridSearchCV(estimator = pipe_svc,
+                  param_grid = param_grid,
+                  scoring = 'accuracy',
+                  cv = 5,
+                  n_jobs = 1)
+gs = gs.fit(X_train_std, y_train)
+print('Grid Search Best Score: ', gs.best_score_)
+print('Grid Search Best Parameters: ', gs.best_params_)
+# use the test dataset to estimate model performance
+clf = gs.best_estimator_
+clf.fit(X_train_std, y_train)
+clf.score(X_test_std, y_test)
+
+# nested cross validation
+gs = GridSearchCV(estimator = pipe_svc,
+                 param_grid = param_grid,
+                 scoring = 'accuracy',
+                 cv = 5,
+                 n_jobs = 1)
+scores = cross_val_score(gs, X_train_std, y_train,
+                         scoring = 'accuracy',
+                         cv = 5)
+print('Cross Validation Scores: ', scores)
+print('Cross Validation Mean Score: ', scores.mean())
+```
+
+## Accuracy score
+
+```{python, warning = FALSE}
+y_pred = clf.predict(X_test_std)
+print('Accuracy Score: ', accuracy_score(y_test, y_pred))
+```
