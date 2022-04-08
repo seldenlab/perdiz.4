@@ -93,6 +93,10 @@ knitr::include_graphics('img/img2/trajectory.png')
 
 #### Results
 
+  - Perdiz arrow point shape **differs significantly** between the large and small size classes in the northern behavioural region
+  - Perdiz arrow point shape **differs significantly** in the small size class between the northern and southern behavioural regions
+  - Perdiz arrow point size **differs significantly** in the large size class between the northern and southern behavioural regions
+  - Perdiz arrow point size **differs significantly** in the small size class between the northern and southern behavioural regions
   - Allometry is **significant**, and the homogeneity of slopes test indicates that the slopes associated with large and small Perdiz arrow points from the northern and southern behavioural regions differ
   - Modularity is **significant**
   - Morphological integration is **significant**
