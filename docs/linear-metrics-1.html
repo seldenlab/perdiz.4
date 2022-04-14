@@ -23,7 +23,7 @@
 <meta name="author" content="Robert Z. Selden, Jr." />
 
 
-<meta name="date" content="2022-04-12" />
+<meta name="date" content="2022-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -286,11 +286,11 @@ div.csl-indent {
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="linear-metrics-1.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis libraries</span></span>
 <span id="cb94-2"><a href="linear-metrics-1.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
 <span id="cb94-3"><a href="linear-metrics-1.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## -- Attaching packages ------------------------------------------------------- tidyverse 1.3.1.9000 --</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------- tidyverse 1.3.1.9000 --</code></pre>
 <pre><code>## v tibble  3.1.6     v purrr   0.3.4
 ## v tidyr   1.2.0     v stringr 1.4.0
 ## v readr   2.1.2     v forcats 0.5.1</code></pre>
-<pre><code>## -- Conflicts --------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------- tidyverse_conflicts() --
 ## x tidyr::expand() masks Matrix::expand()
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
@@ -612,7 +612,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Call: lm.rrpp(f1 = mx.maxbl ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,      print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxbl ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,  
+##     print.progress = FALSE)</code></pre>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="linear-metrics-1.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
 <span id="cb120-2"><a href="linear-metrics-1.html#cb120-2" aria-hidden="true" tabindex="-1"></a>sh.pwmbl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxbl.sizeclass,</span>
 <span id="cb120-3"><a href="linear-metrics-1.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
@@ -664,7 +665,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Call: lm.rrpp(f1 = mx.maxshw ~ merged, iter = 9999, SS.type = &quot;I&quot;,      data = mx, print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxshw ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
+##     data = mx, print.progress = FALSE)</code></pre>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="linear-metrics-1.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
 <span id="cb124-2"><a href="linear-metrics-1.html#cb124-2" aria-hidden="true" tabindex="-1"></a>sh.pwmshw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxshw.sizeclass,</span>
 <span id="cb124-3"><a href="linear-metrics-1.html#cb124-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
@@ -716,7 +718,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Call: lm.rrpp(f1 = mx.maxw ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,      print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxw ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,  
+##     print.progress = FALSE)</code></pre>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="linear-metrics-1.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
 <span id="cb128-2"><a href="linear-metrics-1.html#cb128-2" aria-hidden="true" tabindex="-1"></a>sh.pwmw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxw.sizeclass,</span>
 <span id="cb128-3"><a href="linear-metrics-1.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
@@ -766,7 +769,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## Residuals 63 16.7165 0.26534 0.96042                       
 ## Total     66 17.4054                                       
 ## 
-## Call: lm.rrpp(f1 = mx.maxth ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,      print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxth ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,  
+##     print.progress = FALSE)</code></pre>
 </div>
 <div id="maximum-stem-length-size-class" class="section level3 hasAnchor" number="2.7.5">
 <h3><span class="header-section-number">2.7.5</span> <em>Maximum stem length</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-stem-length-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -794,7 +798,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Call: lm.rrpp(f1 = mx.maxstl ~ merged, iter = 9999, SS.type = &quot;I&quot;,      data = mx, print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxstl ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
+##     data = mx, print.progress = FALSE)</code></pre>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="linear-metrics-1.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
 <span id="cb134-2"><a href="linear-metrics-1.html#cb134-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstl.sizeclass,</span>
 <span id="cb134-3"><a href="linear-metrics-1.html#cb134-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
@@ -846,7 +851,8 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Call: lm.rrpp(f1 = mx.maxstw ~ merged, iter = 9999, SS.type = &quot;I&quot;,      data = mx, print.progress = FALSE)</code></pre>
+## Call: lm.rrpp(f1 = mx.maxstw ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
+##     data = mx, print.progress = FALSE)</code></pre>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="linear-metrics-1.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
 <span id="cb138-2"><a href="linear-metrics-1.html#cb138-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstw.sizeclass,</span>
 <span id="cb138-3"><a href="linear-metrics-1.html#cb138-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
