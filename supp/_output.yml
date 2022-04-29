@@ -6,10 +6,9 @@ bookdown::gitbook:
         <li><a href="./">perdiz.4</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
     download: ["pdf", "epub"]
     fontsettings:
-      theme: sepia
+      theme: night
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

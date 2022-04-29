@@ -26,8 +26,8 @@ knitr::include_graphics('img/img2/hypothesis.viz.png')
 
 ## Primary findings
 
-```{r MAP, out.width = "100%", dpi = 300, echo=FALSE, warning=FALSE, fig.cap="Location of sites with Perdiz arrow points included in the study, extent of major drainage basins (Neches [brown], Sabine [maroon], and Red [navy] Rivers), and extent of the ancestral Caddo region (white). In the context of this effort, those sites from the Red River basin (navy) constitute the `northern behavioural region`, while those from the Sabine (maroon) and Neches (brown) River basins represent the `southern behavioural region`."}
-knitr::include_graphics('img/img2/sca.jpg')
+```{r MAP, out.width = "100%", dpi = 300, echo=FALSE, warning=FALSE, fig.cap="Location of sites with Perdiz arrow points included in the study, extent of major drainage basins (Neches [brown], Sabine [maroon], and Red [navy] Rivers), and extent of the ancestral Caddo region (white). In the context of this effort, those sites from the Red River basin constitute the `northern behavioural region`, while those from the Sabine and Neches River basins represent the `southern behavioural region`."}
+knitr::include_graphics('img/img2/fig1.png')
 ```
 
 ### Linear metrics
