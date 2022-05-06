@@ -1,0 +1,418 @@
+# Standardization & Diversity
+
+```{r load.linear.2, echo=TRUE, warning=FALSE}
+# load analysis libraries
+library(here)
+library(tidyverse)
+library(EnvStats)
+library(ggpubr)
+library(ggfortify)
+library(cluster)
+library(ggExtra)
+library(RRPP)
+library(wesanderson)
+
+# load data
+g.data <- read.csv("gary.csv",
+                   header = TRUE,
+                   as.is = TRUE)
+
+# add vars
+# max blade length
+g.data$maxbl <- g.data$maxl - g.data$maxstl
+# max shoulder width
+g.data$maxshw <- g.data$maxw - g.data$maxstw
+```
+
+
+## Assign `size classes`
+
+While size ranges were reported at Poverty Point, Ford and colleagues [-@RN20899;-@RN20899] used a single metric (maximum length) to assign Gary `size classes` at the Jaketown and Poverty Point sites. For this effort, the `mean blade length` was calculated and used to bin the g.data from each site into two groups; one that has a larger blade, and the other, smaller. Following the assignment of `size classes`, g.data from each site are then joined in advance of analysis. All linear metrics were then divided by the `geometric mean`, which was used to isolate variables associated with Gary dart point shape. The `size classes` and `shape` were then analyzed using an ANOVA to assess `shape` as a function of `size class`, and results were used to posit potential resharpening trajectories for each site.
+
+### Cooper site `size classes`
+
+```{r sizecooper, echo=TRUE, warning=FALSE}
+# cooper subset
+cooper <- subset(g.data,
+                 site == "Cooper",
+                 select = spec:maxshw)
+
+## histogram of max blade length (derived from max length - max stem length)
+hist(cooper$maxbl)
+
+# calculate the mean blade length
+meanbl <- mean(cooper$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- cooper$maxbl >= meanbl
+lcheck3 <- cooper$maxbl >= 0 & cooper$maxbl < meanbl
+
+cooper$size <- ""
+cooper$size <- ifelse(lcheck2, "L", cooper$size)
+cooper$size <- ifelse(lcheck3, "S", cooper$size)
+```
+
+### Means site `size classes`
+
+```{r sizemeans, echo=TRUE, warning=FALSE}
+# means subset
+means <- subset(g.data,
+                 site == "Means",
+                 select = spec:maxshw)
+
+## histogram of max blade length (derived from max length - max stem length)
+hist(means$maxbl)
+
+# calculate the mean blade length
+meanbl <- mean(means$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- means$maxbl >= meanbl
+lcheck3 <- means$maxbl >= 0 & means$maxbl < meanbl
+
+means$size <- ""
+means$size <- ifelse(lcheck2, "L", means$size)
+means$size <- ifelse(lcheck3, "S", means$size)
+```
+
+### Miller site `size classes`
+
+```{r sizemiller, echo=TRUE, warning=FALSE}
+# miller subset
+miller <- subset(g.data,
+                 site == "Miller",
+                 select = spec:maxshw)
+
+## histogram of max blade length (derived from max length - max stem length)
+hist(miller$maxbl)
+
+# calculate the mean blade length
+meanbl <- mean(miller$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- miller$maxbl >= meanbl
+lcheck3 <- miller$maxbl >= 0 & miller$maxbl < meanbl
+
+miller$size <- ""
+miller$size <- ifelse(lcheck2, "L", miller$size)
+miller$size <- ifelse(lcheck3, "S", miller$size)
+```
+
+### Poverty Point site `size classes`
+
+```{r sizepovpt, echo=TRUE, warning=FALSE}
+# poverty point subset
+povpt <- subset(g.data,
+                 site == "Pov Pt",
+                 select = spec:maxshw)
+
+## histogram of max blade length (derived from max length - max stem length)
+hist(povpt$maxbl)
+
+# calculate the mean blade length
+meanbl <- mean(povpt$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- povpt$maxbl >= meanbl
+lcheck3 <- povpt$maxbl >= 0 & povpt$maxbl < meanbl
+
+povpt$size <- ""
+povpt$size <- ifelse(lcheck2, "L", povpt$size)
+povpt$size <- ifelse(lcheck3, "S", povpt$size)
+```
+
+### Yarbrough site `size classes`
+
+```{r sizeyar, echo=TRUE, warning=FALSE}
+# yarbrough subset
+yarb <- subset(g.data,
+                 site == "Yar",
+                 select = spec:maxshw)
+
+## histogram of max blade length (derived from max length - max stem length)
+hist(yarb$maxbl)
+
+# calculate the mean blade length
+meanbl <- mean(yarb$maxbl)
+
+# assign L/S varieties based on mean blade length
+lcheck2 <- yarb$maxbl >= meanbl
+lcheck3 <- yarb$maxbl >= 0 & yarb$maxbl < meanbl
+
+yarb$size <- ""
+yarb$size <- ifelse(lcheck2, "L", yarb$size)
+yarb$size <- ifelse(lcheck3, "S", yarb$size)
+```
+
+### Aggregate
+
+```{r join}
+# aggregate g.data
+mx <- bind_rows(cooper, means, miller, povpt, yarb)
+
+# join site and size assignment
+g.data <- mx %>% 
+  unite("merged", site, size, remove = FALSE)
+
+# export for use in resharpening analysis
+write.csv(g.data, "gary.morph.csv")
+```
+
+## Boxplots
+
+```{r boxplotlin, out.width = "100%", dpi = 300, echo=TRUE, warning=FALSE}
+# palette
+pal <- wes_palette("Moonrise2", 10, type = "continuous")
+
+# boxplot of blade length
+plot1 <- ggplot(g.data, aes(x = merged, y = maxbl, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Blade Length')
+
+# boxplot of shoulder width
+plot2 <- ggplot(g.data, aes(x = merged, y = maxshw, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Shoulder Width')
+
+# boxplot of thickness
+plot3 <- ggplot(g.data, aes(x = merged, y = maxth, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Thickness')
+
+# boxplot of stem length
+plot4 <- ggplot(g.data, aes(x = merged, y = maxstl, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Stem Length')
+
+# boxplot of stem width
+plot5 <- ggplot(g.data, aes(x = merged, y = maxstw, color = merged)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = 'y',stackdir = 'center', dotsize = 0.3) +
+  scale_colour_manual(values = pal) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x = 'Size Class', y = 'Stem Width')
+
+# render figure
+figure <- ggarrange(plot1, plot2, plot3, plot4, plot5,
+                  labels = c("a", "b", "c", "d", "e"),
+                  ncol = 3, nrow = 2)
+
+## plot figure
+figure
+```
+
+## Subsets
+
+Data were subset to include site and size class paired with linear metrics.
+
+```{r subsetearly, out.width = "100%", dpi = 300, echo=TRUE}
+# subset l/s data by site
+CooperL <- g.data %>%
+  filter(merged == "Cooper_L") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+CooperS <- g.data %>%
+  filter(merged == "Cooper_S") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+MeansL <-g.data %>%
+  filter(merged == "Means_L") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+MeansS <- g.data %>%
+  filter(merged == "Means_S") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+MillerL <- g.data %>%
+  filter(merged == "Miller_L") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+MillerS <- g.data %>%
+  filter(merged == "Miller_S") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+PovPtL <- g.data %>%
+  filter(merged == "Pov Pt_L") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+PovPtS <- g.data %>%
+  filter(merged == "Pov Pt_S") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+YarL <- g.data %>%
+  filter(merged == "Yar_L") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+
+YarS <- g.data %>%
+  filter(merged == "Yar_S") %>% 
+  select(maxbl, maxshw, maxth, maxstw, maxstl)
+```
+
+## Calculate CV
+
+### Cooper Large
+
+```{r coopL, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(CooperL, function(x) sd(x) / mean(x) * 100))
+cooperL <- t(cols)
+cooperL
+```
+
+### Cooper Small
+
+```{r coopS, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(CooperS, function(x) sd(x) / mean(x) * 100))
+cooperS <- t(cols)
+cooperS
+```
+
+### Means Large
+
+```{r meansL, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(MeansL, function(x) sd(x) / mean(x) * 100))
+meansL <- t(cols)
+meansL
+```
+
+### Means Small
+
+```{r meansS, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(MeansS, function(x) sd(x) / mean(x) * 100))
+meansS <- t(cols)
+meansS
+```
+
+### Miller Large
+
+```{r millerL, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(MillerL, function(x) sd(x) / mean(x) * 100))
+millerL <- t(cols)
+millerL
+```
+
+### Miller Small
+
+```{r millerS, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(MillerS, function(x) sd(x) / mean(x) * 100))
+millerS <- t(cols)
+millerS
+```
+
+### Poverty Point Large
+
+```{r povptL, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(PovPtL, function(x) sd(x) / mean(x) * 100))
+povptL <- t(cols)
+povptL
+```
+
+### Poverty Point Small
+
+```{r povptS, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(PovPtS, function(x) sd(x) / mean(x) * 100))
+povptS <- t(cols)
+povptS
+```
+
+### Yarbrough Large
+
+```{r yarL, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(YarL, function(x) sd(x) / mean(x) * 100))
+yarL <- t(cols)
+yarL
+```
+
+### Yarbrough Small
+
+```{r yarS, out.width = "100%", dpi = 300, echo=TRUE}
+# calculate CV for each column
+cols <- data.frame(sapply(YarS, function(x) sd(x) / mean(x) * 100))
+yarS <- t(cols)
+yarS
+```
+
+### CV Comparison Plots
+
+```{r cvcompare, out.width="100%", dpi=300, echo=TRUE}
+# load data
+plot <- read.csv("cv.out.csv",
+                 header = TRUE,
+                 as.is = TRUE)
+pch.gps <- c(1:5)[as.factor(plot$site)]
+
+maxbl <- ggplot(plot, aes(x = size, y = maxbl, group = site)) +
+  geom_line(aes(color = site)) +
+  geom_point(aes(shape = site, color = site)) +
+  scale_color_manual(values = pal) +
+  labs(x = "Blade Length",
+       y = "Coefficient of Variation") +
+  theme(legend.position = "none")
+
+
+maxshw <- ggplot(plot, aes(x = size, y = maxshw, group = site)) +
+  geom_line(aes(color = site)) +
+  geom_point(aes(shape = site, color = site)) +
+  scale_color_manual(values = pal) +
+  labs(x = "Shoulder Width",
+       y = "Coefficient of Variation") +
+  theme(legend.position = "none")
+
+maxth <- ggplot(plot, aes(x = size, y = maxth, group = site)) +
+  geom_line(aes(color = site)) +
+  geom_point(aes(shape = site, color = site)) +
+  scale_color_manual(values = pal) +
+  labs(x = "Thickness",
+       y = "Coefficient of Variation") +
+  theme(legend.position = "none")
+
+maxstw <- ggplot(plot, aes(x = size, y = maxstw, group = site)) +
+  geom_line(aes(color = site)) +
+  geom_point(aes(shape = site, color = site)) +
+  scale_color_manual(values = pal) +
+  labs(x = "Stem Width",
+       y = "Coefficient of Variation") +
+  theme(legend.position = "none")
+
+maxstl <- ggplot(plot, aes(x = size, y = maxstw, group = site)) +
+  geom_line(aes(color = site)) +
+  geom_point(aes(shape = site, color = site)) +
+  scale_color_manual(values = pal) +
+  labs(x = "Stem Length",
+       y = "Coefficient of Variation") +
+  theme(legend.position = "none")
+
+
+# render figure
+figure.cv <- ggarrange(maxbl, maxshw, maxth, maxstw, maxstl,
+                       labels = c("a", "b", "c", "d", "e"),
+                       ncol = 3, nrow = 2)
+
+## plot figure
+figure.cv
+```
