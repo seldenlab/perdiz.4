@@ -10,6 +10,8 @@ It also follows another geometric morphometric analysis in which Perdiz arrow po
 
 ```{r load, echo=TRUE, warning=FALSE}
 # load analysis packages
+#devtools::install_github("geomorphR/geomorph", ref = "Stable", build_vignettes = TRUE)
+
 library(here)
 library(StereoMorph)
 library(geomorph)
