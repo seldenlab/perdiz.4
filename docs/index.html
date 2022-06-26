@@ -23,7 +23,7 @@
 <meta name="author" content="Robert Z. Selden, Jr." />
 
 
-<meta name="date" content="2022-06-17" />
+<meta name="date" content="2022-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Morphologically similar, but regionally distinct: Perdiz arrow points from Caddo burial contexts in the American Southeast</h1>
 <p class="author"><em>Robert Z. Selden, Jr.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2022-06-17</em></p>
+<p class="date"><em>2022-06-26</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -408,7 +408,7 @@ Figure 0.8: Visualization of two shape trajectories for Perdiz arrow points (lar
 </div>
 <div id="colophon" class="section level2 hasAnchor" number="0.5">
 <h2><span class="header-section-number">0.5</span> Colophon<a href="index.html#colophon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This version of the analysis was generated on 2022-06-17 15:10:49 using the following computational environment and dependencies:</p>
+<p>This version of the analysis was generated on 2022-06-26 07:23:52 using the following computational environment and dependencies:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what R packages and versions were used?</span></span>
 <span id="cb7-2"><a href="index.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;devtools&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
 <pre><code>## ─ Session info ────────────────────────────────────────────────────────────────────
@@ -421,58 +421,134 @@ Figure 0.8: Visualization of two shape trajectories for Perdiz arrow points (lar
 ##  collate  English_United States.utf8
 ##  ctype    English_United States.utf8
 ##  tz       America/Chicago
-##  date     2022-06-17
+##  date     2022-06-26
 ##  rstudio  2022.02.3+492 Prairie Trillium (desktop)
 ##  pandoc   2.17.1.1 @ C:/Program Files/RStudio/bin/quarto/bin/ (via rmarkdown)
 ## 
 ## ─ Packages ────────────────────────────────────────────────────────────────────────
-##  package     * version date (UTC) lib source
-##  bookdown      0.27    2022-06-14 [1] CRAN (R 4.2.0)
-##  brio          1.1.3   2021-11-30 [1] CRAN (R 4.2.0)
-##  bslib         0.3.1   2021-10-06 [1] CRAN (R 4.2.0)
-##  cachem        1.0.6   2021-08-19 [1] CRAN (R 4.2.0)
-##  callr         3.7.0   2021-04-20 [1] CRAN (R 4.2.0)
-##  cli           3.3.0   2022-04-25 [1] CRAN (R 4.2.0)
-##  crayon        1.5.1   2022-03-26 [1] CRAN (R 4.2.0)
-##  desc          1.4.1   2022-03-06 [1] CRAN (R 4.2.0)
-##  devtools      2.4.3   2021-11-30 [1] CRAN (R 4.2.0)
-##  digest        0.6.29  2021-12-01 [1] CRAN (R 4.2.0)
-##  ellipsis      0.3.2   2021-04-29 [1] CRAN (R 4.2.0)
-##  evaluate      0.15    2022-02-18 [1] CRAN (R 4.2.0)
-##  fastmap       1.1.0   2021-01-25 [1] CRAN (R 4.2.0)
-##  fs            1.5.2   2021-12-08 [1] CRAN (R 4.2.0)
-##  git2r         0.30.1  2022-03-16 [1] CRAN (R 4.2.0)
-##  glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.0)
-##  here          1.0.1   2020-12-13 [1] CRAN (R 4.2.0)
-##  highr         0.9     2021-04-16 [1] CRAN (R 4.2.0)
-##  htmltools     0.5.2   2021-08-25 [1] CRAN (R 4.2.0)
-##  jquerylib     0.1.4   2021-04-26 [1] CRAN (R 4.2.0)
-##  jsonlite      1.8.0   2022-02-22 [1] CRAN (R 4.2.0)
-##  knitr         1.39    2022-04-26 [1] CRAN (R 4.2.0)
-##  lifecycle     1.0.1   2021-09-24 [1] CRAN (R 4.2.0)
-##  magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.0)
-##  memoise       2.0.1   2021-11-26 [1] CRAN (R 4.2.0)
-##  pkgbuild      1.3.1   2021-12-20 [1] CRAN (R 4.2.0)
-##  pkgload       1.2.4   2021-11-30 [1] CRAN (R 4.2.0)
-##  prettyunits   1.1.1   2020-01-24 [1] CRAN (R 4.2.0)
-##  processx      3.6.0   2022-06-10 [1] CRAN (R 4.2.0)
-##  ps            1.7.0   2022-04-23 [1] CRAN (R 4.2.0)
-##  purrr         0.3.4   2020-04-17 [1] CRAN (R 4.2.0)
-##  R6            2.5.1   2021-08-19 [1] CRAN (R 4.2.0)
-##  remotes       2.4.2   2021-11-30 [1] CRAN (R 4.2.0)
-##  rlang         1.0.2   2022-03-04 [1] CRAN (R 4.2.0)
-##  rmarkdown     2.14    2022-04-25 [1] CRAN (R 4.2.0)
-##  rprojroot     2.0.3   2022-04-02 [1] CRAN (R 4.2.0)
-##  rstudioapi    0.13    2020-11-12 [1] CRAN (R 4.2.0)
-##  sass          0.4.1   2022-03-23 [1] CRAN (R 4.2.0)
-##  sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.0)
-##  stringi       1.7.6   2021-11-29 [1] CRAN (R 4.2.0)
-##  stringr       1.4.0   2019-02-10 [1] CRAN (R 4.2.0)
-##  testthat      3.1.4   2022-04-26 [1] CRAN (R 4.2.0)
-##  usethis       2.1.6   2022-05-25 [1] CRAN (R 4.2.0)
-##  withr         2.5.0   2022-03-03 [1] CRAN (R 4.2.0)
-##  xfun          0.31    2022-05-10 [1] CRAN (R 4.2.0)
-##  yaml          2.3.5   2022-02-21 [1] CRAN (R 4.2.0)
+##  package     * version   date (UTC) lib source
+##  abind         1.4-5     2016-07-21 [1] CRAN (R 4.2.0)
+##  ape           5.6-2     2022-03-02 [1] CRAN (R 4.2.0)
+##  assertthat    0.2.1     2019-03-21 [1] CRAN (R 4.2.0)
+##  backports     1.4.1     2021-12-13 [1] CRAN (R 4.2.0)
+##  base64enc     0.1-3     2015-07-28 [1] CRAN (R 4.2.0)
+##  bezier        1.1.2     2018-12-14 [1] CRAN (R 4.2.0)
+##  bookdown      0.27      2022-06-14 [1] CRAN (R 4.2.0)
+##  brew          1.0-7     2022-02-04 [1] CRAN (R 4.2.0)
+##  brio          1.1.3     2021-11-30 [1] CRAN (R 4.2.0)
+##  broom         0.8.0     2022-04-13 [1] CRAN (R 4.2.0)
+##  bslib         0.3.1     2021-10-06 [1] CRAN (R 4.2.0)
+##  cachem        1.0.6     2021-08-19 [1] CRAN (R 4.2.0)
+##  callr         3.7.0     2021-04-20 [1] CRAN (R 4.2.0)
+##  car           3.1-0     2022-06-15 [1] CRAN (R 4.2.0)
+##  carData       3.0-5     2022-01-06 [1] CRAN (R 4.2.0)
+##  cellranger    1.1.0     2016-07-27 [1] CRAN (R 4.2.0)
+##  cli           3.3.0     2022-04-25 [1] CRAN (R 4.2.0)
+##  cluster     * 2.1.3     2022-03-28 [2] CRAN (R 4.2.0)
+##  colorspace    2.0-3     2022-02-21 [1] CRAN (R 4.2.0)
+##  cowplot       1.1.1     2020-12-30 [1] CRAN (R 4.2.0)
+##  crayon        1.5.1     2022-03-26 [1] CRAN (R 4.2.0)
+##  DBI           1.1.2     2021-12-20 [1] CRAN (R 4.2.0)
+##  dbplyr        2.2.0     2022-06-05 [1] CRAN (R 4.2.0)
+##  desc          1.4.1     2022-03-06 [1] CRAN (R 4.2.0)
+##  devtools      2.4.3     2021-11-30 [1] CRAN (R 4.2.0)
+##  digest        0.6.29    2021-12-01 [1] CRAN (R 4.2.0)
+##  dplyr       * 1.0.9     2022-04-28 [1] CRAN (R 4.2.0)
+##  ellipsis      0.3.2     2021-04-29 [1] CRAN (R 4.2.0)
+##  EnvStats    * 2.7.0     2022-03-07 [1] CRAN (R 4.2.0)
+##  evaluate      0.15      2022-02-18 [1] CRAN (R 4.2.0)
+##  fansi         1.0.3     2022-03-24 [1] CRAN (R 4.2.0)
+##  farver        2.1.0     2021-02-28 [1] CRAN (R 4.2.0)
+##  fastmap       1.1.0     2021-01-25 [1] CRAN (R 4.2.0)
+##  forcats     * 0.5.1     2021-01-27 [1] CRAN (R 4.2.0)
+##  fs            1.5.2     2021-12-08 [1] CRAN (R 4.2.0)
+##  generics      0.1.2     2022-01-31 [1] CRAN (R 4.2.0)
+##  geomorph    * 4.0.3.999 2022-05-30 [1] Github (geomorphR/geomorph@33648a3)
+##  ggExtra     * 0.10.0    2022-03-23 [1] CRAN (R 4.2.0)
+##  ggfortify   * 0.4.14    2022-01-03 [1] CRAN (R 4.2.0)
+##  ggplot2     * 3.3.6     2022-05-03 [1] CRAN (R 4.2.0)
+##  ggpubr      * 0.4.0     2020-06-27 [1] CRAN (R 4.2.0)
+##  ggsignif      0.6.3     2021-09-09 [1] CRAN (R 4.2.0)
+##  git2r         0.30.1    2022-03-16 [1] CRAN (R 4.2.0)
+##  glue          1.6.2     2022-02-24 [1] CRAN (R 4.2.0)
+##  gridExtra     2.3       2017-09-09 [1] CRAN (R 4.2.0)
+##  gtable        0.3.0     2019-03-25 [1] CRAN (R 4.2.0)
+##  haven         2.5.0     2022-04-15 [1] CRAN (R 4.2.0)
+##  here        * 1.0.1     2020-12-13 [1] CRAN (R 4.2.0)
+##  highr         0.9       2021-04-16 [1] CRAN (R 4.2.0)
+##  hms           1.1.1     2021-09-26 [1] CRAN (R 4.2.0)
+##  htmltools     0.5.2     2021-08-25 [1] CRAN (R 4.2.0)
+##  htmlwidgets   1.5.4     2021-09-08 [1] CRAN (R 4.2.0)
+##  httpuv        1.6.5     2022-01-05 [1] CRAN (R 4.2.0)
+##  httr          1.4.3     2022-05-04 [1] CRAN (R 4.2.0)
+##  jpeg          0.1-9     2021-07-24 [1] CRAN (R 4.2.0)
+##  jquerylib     0.1.4     2021-04-26 [1] CRAN (R 4.2.0)
+##  jsonlite      1.8.0     2022-02-22 [1] CRAN (R 4.2.0)
+##  knitr         1.39      2022-04-26 [1] CRAN (R 4.2.0)
+##  labeling      0.4.2     2020-10-20 [1] CRAN (R 4.2.0)
+##  later         1.3.0     2021-08-18 [1] CRAN (R 4.2.0)
+##  lattice       0.20-45   2021-09-22 [2] CRAN (R 4.2.0)
+##  lifecycle     1.0.1     2021-09-24 [1] CRAN (R 4.2.0)
+##  lubridate     1.8.0     2021-10-07 [1] CRAN (R 4.2.0)
+##  magrittr      2.0.3     2022-03-30 [1] CRAN (R 4.2.0)
+##  MASS          7.3-56    2022-03-23 [2] CRAN (R 4.2.0)
+##  Matrix      * 1.4-1     2022-03-23 [2] CRAN (R 4.2.0)
+##  memoise       2.0.1     2021-11-26 [1] CRAN (R 4.2.0)
+##  mime          0.12      2021-09-28 [1] CRAN (R 4.2.0)
+##  miniUI        0.1.1.1   2018-05-18 [1] CRAN (R 4.2.0)
+##  modelr        0.1.8     2020-05-19 [1] CRAN (R 4.2.0)
+##  munsell       0.5.0     2018-06-12 [1] CRAN (R 4.2.0)
+##  nlme          3.1-157   2022-03-25 [2] CRAN (R 4.2.0)
+##  pillar        1.7.0     2022-02-01 [1] CRAN (R 4.2.0)
+##  pkgbuild      1.3.1     2021-12-20 [1] CRAN (R 4.2.0)
+##  pkgconfig     2.0.3     2019-09-22 [1] CRAN (R 4.2.0)
+##  pkgload       1.2.4     2021-11-30 [1] CRAN (R 4.2.0)
+##  png           0.1-7     2013-12-03 [1] CRAN (R 4.2.0)
+##  prettyunits   1.1.1     2020-01-24 [1] CRAN (R 4.2.0)
+##  processx      3.6.0     2022-06-10 [1] CRAN (R 4.2.0)
+##  promises      1.2.0.1   2021-02-11 [1] CRAN (R 4.2.0)
+##  ps            1.7.0     2022-04-23 [1] CRAN (R 4.2.0)
+##  purrr       * 0.3.4     2020-04-17 [1] CRAN (R 4.2.0)
+##  R6            2.5.1     2021-08-19 [1] CRAN (R 4.2.0)
+##  Rcpp          1.0.8.3   2022-03-17 [1] CRAN (R 4.2.0)
+##  readr       * 2.1.2     2022-01-30 [1] CRAN (R 4.2.0)
+##  readxl        1.4.0     2022-03-28 [1] CRAN (R 4.2.0)
+##  remotes       2.4.2     2021-11-30 [1] CRAN (R 4.2.0)
+##  reprex        2.0.1     2021-08-05 [1] CRAN (R 4.2.0)
+##  rgl         * 0.109.2   2022-06-10 [1] CRAN (R 4.2.0)
+##  rjson         0.2.21    2022-01-09 [1] CRAN (R 4.2.0)
+##  rlang         1.0.2     2022-03-04 [1] CRAN (R 4.2.0)
+##  rmarkdown     2.14      2022-04-25 [1] CRAN (R 4.2.0)
+##  Rook          1.1-1     2014-10-20 [1] CRAN (R 4.2.0)
+##  rprojroot     2.0.3     2022-04-02 [1] CRAN (R 4.2.0)
+##  RRPP        * 1.3.0     2022-04-01 [1] Github (mlcollyer/RRPP@73eb1a6)
+##  rstatix       0.7.0     2021-02-13 [1] CRAN (R 4.2.0)
+##  rstudioapi    0.13      2020-11-12 [1] CRAN (R 4.2.0)
+##  rvest         1.0.2     2021-10-16 [1] CRAN (R 4.2.0)
+##  sass          0.4.1     2022-03-23 [1] CRAN (R 4.2.0)
+##  scales        1.2.0     2022-04-13 [1] CRAN (R 4.2.0)
+##  sessioninfo   1.2.2     2021-12-06 [1] CRAN (R 4.2.0)
+##  shiny         1.7.1     2021-10-02 [1] CRAN (R 4.2.0)
+##  StereoMorph * 1.6.7     2022-05-25 [1] CRAN (R 4.2.0)
+##  stringi       1.7.6     2021-11-29 [1] CRAN (R 4.2.0)
+##  stringr     * 1.4.0     2019-02-10 [1] CRAN (R 4.2.0)
+##  svgViewR      1.4.1     2020-10-03 [1] CRAN (R 4.2.0)
+##  testthat      3.1.4     2022-04-26 [1] CRAN (R 4.2.0)
+##  tibble      * 3.1.7     2022-05-03 [1] CRAN (R 4.2.0)
+##  tidyr       * 1.2.0     2022-02-01 [1] CRAN (R 4.2.0)
+##  tidyselect    1.1.2     2022-02-21 [1] CRAN (R 4.2.0)
+##  tidyverse   * 1.3.1     2021-04-15 [1] CRAN (R 4.2.0)
+##  tiff          0.1-11    2022-01-31 [1] CRAN (R 4.2.0)
+##  tzdb          0.3.0     2022-03-28 [1] CRAN (R 4.2.0)
+##  usethis       2.1.6     2022-05-25 [1] CRAN (R 4.2.0)
+##  utf8          1.2.2     2021-07-24 [1] CRAN (R 4.2.0)
+##  vctrs         0.4.1     2022-04-13 [1] CRAN (R 4.2.0)
+##  wesanderson * 0.3.6     2018-04-20 [1] CRAN (R 4.2.0)
+##  withr         2.5.0     2022-03-03 [1] CRAN (R 4.2.0)
+##  xfun          0.31      2022-05-10 [1] CRAN (R 4.2.0)
+##  xml2          1.3.3     2021-11-30 [1] CRAN (R 4.2.0)
+##  xtable        1.8-4     2019-04-21 [1] CRAN (R 4.2.0)
+##  yaml          2.3.5     2022-02-21 [1] CRAN (R 4.2.0)
 ## 
 ##  [1] C:/Users/seldenjrz/AppData/Local/R/win-library/4.2
 ##  [2] C:/Program Files/R/R-4.2.0/library
@@ -483,7 +559,7 @@ Figure 0.8: Visualization of two shape trajectories for Perdiz arrow points (lar
 <span id="cb9-2"><a href="index.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;git2r&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>() <span class="sc">&amp;</span> git2r<span class="sc">::</span><span class="fu">in_repository</span>(<span class="at">path =</span> <span class="st">&quot;.&quot;</span>)) git2r<span class="sc">::</span><span class="fu">repository</span>(here<span class="sc">::</span><span class="fu">here</span>())  </span></code></pre></div>
 <pre><code>## Local:    main D:/github/perdiz.4
 ## Remote:   main @ origin (https://github.com/seldenlab/perdiz.4)
-## Head:     [f922567] 2022-06-17: &lt;address comments&gt;</code></pre>
+## Head:     [f548e2e] 2022-06-26: &lt;edit struc&gt;</code></pre>
 
 </div>
 </div>

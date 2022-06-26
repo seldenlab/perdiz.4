@@ -23,7 +23,7 @@
 <meta name="author" content="Robert Z. Selden, Jr." />
 
 
-<meta name="date" content="2022-06-17" />
+<meta name="date" content="2022-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,268 +283,247 @@ div.csl-indent {
 <p>Two <code>size classes</code> (large/small) were used to examine whether the shape of Perdiz arrow points from the northern and southern behavioural regions of the ancestral Caddo region remain morphologically stable, or express morphological variation. Variability in Perdiz arrow point shape potentially provides evidence associated with differential resharpening trajectories.</p>
 <p><em>The <code>maximum blade length</code> variable used in this study is calculated as the difference between <code>maximum length</code> and <code>maximum stem length</code>. For that reason, it differs from traditional measures of maximum blade length, which often overlaps with maximum stem length if measuring Perdiz arrow points with calipers.</em></p>
 <p><em>Similarly, <code>maximum shoulder length</code> is calculated as the difference between <code>maximum width</code> and <code>maximum shoulder width</code>. Thus, while derivative of two linear measures, it does not account for the curvature that occurs in the range of that linear measurement. Similarly, it does not account for asymmetry on either side of the projectile.</em></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="linear-metrics-1.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis libraries</span></span>
-<span id="cb94-2"><a href="linear-metrics-1.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb94-3"><a href="linear-metrics-1.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ──────────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✔ tibble  3.1.7     ✔ purrr   0.3.4
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ─────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::expand() masks Matrix::expand()
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ✖ tidyr::pack()   masks Matrix::pack()
-## ✖ tidyr::unpack() masks Matrix::unpack()</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="linear-metrics-1.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;EnvStats&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
-## 
-##     print</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     predict, predict.lm</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     print.default</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="linear-metrics-1.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb103-2"><a href="linear-metrics-1.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb103-3"><a href="linear-metrics-1.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
-<span id="cb103-4"><a href="linear-metrics-1.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggExtra)</span>
-<span id="cb103-5"><a href="linear-metrics-1.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RRPP)</span>
-<span id="cb103-6"><a href="linear-metrics-1.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
-<span id="cb103-7"><a href="linear-metrics-1.html#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-8"><a href="linear-metrics-1.html#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
-<span id="cb103-9"><a href="linear-metrics-1.html#cb103-9" aria-hidden="true" tabindex="-1"></a>perdiz.linear <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;qdata.perdiz.csv&quot;</span>,</span>
-<span id="cb103-10"><a href="linear-metrics-1.html#cb103-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb103-11"><a href="linear-metrics-1.html#cb103-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">as.is =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="linear-metrics-1.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load analysis libraries</span></span>
+<span id="cb84-2"><a href="linear-metrics-1.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb84-3"><a href="linear-metrics-1.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb84-4"><a href="linear-metrics-1.html#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span>
+<span id="cb84-5"><a href="linear-metrics-1.html#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb84-6"><a href="linear-metrics-1.html#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb84-7"><a href="linear-metrics-1.html#cb84-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb84-8"><a href="linear-metrics-1.html#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggExtra)</span>
+<span id="cb84-9"><a href="linear-metrics-1.html#cb84-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RRPP)</span>
+<span id="cb84-10"><a href="linear-metrics-1.html#cb84-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson)</span>
+<span id="cb84-11"><a href="linear-metrics-1.html#cb84-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-12"><a href="linear-metrics-1.html#cb84-12" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb84-13"><a href="linear-metrics-1.html#cb84-13" aria-hidden="true" tabindex="-1"></a>perdiz.linear <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;qdata.perdiz.csv&quot;</span>,</span>
+<span id="cb84-14"><a href="linear-metrics-1.html#cb84-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb84-15"><a href="linear-metrics-1.html#cb84-15" aria-hidden="true" tabindex="-1"></a>                          <span class="at">as.is =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="derived-variables" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Derived variables<a href="linear-metrics-1.html#derived-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="linear-metrics-1.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add vars to data</span></span>
-<span id="cb104-2"><a href="linear-metrics-1.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum blade length (derived)</span></span>
-<span id="cb104-3"><a href="linear-metrics-1.html#cb104-3" aria-hidden="true" tabindex="-1"></a>perdiz.linear<span class="sc">$</span>maxbl <span class="ot">&lt;-</span> perdiz.linear<span class="sc">$</span>maxl <span class="sc">-</span> perdiz.linear<span class="sc">$</span>maxstl</span>
-<span id="cb104-4"><a href="linear-metrics-1.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum shoulder width (derived)</span></span>
-<span id="cb104-5"><a href="linear-metrics-1.html#cb104-5" aria-hidden="true" tabindex="-1"></a>perdiz.linear<span class="sc">$</span>maxshw <span class="ot">&lt;-</span> perdiz.linear<span class="sc">$</span>maxw <span class="sc">-</span> perdiz.linear<span class="sc">$</span>maxstw</span>
-<span id="cb104-6"><a href="linear-metrics-1.html#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-7"><a href="linear-metrics-1.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="do">## histograms</span></span>
-<span id="cb104-8"><a href="linear-metrics-1.html#cb104-8" aria-hidden="true" tabindex="-1"></a>h.maxbl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxbl)) <span class="sc">+</span></span>
-<span id="cb104-9"><a href="linear-metrics-1.html#cb104-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-10"><a href="linear-metrics-1.html#cb104-10" aria-hidden="true" tabindex="-1"></a>h.maxshw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxshw)) <span class="sc">+</span></span>
-<span id="cb104-11"><a href="linear-metrics-1.html#cb104-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-12"><a href="linear-metrics-1.html#cb104-12" aria-hidden="true" tabindex="-1"></a>h.maxw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxw)) <span class="sc">+</span></span>
-<span id="cb104-13"><a href="linear-metrics-1.html#cb104-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-14"><a href="linear-metrics-1.html#cb104-14" aria-hidden="true" tabindex="-1"></a>h.maxth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxth)) <span class="sc">+</span></span>
-<span id="cb104-15"><a href="linear-metrics-1.html#cb104-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-16"><a href="linear-metrics-1.html#cb104-16" aria-hidden="true" tabindex="-1"></a>h.maxstl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxstl)) <span class="sc">+</span></span>
-<span id="cb104-17"><a href="linear-metrics-1.html#cb104-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-18"><a href="linear-metrics-1.html#cb104-18" aria-hidden="true" tabindex="-1"></a>h.maxstw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxstw)) <span class="sc">+</span></span>
-<span id="cb104-19"><a href="linear-metrics-1.html#cb104-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
-<span id="cb104-20"><a href="linear-metrics-1.html#cb104-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-21"><a href="linear-metrics-1.html#cb104-21" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
-<span id="cb104-22"><a href="linear-metrics-1.html#cb104-22" aria-hidden="true" tabindex="-1"></a>figure.histograms <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(h.maxbl, h.maxshw, h.maxw, h.maxth, h.maxstl, h.maxstw,</span>
-<span id="cb104-23"><a href="linear-metrics-1.html#cb104-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>),</span>
-<span id="cb104-24"><a href="linear-metrics-1.html#cb104-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="linear-metrics-1.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add vars to data</span></span>
+<span id="cb85-2"><a href="linear-metrics-1.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum blade length (derived)</span></span>
+<span id="cb85-3"><a href="linear-metrics-1.html#cb85-3" aria-hidden="true" tabindex="-1"></a>perdiz.linear<span class="sc">$</span>maxbl <span class="ot">&lt;-</span> perdiz.linear<span class="sc">$</span>maxl <span class="sc">-</span> perdiz.linear<span class="sc">$</span>maxstl</span>
+<span id="cb85-4"><a href="linear-metrics-1.html#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum shoulder width (derived)</span></span>
+<span id="cb85-5"><a href="linear-metrics-1.html#cb85-5" aria-hidden="true" tabindex="-1"></a>perdiz.linear<span class="sc">$</span>maxshw <span class="ot">&lt;-</span> perdiz.linear<span class="sc">$</span>maxw <span class="sc">-</span> perdiz.linear<span class="sc">$</span>maxstw</span>
+<span id="cb85-6"><a href="linear-metrics-1.html#cb85-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-7"><a href="linear-metrics-1.html#cb85-7" aria-hidden="true" tabindex="-1"></a><span class="do">## histograms</span></span>
+<span id="cb85-8"><a href="linear-metrics-1.html#cb85-8" aria-hidden="true" tabindex="-1"></a>h.maxbl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxbl)) <span class="sc">+</span></span>
+<span id="cb85-9"><a href="linear-metrics-1.html#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-10"><a href="linear-metrics-1.html#cb85-10" aria-hidden="true" tabindex="-1"></a>h.maxshw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxshw)) <span class="sc">+</span></span>
+<span id="cb85-11"><a href="linear-metrics-1.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-12"><a href="linear-metrics-1.html#cb85-12" aria-hidden="true" tabindex="-1"></a>h.maxw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxw)) <span class="sc">+</span></span>
+<span id="cb85-13"><a href="linear-metrics-1.html#cb85-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-14"><a href="linear-metrics-1.html#cb85-14" aria-hidden="true" tabindex="-1"></a>h.maxth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxth)) <span class="sc">+</span></span>
+<span id="cb85-15"><a href="linear-metrics-1.html#cb85-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-16"><a href="linear-metrics-1.html#cb85-16" aria-hidden="true" tabindex="-1"></a>h.maxstl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxstl)) <span class="sc">+</span></span>
+<span id="cb85-17"><a href="linear-metrics-1.html#cb85-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-18"><a href="linear-metrics-1.html#cb85-18" aria-hidden="true" tabindex="-1"></a>h.maxstw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(perdiz.linear, <span class="fu">aes</span>(maxstw)) <span class="sc">+</span></span>
+<span id="cb85-19"><a href="linear-metrics-1.html#cb85-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb85-20"><a href="linear-metrics-1.html#cb85-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-21"><a href="linear-metrics-1.html#cb85-21" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
+<span id="cb85-22"><a href="linear-metrics-1.html#cb85-22" aria-hidden="true" tabindex="-1"></a>figure.histograms <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(h.maxbl, h.maxshw, h.maxw, h.maxth, h.maxstl, h.maxstw,</span>
+<span id="cb85-23"><a href="linear-metrics-1.html#cb85-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>),</span>
+<span id="cb85-24"><a href="linear-metrics-1.html#cb85-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="linear-metrics-1.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
-<span id="cb106-2"><a href="linear-metrics-1.html#cb106-2" aria-hidden="true" tabindex="-1"></a>figure.histograms</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="linear-metrics-1.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
+<span id="cb87-2"><a href="linear-metrics-1.html#cb87-2" aria-hidden="true" tabindex="-1"></a>figure.histograms</span></code></pre></div>
 <p><img src="_main_files/figure-html/derived.variables-1.png" width="672" /></p>
 </div>
 <div id="assign-size-classes" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Assign <code>size classes</code><a href="linear-metrics-1.html#assign-size-classes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="northern-behavioural-region" class="section level3 hasAnchor" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Northern behavioural region<a href="linear-metrics-1.html#northern-behavioural-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="linear-metrics-1.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset nbr dataset</span></span>
-<span id="cb107-2"><a href="linear-metrics-1.html#cb107-2" aria-hidden="true" tabindex="-1"></a>nbr <span class="ot">&lt;-</span> <span class="fu">subset</span>(perdiz.linear,</span>
-<span id="cb107-3"><a href="linear-metrics-1.html#cb107-3" aria-hidden="true" tabindex="-1"></a>              region <span class="sc">==</span> <span class="st">&quot;north&quot;</span>,</span>
-<span id="cb107-4"><a href="linear-metrics-1.html#cb107-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">select =</span> spec<span class="sc">:</span>maxshw)</span>
-<span id="cb107-5"><a href="linear-metrics-1.html#cb107-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-6"><a href="linear-metrics-1.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean blade length</span></span>
-<span id="cb107-7"><a href="linear-metrics-1.html#cb107-7" aria-hidden="true" tabindex="-1"></a>meanbl <span class="ot">&lt;-</span> <span class="fu">mean</span>(nbr<span class="sc">$</span>maxbl)</span>
-<span id="cb107-8"><a href="linear-metrics-1.html#cb107-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-9"><a href="linear-metrics-1.html#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assign L/S varieties</span></span>
-<span id="cb107-10"><a href="linear-metrics-1.html#cb107-10" aria-hidden="true" tabindex="-1"></a>ls.check1 <span class="ot">&lt;-</span> nbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> meanbl</span>
-<span id="cb107-11"><a href="linear-metrics-1.html#cb107-11" aria-hidden="true" tabindex="-1"></a>ls.check2 <span class="ot">&lt;-</span> nbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> nbr<span class="sc">$</span>maxbl <span class="sc">&lt;</span> meanbl</span>
-<span id="cb107-12"><a href="linear-metrics-1.html#cb107-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-13"><a href="linear-metrics-1.html#cb107-13" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb107-14"><a href="linear-metrics-1.html#cb107-14" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check1, <span class="st">&quot;L&quot;</span>, nbr<span class="sc">$</span>size)</span>
-<span id="cb107-15"><a href="linear-metrics-1.html#cb107-15" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check2, <span class="st">&quot;S&quot;</span>, nbr<span class="sc">$</span>size)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="linear-metrics-1.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset nbr dataset</span></span>
+<span id="cb88-2"><a href="linear-metrics-1.html#cb88-2" aria-hidden="true" tabindex="-1"></a>nbr <span class="ot">&lt;-</span> <span class="fu">subset</span>(perdiz.linear,</span>
+<span id="cb88-3"><a href="linear-metrics-1.html#cb88-3" aria-hidden="true" tabindex="-1"></a>              region <span class="sc">==</span> <span class="st">&quot;north&quot;</span>,</span>
+<span id="cb88-4"><a href="linear-metrics-1.html#cb88-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">select =</span> spec<span class="sc">:</span>maxshw)</span>
+<span id="cb88-5"><a href="linear-metrics-1.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="linear-metrics-1.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean blade length</span></span>
+<span id="cb88-7"><a href="linear-metrics-1.html#cb88-7" aria-hidden="true" tabindex="-1"></a>meanbl <span class="ot">&lt;-</span> <span class="fu">mean</span>(nbr<span class="sc">$</span>maxbl)</span>
+<span id="cb88-8"><a href="linear-metrics-1.html#cb88-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-9"><a href="linear-metrics-1.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assign L/S varieties</span></span>
+<span id="cb88-10"><a href="linear-metrics-1.html#cb88-10" aria-hidden="true" tabindex="-1"></a>ls.check1 <span class="ot">&lt;-</span> nbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> meanbl</span>
+<span id="cb88-11"><a href="linear-metrics-1.html#cb88-11" aria-hidden="true" tabindex="-1"></a>ls.check2 <span class="ot">&lt;-</span> nbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> nbr<span class="sc">$</span>maxbl <span class="sc">&lt;</span> meanbl</span>
+<span id="cb88-12"><a href="linear-metrics-1.html#cb88-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-13"><a href="linear-metrics-1.html#cb88-13" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb88-14"><a href="linear-metrics-1.html#cb88-14" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check1, <span class="st">&quot;L&quot;</span>, nbr<span class="sc">$</span>size)</span>
+<span id="cb88-15"><a href="linear-metrics-1.html#cb88-15" aria-hidden="true" tabindex="-1"></a>nbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check2, <span class="st">&quot;S&quot;</span>, nbr<span class="sc">$</span>size)</span></code></pre></div>
 </div>
 <div id="southern-behavioural-region" class="section level3 hasAnchor" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Southern behavioural region<a href="linear-metrics-1.html#southern-behavioural-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="linear-metrics-1.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset sbr dataset</span></span>
-<span id="cb108-2"><a href="linear-metrics-1.html#cb108-2" aria-hidden="true" tabindex="-1"></a>sbr <span class="ot">&lt;-</span> <span class="fu">subset</span>(perdiz.linear,</span>
-<span id="cb108-3"><a href="linear-metrics-1.html#cb108-3" aria-hidden="true" tabindex="-1"></a>              region <span class="sc">==</span> <span class="st">&quot;south&quot;</span>,</span>
-<span id="cb108-4"><a href="linear-metrics-1.html#cb108-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">select =</span> spec<span class="sc">:</span>maxshw)</span>
-<span id="cb108-5"><a href="linear-metrics-1.html#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-6"><a href="linear-metrics-1.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean blade length</span></span>
-<span id="cb108-7"><a href="linear-metrics-1.html#cb108-7" aria-hidden="true" tabindex="-1"></a>meanbl <span class="ot">&lt;-</span> <span class="fu">mean</span>(sbr<span class="sc">$</span>maxbl)</span>
-<span id="cb108-8"><a href="linear-metrics-1.html#cb108-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-9"><a href="linear-metrics-1.html#cb108-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assign L/S varieties based on mean blade length</span></span>
-<span id="cb108-10"><a href="linear-metrics-1.html#cb108-10" aria-hidden="true" tabindex="-1"></a>ls.check1 <span class="ot">&lt;-</span> sbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> meanbl</span>
-<span id="cb108-11"><a href="linear-metrics-1.html#cb108-11" aria-hidden="true" tabindex="-1"></a>ls.check2 <span class="ot">&lt;-</span> sbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> sbr<span class="sc">$</span>maxbl <span class="sc">&lt;</span> meanbl</span>
-<span id="cb108-12"><a href="linear-metrics-1.html#cb108-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-13"><a href="linear-metrics-1.html#cb108-13" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb108-14"><a href="linear-metrics-1.html#cb108-14" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check1, <span class="st">&quot;L&quot;</span>, sbr<span class="sc">$</span>size)</span>
-<span id="cb108-15"><a href="linear-metrics-1.html#cb108-15" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check2, <span class="st">&quot;S&quot;</span>, sbr<span class="sc">$</span>size)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="linear-metrics-1.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset sbr dataset</span></span>
+<span id="cb89-2"><a href="linear-metrics-1.html#cb89-2" aria-hidden="true" tabindex="-1"></a>sbr <span class="ot">&lt;-</span> <span class="fu">subset</span>(perdiz.linear,</span>
+<span id="cb89-3"><a href="linear-metrics-1.html#cb89-3" aria-hidden="true" tabindex="-1"></a>              region <span class="sc">==</span> <span class="st">&quot;south&quot;</span>,</span>
+<span id="cb89-4"><a href="linear-metrics-1.html#cb89-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">select =</span> spec<span class="sc">:</span>maxshw)</span>
+<span id="cb89-5"><a href="linear-metrics-1.html#cb89-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-6"><a href="linear-metrics-1.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate mean blade length</span></span>
+<span id="cb89-7"><a href="linear-metrics-1.html#cb89-7" aria-hidden="true" tabindex="-1"></a>meanbl <span class="ot">&lt;-</span> <span class="fu">mean</span>(sbr<span class="sc">$</span>maxbl)</span>
+<span id="cb89-8"><a href="linear-metrics-1.html#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="linear-metrics-1.html#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="co"># assign L/S varieties based on mean blade length</span></span>
+<span id="cb89-10"><a href="linear-metrics-1.html#cb89-10" aria-hidden="true" tabindex="-1"></a>ls.check1 <span class="ot">&lt;-</span> sbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> meanbl</span>
+<span id="cb89-11"><a href="linear-metrics-1.html#cb89-11" aria-hidden="true" tabindex="-1"></a>ls.check2 <span class="ot">&lt;-</span> sbr<span class="sc">$</span>maxbl <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> sbr<span class="sc">$</span>maxbl <span class="sc">&lt;</span> meanbl</span>
+<span id="cb89-12"><a href="linear-metrics-1.html#cb89-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-13"><a href="linear-metrics-1.html#cb89-13" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb89-14"><a href="linear-metrics-1.html#cb89-14" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check1, <span class="st">&quot;L&quot;</span>, sbr<span class="sc">$</span>size)</span>
+<span id="cb89-15"><a href="linear-metrics-1.html#cb89-15" aria-hidden="true" tabindex="-1"></a>sbr<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ls.check2, <span class="st">&quot;S&quot;</span>, sbr<span class="sc">$</span>size)</span></code></pre></div>
 </div>
 <div id="aggregate" class="section level3 hasAnchor" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Aggregate<a href="linear-metrics-1.html#aggregate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="linear-metrics-1.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># aggregate data</span></span>
-<span id="cb109-2"><a href="linear-metrics-1.html#cb109-2" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(nbr, sbr)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="linear-metrics-1.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># aggregate data</span></span>
+<span id="cb90-2"><a href="linear-metrics-1.html#cb90-2" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(nbr, sbr)</span></code></pre></div>
 </div>
 </div>
 <div id="shape-variables" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Shape variables<a href="linear-metrics-1.html#shape-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The morphological form (shape + size) of the Perdiz arrow points was split into shape (representing proportions between dimensions in an object) and size (sensu Klingenberg <span class="citation">(<a href="#ref-RN11105" role="doc-biblioref">2016</a>)</span>). <code>Size</code> and <code>shape</code> were calculated using the method of log-shape ratios proposed by Mosimann <span class="citation">(<a href="#ref-RN11104" role="doc-biblioref">1970</a>)</span>, where the <code>geometric mean</code> is considered a proxy for size, and shape was calculated as the log of isometric size subtracted from the log of each linear/dimensional measure.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="linear-metrics-1.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vars used to calculate geometric mean</span></span>
-<span id="cb110-2"><a href="linear-metrics-1.html#cb110-2" aria-hidden="true" tabindex="-1"></a>mx.maxbl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxbl</span>
-<span id="cb110-3"><a href="linear-metrics-1.html#cb110-3" aria-hidden="true" tabindex="-1"></a>mx.maxw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxw</span>
-<span id="cb110-4"><a href="linear-metrics-1.html#cb110-4" aria-hidden="true" tabindex="-1"></a>mx.maxshw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxshw</span>
-<span id="cb110-5"><a href="linear-metrics-1.html#cb110-5" aria-hidden="true" tabindex="-1"></a>mx.maxth <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxth</span>
-<span id="cb110-6"><a href="linear-metrics-1.html#cb110-6" aria-hidden="true" tabindex="-1"></a>mx.maxstl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxstl</span>
-<span id="cb110-7"><a href="linear-metrics-1.html#cb110-7" aria-hidden="true" tabindex="-1"></a>mx.maxstw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxstw</span>
-<span id="cb110-8"><a href="linear-metrics-1.html#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-9"><a href="linear-metrics-1.html#cb110-9" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="fu">c</span>(mx.maxbl, mx.maxw, mx.maxshw, mx.maxth, mx.maxstl, mx.maxstw)</span>
-<span id="cb110-10"><a href="linear-metrics-1.html#cb110-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-11"><a href="linear-metrics-1.html#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate geometric mean</span></span>
-<span id="cb110-12"><a href="linear-metrics-1.html#cb110-12" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>geo.mean <span class="ot">&lt;-</span> <span class="fu">geoMean</span>(mean)</span>
-<span id="cb110-13"><a href="linear-metrics-1.html#cb110-13" aria-hidden="true" tabindex="-1"></a>geo.mean <span class="ot">&lt;-</span> mx<span class="sc">$</span>geo.mean</span>
-<span id="cb110-14"><a href="linear-metrics-1.html#cb110-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-15"><a href="linear-metrics-1.html#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="co"># log of linear vars subtracted from log of geometric mean to isolate shape</span></span>
-<span id="cb110-16"><a href="linear-metrics-1.html#cb110-16" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxbl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxbl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-17"><a href="linear-metrics-1.html#cb110-17" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-18"><a href="linear-metrics-1.html#cb110-18" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxshw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxshw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-19"><a href="linear-metrics-1.html#cb110-19" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxth <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxth) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-20"><a href="linear-metrics-1.html#cb110-20" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxstl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxstl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-21"><a href="linear-metrics-1.html#cb110-21" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxstw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxstw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb110-22"><a href="linear-metrics-1.html#cb110-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-23"><a href="linear-metrics-1.html#cb110-23" aria-hidden="true" tabindex="-1"></a><span class="co"># join river region and size class</span></span>
-<span id="cb110-24"><a href="linear-metrics-1.html#cb110-24" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> mx <span class="sc">%&gt;%</span> </span>
-<span id="cb110-25"><a href="linear-metrics-1.html#cb110-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;merged&quot;</span>, region, size, <span class="at">remove =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb110-26"><a href="linear-metrics-1.html#cb110-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-27"><a href="linear-metrics-1.html#cb110-27" aria-hidden="true" tabindex="-1"></a><span class="co"># export table for use in gm analysis</span></span>
-<span id="cb110-28"><a href="linear-metrics-1.html#cb110-28" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(mx, <span class="st">&quot;qdata.morph.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="linear-metrics-1.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vars used to calculate geometric mean</span></span>
+<span id="cb91-2"><a href="linear-metrics-1.html#cb91-2" aria-hidden="true" tabindex="-1"></a>mx.maxbl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxbl</span>
+<span id="cb91-3"><a href="linear-metrics-1.html#cb91-3" aria-hidden="true" tabindex="-1"></a>mx.maxw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxw</span>
+<span id="cb91-4"><a href="linear-metrics-1.html#cb91-4" aria-hidden="true" tabindex="-1"></a>mx.maxshw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxshw</span>
+<span id="cb91-5"><a href="linear-metrics-1.html#cb91-5" aria-hidden="true" tabindex="-1"></a>mx.maxth <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxth</span>
+<span id="cb91-6"><a href="linear-metrics-1.html#cb91-6" aria-hidden="true" tabindex="-1"></a>mx.maxstl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxstl</span>
+<span id="cb91-7"><a href="linear-metrics-1.html#cb91-7" aria-hidden="true" tabindex="-1"></a>mx.maxstw <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxstw</span>
+<span id="cb91-8"><a href="linear-metrics-1.html#cb91-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-9"><a href="linear-metrics-1.html#cb91-9" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="fu">c</span>(mx.maxbl, mx.maxw, mx.maxshw, mx.maxth, mx.maxstl, mx.maxstw)</span>
+<span id="cb91-10"><a href="linear-metrics-1.html#cb91-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-11"><a href="linear-metrics-1.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate geometric mean</span></span>
+<span id="cb91-12"><a href="linear-metrics-1.html#cb91-12" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>geo.mean <span class="ot">&lt;-</span> <span class="fu">geoMean</span>(mean)</span>
+<span id="cb91-13"><a href="linear-metrics-1.html#cb91-13" aria-hidden="true" tabindex="-1"></a>geo.mean <span class="ot">&lt;-</span> mx<span class="sc">$</span>geo.mean</span>
+<span id="cb91-14"><a href="linear-metrics-1.html#cb91-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-15"><a href="linear-metrics-1.html#cb91-15" aria-hidden="true" tabindex="-1"></a><span class="co"># log of linear vars subtracted from log of geometric mean to isolate shape</span></span>
+<span id="cb91-16"><a href="linear-metrics-1.html#cb91-16" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxbl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxbl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-17"><a href="linear-metrics-1.html#cb91-17" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-18"><a href="linear-metrics-1.html#cb91-18" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxshw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxshw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-19"><a href="linear-metrics-1.html#cb91-19" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxth <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxth) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-20"><a href="linear-metrics-1.html#cb91-20" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxstl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxstl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-21"><a href="linear-metrics-1.html#cb91-21" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxstw <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxstw) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb91-22"><a href="linear-metrics-1.html#cb91-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-23"><a href="linear-metrics-1.html#cb91-23" aria-hidden="true" tabindex="-1"></a><span class="co"># join river region and size class</span></span>
+<span id="cb91-24"><a href="linear-metrics-1.html#cb91-24" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> mx <span class="sc">%&gt;%</span> </span>
+<span id="cb91-25"><a href="linear-metrics-1.html#cb91-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;merged&quot;</span>, region, size, <span class="at">remove =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb91-26"><a href="linear-metrics-1.html#cb91-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-27"><a href="linear-metrics-1.html#cb91-27" aria-hidden="true" tabindex="-1"></a><span class="co"># export table for use in gm analysis</span></span>
+<span id="cb91-28"><a href="linear-metrics-1.html#cb91-28" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(mx, <span class="st">&quot;qdata.morph.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="ratios" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Ratios<a href="linear-metrics-1.html#ratios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="linear-metrics-1.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate ratios</span></span>
-<span id="cb111-2"><a href="linear-metrics-1.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># blade:stem (linear vars)</span></span>
-<span id="cb111-3"><a href="linear-metrics-1.html#cb111-3" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>perdiz.blade.stem2 <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxbl <span class="sc">/</span> mx<span class="sc">$</span>maxstl</span>
-<span id="cb111-4"><a href="linear-metrics-1.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-5"><a href="linear-metrics-1.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="co"># length:thickness</span></span>
-<span id="cb111-6"><a href="linear-metrics-1.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate sh.maxl var</span></span>
-<span id="cb111-7"><a href="linear-metrics-1.html#cb111-7" aria-hidden="true" tabindex="-1"></a>mx.maxl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxl</span>
-<span id="cb111-8"><a href="linear-metrics-1.html#cb111-8" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
-<span id="cb111-9"><a href="linear-metrics-1.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="co"># length:thickness (linear vars)</span></span>
-<span id="cb111-10"><a href="linear-metrics-1.html#cb111-10" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>perdiz.length.thickness2 <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxl <span class="sc">/</span> mx<span class="sc">$</span>maxth</span>
-<span id="cb111-11"><a href="linear-metrics-1.html#cb111-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-12"><a href="linear-metrics-1.html#cb111-12" aria-hidden="true" tabindex="-1"></a><span class="co"># palette</span></span>
-<span id="cb111-13"><a href="linear-metrics-1.html#cb111-13" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">wes_palette</span>(<span class="st">&quot;Moonrise2&quot;</span>, <span class="dv">4</span>, <span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
-<span id="cb111-14"><a href="linear-metrics-1.html#cb111-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-15"><a href="linear-metrics-1.html#cb111-15" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot blade:stem</span></span>
-<span id="cb111-16"><a href="linear-metrics-1.html#cb111-16" aria-hidden="true" tabindex="-1"></a>bl.st <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> perdiz.blade.stem2, <span class="at">color =</span> merged)) <span class="sc">+</span></span>
-<span id="cb111-17"><a href="linear-metrics-1.html#cb111-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb111-18"><a href="linear-metrics-1.html#cb111-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb111-19"><a href="linear-metrics-1.html#cb111-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb111-20"><a href="linear-metrics-1.html#cb111-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb111-21"><a href="linear-metrics-1.html#cb111-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb111-22"><a href="linear-metrics-1.html#cb111-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Blade:Stem&#39;</span>)</span>
-<span id="cb111-23"><a href="linear-metrics-1.html#cb111-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-24"><a href="linear-metrics-1.html#cb111-24" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot length:thickness</span></span>
-<span id="cb111-25"><a href="linear-metrics-1.html#cb111-25" aria-hidden="true" tabindex="-1"></a>lth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> perdiz.length.thickness2, <span class="at">color =</span> merged)) <span class="sc">+</span></span>
-<span id="cb111-26"><a href="linear-metrics-1.html#cb111-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb111-27"><a href="linear-metrics-1.html#cb111-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb111-28"><a href="linear-metrics-1.html#cb111-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb111-29"><a href="linear-metrics-1.html#cb111-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb111-30"><a href="linear-metrics-1.html#cb111-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb111-31"><a href="linear-metrics-1.html#cb111-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Length:Thickness&#39;</span>)</span>
-<span id="cb111-32"><a href="linear-metrics-1.html#cb111-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-33"><a href="linear-metrics-1.html#cb111-33" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
-<span id="cb111-34"><a href="linear-metrics-1.html#cb111-34" aria-hidden="true" tabindex="-1"></a>figure.ratios <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(bl.st, lth,</span>
-<span id="cb111-35"><a href="linear-metrics-1.html#cb111-35" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),</span>
-<span id="cb111-36"><a href="linear-metrics-1.html#cb111-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="linear-metrics-1.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate ratios</span></span>
+<span id="cb92-2"><a href="linear-metrics-1.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="co"># blade:stem (linear vars)</span></span>
+<span id="cb92-3"><a href="linear-metrics-1.html#cb92-3" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>perdiz.blade.stem2 <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxbl <span class="sc">/</span> mx<span class="sc">$</span>maxstl</span>
+<span id="cb92-4"><a href="linear-metrics-1.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="linear-metrics-1.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="co"># length:thickness</span></span>
+<span id="cb92-6"><a href="linear-metrics-1.html#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate sh.maxl var</span></span>
+<span id="cb92-7"><a href="linear-metrics-1.html#cb92-7" aria-hidden="true" tabindex="-1"></a>mx.maxl <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxl</span>
+<span id="cb92-8"><a href="linear-metrics-1.html#cb92-8" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>sh.maxl <span class="ot">&lt;-</span> <span class="fu">log</span>(mx.maxl) <span class="sc">-</span> <span class="fu">log</span>(geo.mean)</span>
+<span id="cb92-9"><a href="linear-metrics-1.html#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="co"># length:thickness (linear vars)</span></span>
+<span id="cb92-10"><a href="linear-metrics-1.html#cb92-10" aria-hidden="true" tabindex="-1"></a>mx<span class="sc">$</span>perdiz.length.thickness2 <span class="ot">&lt;-</span> mx<span class="sc">$</span>maxl <span class="sc">/</span> mx<span class="sc">$</span>maxth</span>
+<span id="cb92-11"><a href="linear-metrics-1.html#cb92-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-12"><a href="linear-metrics-1.html#cb92-12" aria-hidden="true" tabindex="-1"></a><span class="co"># palette</span></span>
+<span id="cb92-13"><a href="linear-metrics-1.html#cb92-13" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">wes_palette</span>(<span class="st">&quot;Moonrise2&quot;</span>, <span class="dv">4</span>, <span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
+<span id="cb92-14"><a href="linear-metrics-1.html#cb92-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-15"><a href="linear-metrics-1.html#cb92-15" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot blade:stem</span></span>
+<span id="cb92-16"><a href="linear-metrics-1.html#cb92-16" aria-hidden="true" tabindex="-1"></a>bl.st <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> perdiz.blade.stem2, <span class="at">color =</span> merged)) <span class="sc">+</span></span>
+<span id="cb92-17"><a href="linear-metrics-1.html#cb92-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb92-18"><a href="linear-metrics-1.html#cb92-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb92-19"><a href="linear-metrics-1.html#cb92-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb92-20"><a href="linear-metrics-1.html#cb92-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-21"><a href="linear-metrics-1.html#cb92-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb92-22"><a href="linear-metrics-1.html#cb92-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Blade:Stem&#39;</span>)</span>
+<span id="cb92-23"><a href="linear-metrics-1.html#cb92-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-24"><a href="linear-metrics-1.html#cb92-24" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot length:thickness</span></span>
+<span id="cb92-25"><a href="linear-metrics-1.html#cb92-25" aria-hidden="true" tabindex="-1"></a>lth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> perdiz.length.thickness2, <span class="at">color =</span> merged)) <span class="sc">+</span></span>
+<span id="cb92-26"><a href="linear-metrics-1.html#cb92-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb92-27"><a href="linear-metrics-1.html#cb92-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb92-28"><a href="linear-metrics-1.html#cb92-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb92-29"><a href="linear-metrics-1.html#cb92-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-30"><a href="linear-metrics-1.html#cb92-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb92-31"><a href="linear-metrics-1.html#cb92-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Length:Thickness&#39;</span>)</span>
+<span id="cb92-32"><a href="linear-metrics-1.html#cb92-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-33"><a href="linear-metrics-1.html#cb92-33" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
+<span id="cb92-34"><a href="linear-metrics-1.html#cb92-34" aria-hidden="true" tabindex="-1"></a>figure.ratios <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(bl.st, lth,</span>
+<span id="cb92-35"><a href="linear-metrics-1.html#cb92-35" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),</span>
+<span id="cb92-36"><a href="linear-metrics-1.html#cb92-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="linear-metrics-1.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
-<span id="cb113-2"><a href="linear-metrics-1.html#cb113-2" aria-hidden="true" tabindex="-1"></a>figure.ratios</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="linear-metrics-1.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
+<span id="cb94-2"><a href="linear-metrics-1.html#cb94-2" aria-hidden="true" tabindex="-1"></a>figure.ratios</span></code></pre></div>
 <p><img src="_main_files/figure-html/ratios-1.png" width="100%" /></p>
 </div>
 <div id="boxplots-for-size-class" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Boxplots for <code>Size Class</code><a href="linear-metrics-1.html#boxplots-for-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Boxplots are used here to identify whether shape changes in similar ways between <code>size classes</code>.</p>
 <p>Three attributes (maximum blade length, shoulder width, and width) are associated with <strong>blade shape</strong>, two attributes (maximum stem length and stem width) articulate with <strong>base shape</strong>, and one attribute (maximum thickness) remains <strong>neutral</strong> as the thickest part of each projectile was inconsistent across blade and base designations.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="linear-metrics-1.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum blade length</span></span>
-<span id="cb114-2"><a href="linear-metrics-1.html#cb114-2" aria-hidden="true" tabindex="-1"></a>maxbl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxbl, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-3"><a href="linear-metrics-1.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-4"><a href="linear-metrics-1.html#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-5"><a href="linear-metrics-1.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-6"><a href="linear-metrics-1.html#cb114-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-7"><a href="linear-metrics-1.html#cb114-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-8"><a href="linear-metrics-1.html#cb114-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxBL&#39;</span>)</span>
-<span id="cb114-9"><a href="linear-metrics-1.html#cb114-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-10"><a href="linear-metrics-1.html#cb114-10" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of  maximum shoulder width</span></span>
-<span id="cb114-11"><a href="linear-metrics-1.html#cb114-11" aria-hidden="true" tabindex="-1"></a>maxshw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxshw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-12"><a href="linear-metrics-1.html#cb114-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-13"><a href="linear-metrics-1.html#cb114-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-14"><a href="linear-metrics-1.html#cb114-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-15"><a href="linear-metrics-1.html#cb114-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-16"><a href="linear-metrics-1.html#cb114-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-17"><a href="linear-metrics-1.html#cb114-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxShW&#39;</span>)</span>
-<span id="cb114-18"><a href="linear-metrics-1.html#cb114-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-19"><a href="linear-metrics-1.html#cb114-19" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum width</span></span>
-<span id="cb114-20"><a href="linear-metrics-1.html#cb114-20" aria-hidden="true" tabindex="-1"></a>maxw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-21"><a href="linear-metrics-1.html#cb114-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-22"><a href="linear-metrics-1.html#cb114-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-23"><a href="linear-metrics-1.html#cb114-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-24"><a href="linear-metrics-1.html#cb114-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-25"><a href="linear-metrics-1.html#cb114-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-26"><a href="linear-metrics-1.html#cb114-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxW&#39;</span>)</span>
-<span id="cb114-27"><a href="linear-metrics-1.html#cb114-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-28"><a href="linear-metrics-1.html#cb114-28" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum thickness</span></span>
-<span id="cb114-29"><a href="linear-metrics-1.html#cb114-29" aria-hidden="true" tabindex="-1"></a>maxth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxth, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-30"><a href="linear-metrics-1.html#cb114-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-31"><a href="linear-metrics-1.html#cb114-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-32"><a href="linear-metrics-1.html#cb114-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-33"><a href="linear-metrics-1.html#cb114-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-34"><a href="linear-metrics-1.html#cb114-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-35"><a href="linear-metrics-1.html#cb114-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxTh&#39;</span>)</span>
-<span id="cb114-36"><a href="linear-metrics-1.html#cb114-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-37"><a href="linear-metrics-1.html#cb114-37" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum stem length</span></span>
-<span id="cb114-38"><a href="linear-metrics-1.html#cb114-38" aria-hidden="true" tabindex="-1"></a>maxstl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxstl, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-39"><a href="linear-metrics-1.html#cb114-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-40"><a href="linear-metrics-1.html#cb114-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-41"><a href="linear-metrics-1.html#cb114-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-42"><a href="linear-metrics-1.html#cb114-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-43"><a href="linear-metrics-1.html#cb114-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-44"><a href="linear-metrics-1.html#cb114-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxStL&#39;</span>)</span>
-<span id="cb114-45"><a href="linear-metrics-1.html#cb114-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-46"><a href="linear-metrics-1.html#cb114-46" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of stem width</span></span>
-<span id="cb114-47"><a href="linear-metrics-1.html#cb114-47" aria-hidden="true" tabindex="-1"></a>maxstw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxstw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
-<span id="cb114-48"><a href="linear-metrics-1.html#cb114-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb114-49"><a href="linear-metrics-1.html#cb114-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb114-50"><a href="linear-metrics-1.html#cb114-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb114-51"><a href="linear-metrics-1.html#cb114-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb114-52"><a href="linear-metrics-1.html#cb114-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb114-53"><a href="linear-metrics-1.html#cb114-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxStW&#39;</span>)</span>
-<span id="cb114-54"><a href="linear-metrics-1.html#cb114-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-55"><a href="linear-metrics-1.html#cb114-55" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
-<span id="cb114-56"><a href="linear-metrics-1.html#cb114-56" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(maxbl, maxshw, maxw, maxth, maxstl, maxstw,</span>
-<span id="cb114-57"><a href="linear-metrics-1.html#cb114-57" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>),</span>
-<span id="cb114-58"><a href="linear-metrics-1.html#cb114-58" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="linear-metrics-1.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum blade length</span></span>
+<span id="cb95-2"><a href="linear-metrics-1.html#cb95-2" aria-hidden="true" tabindex="-1"></a>maxbl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxbl, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-3"><a href="linear-metrics-1.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-4"><a href="linear-metrics-1.html#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-5"><a href="linear-metrics-1.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-6"><a href="linear-metrics-1.html#cb95-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-7"><a href="linear-metrics-1.html#cb95-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-8"><a href="linear-metrics-1.html#cb95-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxBL&#39;</span>)</span>
+<span id="cb95-9"><a href="linear-metrics-1.html#cb95-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-10"><a href="linear-metrics-1.html#cb95-10" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of  maximum shoulder width</span></span>
+<span id="cb95-11"><a href="linear-metrics-1.html#cb95-11" aria-hidden="true" tabindex="-1"></a>maxshw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxshw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-12"><a href="linear-metrics-1.html#cb95-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-13"><a href="linear-metrics-1.html#cb95-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-14"><a href="linear-metrics-1.html#cb95-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-15"><a href="linear-metrics-1.html#cb95-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-16"><a href="linear-metrics-1.html#cb95-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-17"><a href="linear-metrics-1.html#cb95-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxShW&#39;</span>)</span>
+<span id="cb95-18"><a href="linear-metrics-1.html#cb95-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-19"><a href="linear-metrics-1.html#cb95-19" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum width</span></span>
+<span id="cb95-20"><a href="linear-metrics-1.html#cb95-20" aria-hidden="true" tabindex="-1"></a>maxw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-21"><a href="linear-metrics-1.html#cb95-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-22"><a href="linear-metrics-1.html#cb95-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-23"><a href="linear-metrics-1.html#cb95-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-24"><a href="linear-metrics-1.html#cb95-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-25"><a href="linear-metrics-1.html#cb95-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-26"><a href="linear-metrics-1.html#cb95-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxW&#39;</span>)</span>
+<span id="cb95-27"><a href="linear-metrics-1.html#cb95-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-28"><a href="linear-metrics-1.html#cb95-28" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum thickness</span></span>
+<span id="cb95-29"><a href="linear-metrics-1.html#cb95-29" aria-hidden="true" tabindex="-1"></a>maxth <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxth, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-30"><a href="linear-metrics-1.html#cb95-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-31"><a href="linear-metrics-1.html#cb95-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-32"><a href="linear-metrics-1.html#cb95-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-33"><a href="linear-metrics-1.html#cb95-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-34"><a href="linear-metrics-1.html#cb95-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-35"><a href="linear-metrics-1.html#cb95-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxTh&#39;</span>)</span>
+<span id="cb95-36"><a href="linear-metrics-1.html#cb95-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-37"><a href="linear-metrics-1.html#cb95-37" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of maximum stem length</span></span>
+<span id="cb95-38"><a href="linear-metrics-1.html#cb95-38" aria-hidden="true" tabindex="-1"></a>maxstl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxstl, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-39"><a href="linear-metrics-1.html#cb95-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-40"><a href="linear-metrics-1.html#cb95-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-41"><a href="linear-metrics-1.html#cb95-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-42"><a href="linear-metrics-1.html#cb95-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-43"><a href="linear-metrics-1.html#cb95-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-44"><a href="linear-metrics-1.html#cb95-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxStL&#39;</span>)</span>
+<span id="cb95-45"><a href="linear-metrics-1.html#cb95-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-46"><a href="linear-metrics-1.html#cb95-46" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of stem width</span></span>
+<span id="cb95-47"><a href="linear-metrics-1.html#cb95-47" aria-hidden="true" tabindex="-1"></a>maxstw <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mx, <span class="fu">aes</span>(<span class="at">x =</span> merged, <span class="at">y =</span> sh.maxstw, <span class="at">color =</span> merged)) <span class="sc">+</span> </span>
+<span id="cb95-48"><a href="linear-metrics-1.html#cb95-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb95-49"><a href="linear-metrics-1.html#cb95-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">&#39;y&#39;</span>,<span class="at">stackdir =</span> <span class="st">&#39;center&#39;</span>, <span class="at">dotsize =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb95-50"><a href="linear-metrics-1.html#cb95-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb95-51"><a href="linear-metrics-1.html#cb95-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-52"><a href="linear-metrics-1.html#cb95-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb95-53"><a href="linear-metrics-1.html#cb95-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Size Class&#39;</span>, <span class="at">y =</span> <span class="st">&#39;MaxStW&#39;</span>)</span>
+<span id="cb95-54"><a href="linear-metrics-1.html#cb95-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-55"><a href="linear-metrics-1.html#cb95-55" aria-hidden="true" tabindex="-1"></a><span class="co"># render figure</span></span>
+<span id="cb95-56"><a href="linear-metrics-1.html#cb95-56" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(maxbl, maxshw, maxw, maxth, maxstl, maxstw,</span>
+<span id="cb95-57"><a href="linear-metrics-1.html#cb95-57" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>),</span>
+<span id="cb95-58"><a href="linear-metrics-1.html#cb95-58" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.
 ## Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="linear-metrics-1.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
-<span id="cb116-2"><a href="linear-metrics-1.html#cb116-2" aria-hidden="true" tabindex="-1"></a>figure</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="linear-metrics-1.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot figure</span></span>
+<span id="cb97-2"><a href="linear-metrics-1.html#cb97-2" aria-hidden="true" tabindex="-1"></a>figure</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:boxplotppx"></span>
 <img src="_main_files/figure-html/boxplotppx-1.png" alt="Boxplots for shape variables associated with a, maximum length; b, width; c, thickness; d, stem length; and e, stem width for Perdiz arrow points from the northern and southern behavioural regions." width="100%" />
 <p class="caption">
@@ -554,28 +533,28 @@ Figure 2.1: Boxplots for shape variables associated with a, maximum length; b, w
 </div>
 <div id="principal-components-analysis" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Principal Components Analysis<a href="linear-metrics-1.html#principal-components-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="linear-metrics-1.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pca</span></span>
-<span id="cb117-2"><a href="linear-metrics-1.html#cb117-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mx[<span class="fu">c</span>(<span class="dv">14</span><span class="sc">:</span><span class="dv">19</span>)]</span>
-<span id="cb117-3"><a href="linear-metrics-1.html#cb117-3" aria-hidden="true" tabindex="-1"></a>pch.gps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)[<span class="fu">as.factor</span>(mx<span class="sc">$</span>merged)]</span>
-<span id="cb117-4"><a href="linear-metrics-1.html#cb117-4" aria-hidden="true" tabindex="-1"></a>col.gps <span class="ot">&lt;-</span> pal[<span class="fu">as.factor</span>(mx<span class="sc">$</span>merged)]</span>
-<span id="cb117-5"><a href="linear-metrics-1.html#cb117-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-6"><a href="linear-metrics-1.html#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="do">## pca plot</span></span>
-<span id="cb117-7"><a href="linear-metrics-1.html#cb117-7" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df),</span>
-<span id="cb117-8"><a href="linear-metrics-1.html#cb117-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> mx,</span>
-<span id="cb117-9"><a href="linear-metrics-1.html#cb117-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">asp =</span> <span class="dv">1</span>,</span>
-<span id="cb117-10"><a href="linear-metrics-1.html#cb117-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">shape =</span> pch.gps,</span>
-<span id="cb117-11"><a href="linear-metrics-1.html#cb117-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;merged&quot;</span>,</span>
-<span id="cb117-12"><a href="linear-metrics-1.html#cb117-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">variance_percentage =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb117-13"><a href="linear-metrics-1.html#cb117-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb117-14"><a href="linear-metrics-1.html#cb117-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>,</span>
-<span id="cb117-15"><a href="linear-metrics-1.html#cb117-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.label =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb117-16"><a href="linear-metrics-1.html#cb117-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.label.size =</span> <span class="dv">3</span>,</span>
-<span id="cb117-17"><a href="linear-metrics-1.html#cb117-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">frame =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb117-18"><a href="linear-metrics-1.html#cb117-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">frame.type =</span> <span class="st">&#39;t&#39;</span>) <span class="sc">+</span></span>
-<span id="cb117-19"><a href="linear-metrics-1.html#cb117-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
-<span id="cb117-20"><a href="linear-metrics-1.html#cb117-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal)</span>
-<span id="cb117-21"><a href="linear-metrics-1.html#cb117-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-22"><a href="linear-metrics-1.html#cb117-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggMarginal</span>(pca, <span class="at">groupColour =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="linear-metrics-1.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pca</span></span>
+<span id="cb98-2"><a href="linear-metrics-1.html#cb98-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mx[<span class="fu">c</span>(<span class="dv">15</span><span class="sc">:</span><span class="dv">20</span>)]</span>
+<span id="cb98-3"><a href="linear-metrics-1.html#cb98-3" aria-hidden="true" tabindex="-1"></a>pch.gps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)[<span class="fu">as.factor</span>(mx<span class="sc">$</span>merged)]</span>
+<span id="cb98-4"><a href="linear-metrics-1.html#cb98-4" aria-hidden="true" tabindex="-1"></a>col.gps <span class="ot">&lt;-</span> pal[<span class="fu">as.factor</span>(mx<span class="sc">$</span>merged)]</span>
+<span id="cb98-5"><a href="linear-metrics-1.html#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="linear-metrics-1.html#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="do">## pca plot</span></span>
+<span id="cb98-7"><a href="linear-metrics-1.html#cb98-7" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(<span class="fu">prcomp</span>(df),</span>
+<span id="cb98-8"><a href="linear-metrics-1.html#cb98-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> mx,</span>
+<span id="cb98-9"><a href="linear-metrics-1.html#cb98-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">asp =</span> <span class="dv">1</span>,</span>
+<span id="cb98-10"><a href="linear-metrics-1.html#cb98-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">shape =</span> pch.gps,</span>
+<span id="cb98-11"><a href="linear-metrics-1.html#cb98-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;merged&quot;</span>,</span>
+<span id="cb98-12"><a href="linear-metrics-1.html#cb98-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">variance_percentage =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb98-13"><a href="linear-metrics-1.html#cb98-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb98-14"><a href="linear-metrics-1.html#cb98-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>,</span>
+<span id="cb98-15"><a href="linear-metrics-1.html#cb98-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.label =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb98-16"><a href="linear-metrics-1.html#cb98-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">loadings.label.size =</span> <span class="dv">3</span>,</span>
+<span id="cb98-17"><a href="linear-metrics-1.html#cb98-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">frame =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb98-18"><a href="linear-metrics-1.html#cb98-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">frame.type =</span> <span class="st">&#39;t&#39;</span>) <span class="sc">+</span></span>
+<span id="cb98-19"><a href="linear-metrics-1.html#cb98-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb98-20"><a href="linear-metrics-1.html#cb98-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal)</span>
+<span id="cb98-21"><a href="linear-metrics-1.html#cb98-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-22"><a href="linear-metrics-1.html#cb98-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggMarginal</span>(pca, <span class="at">groupColour =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:pcalinearx"></span>
 <img src="_main_files/figure-html/pcalinearx-1.png" alt="PCA of Perdiz arrow point shape variables by size class." width="100%" />
 <p class="caption">
@@ -588,15 +567,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 <p><code>Size classes</code> and <code>shape</code> were analysed using an ANOVA to assess <code>shape</code> as a function of <code>size class</code>, and results are used to determine differences in Perdiz arrow point shape <em>in</em> and <em>between</em> behavioural regions.</p>
 <div id="maximum-blade-length-size-class" class="section level3 hasAnchor" number="2.7.1">
 <h3><span class="header-section-number">2.7.1</span> <em>Maximum blade length</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-blade-length-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="linear-metrics-1.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum blade length ~ `size class`</span></span>
-<span id="cb118-2"><a href="linear-metrics-1.html#cb118-2" aria-hidden="true" tabindex="-1"></a>maxbl.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxbl <span class="sc">~</span> merged,</span>
-<span id="cb118-3"><a href="linear-metrics-1.html#cb118-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb118-4"><a href="linear-metrics-1.html#cb118-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> mx,</span>
-<span id="cb118-5"><a href="linear-metrics-1.html#cb118-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb118-6"><a href="linear-metrics-1.html#cb118-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb118-7"><a href="linear-metrics-1.html#cb118-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-8"><a href="linear-metrics-1.html#cb118-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max blade length by size class?</span></span>
-<span id="cb118-9"><a href="linear-metrics-1.html#cb118-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxbl.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="linear-metrics-1.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum blade length ~ `size class`</span></span>
+<span id="cb99-2"><a href="linear-metrics-1.html#cb99-2" aria-hidden="true" tabindex="-1"></a>maxbl.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxbl <span class="sc">~</span> merged,</span>
+<span id="cb99-3"><a href="linear-metrics-1.html#cb99-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb99-4"><a href="linear-metrics-1.html#cb99-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> mx,</span>
+<span id="cb99-5"><a href="linear-metrics-1.html#cb99-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb99-6"><a href="linear-metrics-1.html#cb99-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb99-7"><a href="linear-metrics-1.html#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="linear-metrics-1.html#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max blade length by size class?</span></span>
+<span id="cb99-9"><a href="linear-metrics-1.html#cb99-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxbl.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -614,12 +593,12 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## 
 ## Call: lm.rrpp(f1 = mx.maxbl ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,  
 ##     print.progress = FALSE)</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="linear-metrics-1.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
-<span id="cb120-2"><a href="linear-metrics-1.html#cb120-2" aria-hidden="true" tabindex="-1"></a>sh.pwmbl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxbl.sizeclass,</span>
-<span id="cb120-3"><a href="linear-metrics-1.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
-<span id="cb120-4"><a href="linear-metrics-1.html#cb120-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmbl, </span>
-<span id="cb120-5"><a href="linear-metrics-1.html#cb120-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
-<span id="cb120-6"><a href="linear-metrics-1.html#cb120-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="linear-metrics-1.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb101-2"><a href="linear-metrics-1.html#cb101-2" aria-hidden="true" tabindex="-1"></a>sh.pwmbl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxbl.sizeclass,</span>
+<span id="cb101-3"><a href="linear-metrics-1.html#cb101-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
+<span id="cb101-4"><a href="linear-metrics-1.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmbl, </span>
+<span id="cb101-5"><a href="linear-metrics-1.html#cb101-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb101-6"><a href="linear-metrics-1.html#cb101-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Pairwise comparisons
 ## 
@@ -641,15 +620,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 </div>
 <div id="maximum-shoulder-width-size-class" class="section level3 hasAnchor" number="2.7.2">
 <h3><span class="header-section-number">2.7.2</span> <em>Maximum shoulder width</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-shoulder-width-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="linear-metrics-1.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum shoulder width ~ size class</span></span>
-<span id="cb122-2"><a href="linear-metrics-1.html#cb122-2" aria-hidden="true" tabindex="-1"></a>maxshw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxshw <span class="sc">~</span> merged,</span>
-<span id="cb122-3"><a href="linear-metrics-1.html#cb122-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb122-4"><a href="linear-metrics-1.html#cb122-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
-<span id="cb122-5"><a href="linear-metrics-1.html#cb122-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb122-6"><a href="linear-metrics-1.html#cb122-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb122-7"><a href="linear-metrics-1.html#cb122-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-8"><a href="linear-metrics-1.html#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max shoulder width by size class?</span></span>
-<span id="cb122-9"><a href="linear-metrics-1.html#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxshw.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="linear-metrics-1.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum shoulder width ~ size class</span></span>
+<span id="cb103-2"><a href="linear-metrics-1.html#cb103-2" aria-hidden="true" tabindex="-1"></a>maxshw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxshw <span class="sc">~</span> merged,</span>
+<span id="cb103-3"><a href="linear-metrics-1.html#cb103-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb103-4"><a href="linear-metrics-1.html#cb103-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
+<span id="cb103-5"><a href="linear-metrics-1.html#cb103-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb103-6"><a href="linear-metrics-1.html#cb103-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb103-7"><a href="linear-metrics-1.html#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-8"><a href="linear-metrics-1.html#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max shoulder width by size class?</span></span>
+<span id="cb103-9"><a href="linear-metrics-1.html#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxshw.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -667,12 +646,12 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## 
 ## Call: lm.rrpp(f1 = mx.maxshw ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
 ##     data = mx, print.progress = FALSE)</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="linear-metrics-1.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
-<span id="cb124-2"><a href="linear-metrics-1.html#cb124-2" aria-hidden="true" tabindex="-1"></a>sh.pwmshw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxshw.sizeclass,</span>
-<span id="cb124-3"><a href="linear-metrics-1.html#cb124-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
-<span id="cb124-4"><a href="linear-metrics-1.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmshw, </span>
-<span id="cb124-5"><a href="linear-metrics-1.html#cb124-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
-<span id="cb124-6"><a href="linear-metrics-1.html#cb124-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="linear-metrics-1.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb105-2"><a href="linear-metrics-1.html#cb105-2" aria-hidden="true" tabindex="-1"></a>sh.pwmshw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxshw.sizeclass,</span>
+<span id="cb105-3"><a href="linear-metrics-1.html#cb105-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
+<span id="cb105-4"><a href="linear-metrics-1.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmshw, </span>
+<span id="cb105-5"><a href="linear-metrics-1.html#cb105-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb105-6"><a href="linear-metrics-1.html#cb105-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Pairwise comparisons
 ## 
@@ -694,15 +673,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 </div>
 <div id="maximum-width-size-class" class="section level3 hasAnchor" number="2.7.3">
 <h3><span class="header-section-number">2.7.3</span> <em>Maximum width</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-width-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="linear-metrics-1.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum width ~ size class</span></span>
-<span id="cb126-2"><a href="linear-metrics-1.html#cb126-2" aria-hidden="true" tabindex="-1"></a>maxw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxw <span class="sc">~</span> merged,</span>
-<span id="cb126-3"><a href="linear-metrics-1.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb126-4"><a href="linear-metrics-1.html#cb126-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> mx,</span>
-<span id="cb126-5"><a href="linear-metrics-1.html#cb126-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb126-6"><a href="linear-metrics-1.html#cb126-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb126-7"><a href="linear-metrics-1.html#cb126-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-8"><a href="linear-metrics-1.html#cb126-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max width by size class?</span></span>
-<span id="cb126-9"><a href="linear-metrics-1.html#cb126-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxw.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="linear-metrics-1.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum width ~ size class</span></span>
+<span id="cb107-2"><a href="linear-metrics-1.html#cb107-2" aria-hidden="true" tabindex="-1"></a>maxw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxw <span class="sc">~</span> merged,</span>
+<span id="cb107-3"><a href="linear-metrics-1.html#cb107-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb107-4"><a href="linear-metrics-1.html#cb107-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> mx,</span>
+<span id="cb107-5"><a href="linear-metrics-1.html#cb107-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb107-6"><a href="linear-metrics-1.html#cb107-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb107-7"><a href="linear-metrics-1.html#cb107-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-8"><a href="linear-metrics-1.html#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max width by size class?</span></span>
+<span id="cb107-9"><a href="linear-metrics-1.html#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxw.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -720,12 +699,12 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## 
 ## Call: lm.rrpp(f1 = mx.maxw ~ merged, iter = 9999, SS.type = &quot;I&quot;, data = mx,  
 ##     print.progress = FALSE)</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="linear-metrics-1.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
-<span id="cb128-2"><a href="linear-metrics-1.html#cb128-2" aria-hidden="true" tabindex="-1"></a>sh.pwmw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxw.sizeclass,</span>
-<span id="cb128-3"><a href="linear-metrics-1.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
-<span id="cb128-4"><a href="linear-metrics-1.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmw, </span>
-<span id="cb128-5"><a href="linear-metrics-1.html#cb128-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
-<span id="cb128-6"><a href="linear-metrics-1.html#cb128-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="linear-metrics-1.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb109-2"><a href="linear-metrics-1.html#cb109-2" aria-hidden="true" tabindex="-1"></a>sh.pwmw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxw.sizeclass,</span>
+<span id="cb109-3"><a href="linear-metrics-1.html#cb109-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
+<span id="cb109-4"><a href="linear-metrics-1.html#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmw, </span>
+<span id="cb109-5"><a href="linear-metrics-1.html#cb109-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb109-6"><a href="linear-metrics-1.html#cb109-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Pairwise comparisons
 ## 
@@ -747,15 +726,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 </div>
 <div id="maximum-thickness-size-class" class="section level3 hasAnchor" number="2.7.4">
 <h3><span class="header-section-number">2.7.4</span> <em>Maximum thickness</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-thickness-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="linear-metrics-1.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum thickness ~ size class</span></span>
-<span id="cb130-2"><a href="linear-metrics-1.html#cb130-2" aria-hidden="true" tabindex="-1"></a>maxth.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxth <span class="sc">~</span> merged,</span>
-<span id="cb130-3"><a href="linear-metrics-1.html#cb130-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb130-4"><a href="linear-metrics-1.html#cb130-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> mx,</span>
-<span id="cb130-5"><a href="linear-metrics-1.html#cb130-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb130-6"><a href="linear-metrics-1.html#cb130-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb130-7"><a href="linear-metrics-1.html#cb130-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-8"><a href="linear-metrics-1.html#cb130-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max thickness by size class?</span></span>
-<span id="cb130-9"><a href="linear-metrics-1.html#cb130-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxth.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="linear-metrics-1.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum thickness ~ size class</span></span>
+<span id="cb111-2"><a href="linear-metrics-1.html#cb111-2" aria-hidden="true" tabindex="-1"></a>maxth.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxth <span class="sc">~</span> merged,</span>
+<span id="cb111-3"><a href="linear-metrics-1.html#cb111-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb111-4"><a href="linear-metrics-1.html#cb111-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> mx,</span>
+<span id="cb111-5"><a href="linear-metrics-1.html#cb111-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb111-6"><a href="linear-metrics-1.html#cb111-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb111-7"><a href="linear-metrics-1.html#cb111-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-8"><a href="linear-metrics-1.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max thickness by size class?</span></span>
+<span id="cb111-9"><a href="linear-metrics-1.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxth.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -774,15 +753,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 </div>
 <div id="maximum-stem-length-size-class" class="section level3 hasAnchor" number="2.7.5">
 <h3><span class="header-section-number">2.7.5</span> <em>Maximum stem length</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-stem-length-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="linear-metrics-1.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum stem length ~ size class</span></span>
-<span id="cb132-2"><a href="linear-metrics-1.html#cb132-2" aria-hidden="true" tabindex="-1"></a>maxstl.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxstl <span class="sc">~</span> merged,</span>
-<span id="cb132-3"><a href="linear-metrics-1.html#cb132-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb132-4"><a href="linear-metrics-1.html#cb132-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
-<span id="cb132-5"><a href="linear-metrics-1.html#cb132-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb132-6"><a href="linear-metrics-1.html#cb132-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb132-7"><a href="linear-metrics-1.html#cb132-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-8"><a href="linear-metrics-1.html#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max stem length by size class?</span></span>
-<span id="cb132-9"><a href="linear-metrics-1.html#cb132-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxstl.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="linear-metrics-1.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum stem length ~ size class</span></span>
+<span id="cb113-2"><a href="linear-metrics-1.html#cb113-2" aria-hidden="true" tabindex="-1"></a>maxstl.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxstl <span class="sc">~</span> merged,</span>
+<span id="cb113-3"><a href="linear-metrics-1.html#cb113-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb113-4"><a href="linear-metrics-1.html#cb113-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
+<span id="cb113-5"><a href="linear-metrics-1.html#cb113-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb113-6"><a href="linear-metrics-1.html#cb113-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb113-7"><a href="linear-metrics-1.html#cb113-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-8"><a href="linear-metrics-1.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max stem length by size class?</span></span>
+<span id="cb113-9"><a href="linear-metrics-1.html#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxstl.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -800,12 +779,12 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## 
 ## Call: lm.rrpp(f1 = mx.maxstl ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
 ##     data = mx, print.progress = FALSE)</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="linear-metrics-1.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
-<span id="cb134-2"><a href="linear-metrics-1.html#cb134-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstl.sizeclass,</span>
-<span id="cb134-3"><a href="linear-metrics-1.html#cb134-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
-<span id="cb134-4"><a href="linear-metrics-1.html#cb134-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmstl, </span>
-<span id="cb134-5"><a href="linear-metrics-1.html#cb134-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
-<span id="cb134-6"><a href="linear-metrics-1.html#cb134-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="linear-metrics-1.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb115-2"><a href="linear-metrics-1.html#cb115-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstl <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstl.sizeclass,</span>
+<span id="cb115-3"><a href="linear-metrics-1.html#cb115-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
+<span id="cb115-4"><a href="linear-metrics-1.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmstl, </span>
+<span id="cb115-5"><a href="linear-metrics-1.html#cb115-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb115-6"><a href="linear-metrics-1.html#cb115-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Pairwise comparisons
 ## 
@@ -827,15 +806,15 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 </div>
 <div id="maximum-stem-width-size-class" class="section level3 hasAnchor" number="2.7.6">
 <h3><span class="header-section-number">2.7.6</span> <em>Maximum stem width</em> ~ <em><code>size class</code></em><a href="linear-metrics-1.html#maximum-stem-width-size-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="linear-metrics-1.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum stem width ~ size class</span></span>
-<span id="cb136-2"><a href="linear-metrics-1.html#cb136-2" aria-hidden="true" tabindex="-1"></a>maxstw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxstw <span class="sc">~</span> merged,</span>
-<span id="cb136-3"><a href="linear-metrics-1.html#cb136-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
-<span id="cb136-4"><a href="linear-metrics-1.html#cb136-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
-<span id="cb136-5"><a href="linear-metrics-1.html#cb136-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
-<span id="cb136-6"><a href="linear-metrics-1.html#cb136-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb136-7"><a href="linear-metrics-1.html#cb136-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-8"><a href="linear-metrics-1.html#cb136-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max stem width by size class?</span></span>
-<span id="cb136-9"><a href="linear-metrics-1.html#cb136-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxstw.sizeclass)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="linear-metrics-1.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova = maximum stem width ~ size class</span></span>
+<span id="cb117-2"><a href="linear-metrics-1.html#cb117-2" aria-hidden="true" tabindex="-1"></a>maxstw.sizeclass <span class="ot">&lt;-</span> <span class="fu">lm.rrpp</span>(mx.maxstw <span class="sc">~</span> merged,</span>
+<span id="cb117-3"><a href="linear-metrics-1.html#cb117-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SS.type =</span> <span class="st">&quot;I&quot;</span>,</span>
+<span id="cb117-4"><a href="linear-metrics-1.html#cb117-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> mx,</span>
+<span id="cb117-5"><a href="linear-metrics-1.html#cb117-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">iter =</span> <span class="dv">9999</span>,</span>
+<span id="cb117-6"><a href="linear-metrics-1.html#cb117-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">print.progress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb117-7"><a href="linear-metrics-1.html#cb117-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-8"><a href="linear-metrics-1.html#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="do">## difference in max stem width by size class?</span></span>
+<span id="cb117-9"><a href="linear-metrics-1.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(maxstw.sizeclass)</span></code></pre></div>
 <pre><code>## 
 ## Analysis of Variance, using Residual Randomization
 ## Permutation procedure: Randomization of null model residuals 
@@ -853,12 +832,12 @@ Figure 2.2: PCA of Perdiz arrow point shape variables by size class.
 ## 
 ## Call: lm.rrpp(f1 = mx.maxstw ~ merged, iter = 9999, SS.type = &quot;I&quot;,  
 ##     data = mx, print.progress = FALSE)</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="linear-metrics-1.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
-<span id="cb138-2"><a href="linear-metrics-1.html#cb138-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstw.sizeclass,</span>
-<span id="cb138-3"><a href="linear-metrics-1.html#cb138-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
-<span id="cb138-4"><a href="linear-metrics-1.html#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmstw, </span>
-<span id="cb138-5"><a href="linear-metrics-1.html#cb138-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
-<span id="cb138-6"><a href="linear-metrics-1.html#cb138-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="linear-metrics-1.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairwise comparison of LS means = which differ?</span></span>
+<span id="cb119-2"><a href="linear-metrics-1.html#cb119-2" aria-hidden="true" tabindex="-1"></a>sh.pwmstw <span class="ot">&lt;-</span> <span class="fu">pairwise</span>(maxstw.sizeclass,</span>
+<span id="cb119-3"><a href="linear-metrics-1.html#cb119-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">groups =</span> mx<span class="sc">$</span>merged)</span>
+<span id="cb119-4"><a href="linear-metrics-1.html#cb119-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sh.pwmstw, </span>
+<span id="cb119-5"><a href="linear-metrics-1.html#cb119-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">confidence =</span> <span class="fl">0.95</span>, </span>
+<span id="cb119-6"><a href="linear-metrics-1.html#cb119-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">test.type =</span> <span class="st">&quot;dist&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Pairwise comparisons
 ## 

@@ -258,7 +258,7 @@ figure
 
 ```{r pcalinearx, out.width = "100%", dpi = 300, echo=TRUE, fig.cap = "PCA of Perdiz arrow point shape variables by size class."}
 #pca
-df <- mx[c(14:19)]
+df <- mx[c(15:20)]
 pch.gps <- c(1:4)[as.factor(mx$merged)]
 col.gps <- pal[as.factor(mx$merged)]
 
